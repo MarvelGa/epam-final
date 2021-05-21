@@ -4,14 +4,9 @@ import java.util.Locale;
 
 public final class Locales {
     private static final Locale ru = new Locale("ru", "RU");
-    private static final Locale en = Locale.ENGLISH;
+    //private static final Locale en = Locale.ENGLISH;
+    private static final Locale en = new Locale("en", "US");
 
-    /**
-     * Get locale.
-     *
-     * @param locale locale to set
-     * @return Locale
-     */
     public static Locale getLocale(final String locale) {
         Locale loc = en;
         if (locale.equalsIgnoreCase("ru")) {

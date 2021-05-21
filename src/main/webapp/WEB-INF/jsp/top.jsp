@@ -3,9 +3,10 @@
     <table border="0">
 
         <tr>
-            <th><a href="/home">Home page</a> | </th>
+            <th><a href="controller?command=home">${resources.Home_page}</a> | </th>
+<%--            <th><a href="${pageContext.request.contextPath}/home">${resources.Home_page}</a> | </th>--%>
             <th><a href="controller?command=loginPage">${resources.Login}</a> | </th>
-            <th><a href="controller?command=register">Register</a> | </th>
+            <th><a href="controller?command=registration">Register</a> | </th>
             <th><a href="/gtc/controller?command=calculator">Calculator</a> | </th>
             <th><a href="/gtc/controller?command=order">Order</a></th>
             <th></th>
@@ -13,9 +14,9 @@
             <th></th>
             <th></th>
             <th>
-                <a href='/gtc/changeLocale' class='langstyle'>${resources.EN}</a>
+                <a href='changeLocale' class='langstyle'>${resources.EN}</a>
                 <strong style='width:2px'>|</strong>
-                <a href='/gtc/changeLocale?locale=ru' class='langstyle'>${resources.RU}</a>
+                <a href='changeLocale?locale=ru' class='langstyle'>${resources.RU}</a>
             </th>
 
             <th>
