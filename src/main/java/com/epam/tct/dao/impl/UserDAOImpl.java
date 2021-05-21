@@ -8,15 +8,19 @@ import com.epam.tct.model.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
-    private static final String SQL__FIND_USER_BY_EMAIL =
-            "SELECT * FROM users WHERE email=?";
+    private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
+    private static final String CREAT_USER = "INSERT INTO users (email, first_name, last_name, password, role_id) VALUES (?, ?, ?, ?, ?);";
+    private static final String DELETE_USER_BY_ID = "DELETE FROM users where id = ?;";
+    private static final String GET_ALL_USERS = "SELECT * FROM users;";
+    private static final String GET_COUNT_OF_USERS = "select count(*) from users;";
+    private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
+    private static final String UPDATE_USER_BY_ID = "UPDATE users SET email = ?, first _name = ?, last_name = ?, password=?, role_id = ?,  WHERE id = ?;";
 
     @Override
     public User getUserByEmail(String email) throws DaoException {
@@ -28,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             dbm = DBManager.getInstance();
             con = dbm.getConnection();
-            pstmt = con.prepareStatement(SQL__FIND_USER_BY_EMAIL);
+            pstmt = con.prepareStatement(GET_USER_BY_EMAIL);
             pstmt.setString(1, email);
             rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -45,6 +49,180 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+
+    @Override
+    public int createUser(User user) throws DaoException {
+        int id = -1;
+        if (user.getId() != 0 && user.getId() > 0) {
+            return 0;
+        }
+        final String query = CREAT_USER;
+        DBManager dbm;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            int k = 1;
+            pstmt.setString(k++, user.getEmail());
+            pstmt.setString(k++, user.getFirstName());
+            pstmt.setString(k++, user.getLastName());
+            pstmt.setString(k++, user.getPassword());
+            pstmt.setInt(k, 2);
+
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                id = rs.getInt(1);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_INSERT_USER, ex);
+            throw new DaoException(Messages.ERR_CANNOT_INSERT_USER, ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return id;
+    }
+
+    @Override
+    public int countAllUsers() throws DaoException {
+        final String query = GET_COUNT_OF_USERS;
+        DBManager dbm;
+        Connection con = null;
+        Statement smt = null;
+        ResultSet rs = null;
+        int usersNumber = 0;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            smt = con.createStatement();
+            rs = smt.executeQuery(query);
+            rs.next();
+            usersNumber = rs.getInt(1);
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_COUNT_ALL_USERS);
+            throw new DaoException(Messages.ERR_CANNOT_COUNT_ALL_USERS, ex);
+        } finally {
+            DBManager.close(con, smt, rs);
+        }
+        return usersNumber;
+    }
+
+    @Override
+    public List<User> readAllUsers() throws DaoException {
+        final String query = GET_ALL_USERS;
+        List<User> userList = new ArrayList<>();
+        DBManager dbm;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                userList.add(extractUserFromResultSet(rs));
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_READ_ALL_USERS, ex);
+            throw new DaoException(Messages.ERR_CANNOT_READ_ALL_USERS, ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return userList;
+    }
+
+    @Override
+    public boolean deleteUserById(int id) throws DaoException {
+        if (id <= 0) {
+            return false;
+        }
+        final String query = DELETE_USER_BY_ID;
+        DBManager dbm;
+        Connection con = null;
+        PreparedStatement psmt = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            psmt = con.prepareStatement(query);
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_DELETE_USER);
+            throw new DaoException(Messages.ERR_CANNOT_DELETE_USER, ex);
+        } finally {
+            DBManager.close(con, psmt);
+        }
+        return true;
+    }
+
+    @Override
+    public User getUserByID(int id) throws DaoException {
+        final String query = GET_USER_BY_ID;
+        User user = null;
+        DBManager dbm;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                user = extractUserFromResultSet(rs);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+            throw new DaoException(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+        } finally {
+            DBManager.close(con, pstmt, rs);
+        }
+        return user;
+    }
+
+    @Override
+    public boolean updateUser(User user) throws DaoException {
+        final String query = UPDATE_USER_BY_ID;
+        DBManager dbm;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            pstmt = con.prepareStatement(query);
+            int k = 1;
+            pstmt.setString(k++, user.getEmail());
+            pstmt.setString(k++, user.getFirstName());
+            pstmt.setString(k++, user.getLastName());
+            pstmt.setString(k++, user.getPassword());
+            pstmt.setInt(k, user.getId());
+            pstmt.executeUpdate();
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_UPDATE_USER);
+            throw new DaoException(Messages.ERR_CANNOT_UPDATE_USER, ex);
+        } finally {
+            DBManager.close(con, pstmt);
+        }
+        return true;
+    }
+
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));
@@ -55,174 +233,5 @@ public class UserDAOImpl implements UserDAO {
 
     }
 
-    //    @Override
-//    public User getUserByEmail(String email) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement("SELECT *FROM user  WHERE EMAIL=?");
-//            ps.setString(1,email);
-//            ResultSet resultSet = ps.executeQuery();
-//            if (resultSet.next()) {
-//                logger.info("Created userByEmail " +  email);
-//                return extractUserFromResultSet(resultSet);
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//        return null;
-//    }
-
-//    @Override
-//    public User getUser(long id) throws DaoException {
-//        DBManager databaseHandler = DBManager.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement("SELECT* FROM user WHERE ID=?");
-//            ps.setLong(1, id);
-//            ResultSet resultSet = ps.executeQuery();
-//            if (resultSet.next()) {
-//                return extractUserFromResultSet(resultSet);
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//        return null;
-//    }
-//    // todo внутренний клас
-//    private User extractUserFromResultSet(ResultSet rs) throws SQLException {
-//        User user = new User();
-//        user.setId(rs.getInt("ID"));
-//        user.setName(rs.getString("NAME"));
-//        user.setSurname(rs.getString("SURNAME"));
-//        user.setEmail(rs.getString("EMAIL"));
-//        return user;
-//    }
-//
-//    @Override
-//    public User getUserByEmail(String email) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement("SELECT *FROM user  WHERE EMAIL=?");
-//            ps.setString(1,email);
-//            ResultSet resultSet = ps.executeQuery();
-//            if (resultSet.next()) {
-//                logger.info("Created userByEmail " +  email);
-//                return extractUserFromResultSet(resultSet);
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public User createUser(User user) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?)",
-//                    PreparedStatement.RETURN_GENERATED_KEYS);
-//            ps.setString(1, user.getName());
-//            ps.setString(2, user.getSurname());
-//            ps.setString(3, user.getEmail());
-//            if (ps.executeUpdate() == 1) {
-//                ResultSet generatedKeys = ps.getGeneratedKeys();
-//                if (generatedKeys.next()) {
-//                    user.setId(generatedKeys.getLong(1));
-//                }
-//                logger.info("Created " + user);
-//                return user;
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//        return null;
-//    }
-
-//    @Override
-//    public boolean updateUser(User user) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement(
-//                    "UPDATE user SET NAME=?, SURNAME=?, EMAIL=?,WHERE ID=?");
-//            ps.setString(1, user.getName());
-//            ps.setString(2, user.getSurname());
-//            ps.setString(3, user.getEmail());
-//            ps.setLong(4, user.getId());
-//            logger.info("Update " + user);
-//            return ps.executeUpdate() == 1;
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//    }
-//
-//    @Override
-//    public boolean deleteUser(User user) throws DaoException {
-//        long id = user.getId();
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement("DELETE FROM user WHERE ID=?");
-//            ps.setLong(1,id);
-//            int result = ps.executeUpdate();
-//            logger.info("Deleted " + user);
-//            return result == 1;
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//    }
-//
-//    @Override
-//    public void setUserPassHash(long id, String passHash) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement(
-//                    "SELECT user_id FROM user_password WHERE user_id =?");
-//            ps.setLong(1, id);
-//            if (ps.execute()) {
-//                ResultSet resultSet = ps.getResultSet();
-//                if (resultSet.next()) {
-//                    ps = connection.prepareStatement("UPDATE user_password SET password =? WHERE user_id =?");
-//                    ps.setString(1, passHash);
-//                    ps.setLong(2, id);
-//                    ps.executeUpdate();
-//                    logger.info("Update user PassHash" );
-//                }   else {
-//                    ps = connection.prepareStatement("INSERT INTO user_password VALUES (? , ?)");
-//                    ps.setLong(1, id);
-//                    ps.setString(2, passHash);
-//                    ps.execute();
-//                    logger.info("Created user passsword hash");
-//                }
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//    }
-//
-//    @Override
-//    public String getUserPassHash(long id) throws DaoException {
-//        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-//        String result = "";
-//        try (Connection connection = databaseHandler.getDbConnection()) {
-//            PreparedStatement ps = connection.prepareStatement(
-//                    "SELECT password FROM user_password WHERE user_id =?");
-//            ps.setLong(1, id);
-//            if (ps.execute()) {
-//                ResultSet resultSet = ps.getResultSet();
-//                if (resultSet.next()) {
-//                    result = resultSet.getString(1);
-//                }
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            logger.error(e);
-//            throw new DaoException(e);
-//        }
-//        return result;
-//    }
 
 }
