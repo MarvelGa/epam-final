@@ -35,9 +35,9 @@
             <th align= "right">
             <c:choose>
 
-                <c:when test = "${sessionScope.users!=null}">
-                    <h3 style="color:forestgreen">Hello, ${sessionScope.users.name}</h3></br>
-
+                <c:when test = "${sessionScope.user!=null}">
+                    <h3 style="color:forestgreen">Hello, ${sessionScope.user.firstName}</h3></br>
+                    <h3 style="color:forestgreen">You entered as ${sessionScope.user.roleId.equals(1)?"ADMIN":"USER"}</h3></br>
                     <form action='./login' method='post'>
                         <input type='hidden' name='logout' />
                         <input type='submit' value='LOGOUT'/>

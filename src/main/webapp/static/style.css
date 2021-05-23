@@ -10,16 +10,31 @@
     text-align: center;
     font-size: 12px;
 }
-
-body {
-    color: #ff6347;
-    background: url(../images/air.jpg) repeat-y left top;
+#loginForm{
+    /*position: center;*/
+    /*align:  center;*/
+    /*float: right;*/
+    /*color: #ff6347*/
 }
 
+/*.field{*/
+/*    text-align: left;*/
+/*}*/
+
+/*body {*/
+/*    background: url(../WEB-INF/images/air.jpg.jpg) no-repeat center 115px;*/
+/*}*/
+
+/*body {*/
+/*    color: #ff6347;*/
+/*    !*background: url(../images/air.jpg) repeat-y left top;*!*/
+/*    background: url(../WEB-INF/images/air.jpg) no-repeat center 115px;*/
+/*}*/
+
 #content {
-    float: right;
+    /*float: right;*/
     width: 530px;
-    color: #ff6347
+    /*color: #ff6347*/
 }
 
 #bg1 {

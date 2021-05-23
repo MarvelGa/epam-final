@@ -8,10 +8,11 @@ public class CommandContainer {
 
     static {
         commands = new HashMap<>();
-        commands.put("loginPage", new ViewLoginPage());
-        commands.put("authorization", new AuthorizationPage());
-        commands.put("registration", new CommandNotFound());
-
+        commands.put("loginPage", new GetLoginCommand());
+        commands.put("home", new CommandHome());
+        commands.put("authorization", new PostLoginCommand());
+        commands.put("register", new PostRegistrationCommand());
+        commands.put("registration", new GetRegistrationCommand());
         commands.put("commandNotFound", new CommandNotFound());
 
 

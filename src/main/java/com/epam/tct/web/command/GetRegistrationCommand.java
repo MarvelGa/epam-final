@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ViewLoginPageCommand implements Command{
+public class GetRegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-        return Path.PAGE__LOGIN;
+        return Path.PAGE__REGISTRATION;
     }
 }

@@ -16,7 +16,7 @@
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}" />
-<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
+<center><h1>AdminCabinet!</h1></center>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>

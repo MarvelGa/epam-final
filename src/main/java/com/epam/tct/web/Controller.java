@@ -24,11 +24,13 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         try {
             process (req, resp);
         } catch (AppException e) {
             e.printStackTrace();
         }
+
     }
 
     private void process (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, AppException {
@@ -41,6 +43,19 @@ public class Controller extends HttpServlet {
         }catch (AppException ex){
             req.setAttribute("errorMessage", ex.getMessage());
         }
-        req.getRequestDispatcher(address).forward(req,resp);
+     //   req.getRequestDispatcher(address).forward(req,resp);
+
+        if (address.contains("controller?command")) {
+            resp.sendRedirect(address);
+        } else {
+            req.getRequestDispatcher(address).forward(req, resp);
+        }
+
+//        if(address.contains("redirect:")){
+//          //  resp.sendRedirect(commandName.replace("redirect:", "/controller"));
+//            resp.sendRedirect(address);
+//        }else {
+//            req.getRequestDispatcher(address).forward(req, resp);
+//        }
     }
 }

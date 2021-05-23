@@ -1,22 +1,14 @@
 package com.epam.tct.model;
 
-public class Role {
-    private int id;
-    private String name;
+public enum Role {
+    ADMIN, USER, GUEST;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public static Role getRole(User user) {
+        int roleId = user.getRoleId()-1;
+        return Role.values()[roleId];
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return name().toLowerCase();
     }
 }

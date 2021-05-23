@@ -1,7 +1,7 @@
 package com.epam.tct.web.command.n;
 
 import com.epam.tct.web.command.Command;
-import com.epam.tct.web.command.ViewLoginPageCommand;
+import com.epam.tct.web.command.GetLoginCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public class CommandProvider {
     private static final CommandProvider instance = new CommandProvider();
     private Map<CommandType, Command> commands = new HashMap<>();
     public CommandProvider(){
-        commands.put(CommandType.LOGIN, new ViewLoginPageCommand());
+        commands.put(CommandType.LOGIN, new GetLoginCommand());
 //        commands.put(CommandType.AUTHORIZATION, new AuthorizationUserCommand());
 //        commands.put(CommandType.REGISTRATION, new RegistrationUserCommand());
 //        commands.put(CommandType.COMMAND_NOT_FOUND,new CommandNotFound());

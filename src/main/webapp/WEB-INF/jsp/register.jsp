@@ -1,3 +1,18 @@
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${resources.Login_form}</title>
+<%--    <link href="/static/style.css" rel="stylesheet"/>--%>
+</head>
+
+<body>
+
+
+    <%@include file="/WEB-INF/jsp/top.jsp" %>
+
 <%--<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>--%>
 <%--<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>--%>
 <%--<%@ page isELIgnored="false" %>--%>
@@ -82,3 +97,76 @@
 <%--</body>--%>
 
 <%--  </html>--%>
+
+<div id="content">
+    <center>
+        <table>
+            <tr>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.users==null}">
+                            <h2>REGISTER</h2> <br>
+
+                            <c:if test="${not empty errorMessage and empty exception and empty code}">
+                                <h3 style="color:tomato">${errorMessage}</h3>
+                            </c:if>
+
+                            <form id="formRegistration" action="/null/controller?command=register" method="post">
+
+                                <div class="field">
+                                    <label>Enter your email:</label>
+                                    <div class="input"><input type="text" name="email" value="${(users.login)}"
+                                                              id="login"/></div>
+                                </div>
+
+                                <div class="field">
+                                    <label>Enter your name:</label>
+                                    <div class="input"><input type="text" name="name" value="${users.name}" id="name"/>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label>Enter your lastName:</label>
+                                    <div class="input"><input type="text" name="lastName" value="${users.name}" id="lastName"/>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label>Enter your password:</label>
+                                    <div class="input"><input type="password" name="password"
+                                                              value="${users.password1.equals(users.password2)?users.password1:""}"
+                                                              id="password1"/></div>
+                                </div>
+
+
+                                <div class="submit">
+                                    <button type="submit">Register</button>
+                                </div>
+                            </form>
+                        </c:when>
+                    </c:choose>
+                </td>
+
+                <td>
+                    </br></br>
+                    <c:choose>
+                        <c:when test="${errorMessages!=null}">
+                            <ul style="color:tomato">
+                                Error list: <br/>
+                                <c:forEach items="${errorMessages}" var="i">
+                                    <li><c:out value="${i}"/></li>
+                                    <br/>
+                                </c:forEach>
+                            </ul>
+                        </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
+    </center>
+</div>
+
+        </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+        <%@include file="/WEB-INF/jsp/footer.jsp" %>
+</body>
+</html>
