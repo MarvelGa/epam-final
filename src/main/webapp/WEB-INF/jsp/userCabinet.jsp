@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+<body style="background-color: #D8BFD8;">
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 </center>

@@ -15,8 +15,8 @@ public class CommandContainer {
         commands.put("registration", new GetRegistrationCommand());
         commands.put("commandNotFound", new CommandNotFound());
         commands.put("logout", new LogoutCommand());
-
-
+        commands.put("adminCabinet", new GetAdminCabinet());
+        commands.put("userCabinet", new GetUserCabinet());
 
     }
     public static Command getCommand(String commandName) {

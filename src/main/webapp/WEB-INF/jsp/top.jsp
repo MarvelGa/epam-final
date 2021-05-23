@@ -7,7 +7,9 @@
             <th><a href="controller?command=registration">Register</a> |</th>
             <th><a href="/gtc/controller?command=calculator">Calculator</a> |</th>
             <th><a href="/gtc/controller?command=order">Order</a></th>
-            <th></th>
+            <th>
+                <a href="/controller?command=login">${resources.Login}</a>
+            </th>
             <th></th>
             <th></th>
             <th></th>
@@ -16,12 +18,23 @@
                 <strong style='width:2px'>|</strong>
                 <a href='changeLocale?locale=ru' class='langstyle'>${resources.RU}</a>
             </th>
-            <th align="right">
+            <th>
                 <c:choose>
                     <c:when test="${sessionScope.user!=null}">
-                        <h3 style="color:forestgreen">Hello, ${sessionScope.user.firstName}</h3></br>
-                        <h3 style="color:forestgreen">You entered
-                            as ${sessionScope.user.roleId.equals(1)?"ADMIN":"USER"}</h3></br>
+                        <h4 style="color:forestgreen">Hello, ${sessionScope.user.firstName}</h4></br>
+                        <h4 style="color:forestgreen">You've entered
+                            as ${sessionScope.user.roleId.equals(1)?"ADMIN":"USER"}</h4></br>
+
+                        <c:choose>
+                            <c:when test="${sessionScope.user.roleId==1}">
+                                <a href="/null/controller?command=adminCabinet">${resources.Personal_cabinet}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/null/controller?command=userCabinet">${resources.Personal_cabinet}</a>
+                            </c:otherwise>
+                        </c:choose>
+
+
                         <form action='' method="get">
                             <input type='submit' value='${resources.Log_out}'/>
                             <input type="hidden" name="command" value="logout">
