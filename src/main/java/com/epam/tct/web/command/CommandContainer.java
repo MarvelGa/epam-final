@@ -14,6 +14,7 @@ public class CommandContainer {
         commands.put("register", new PostRegistrationCommand());
         commands.put("registration", new GetRegistrationCommand());
         commands.put("commandNotFound", new CommandNotFound());
+        commands.put("logout", new LogoutCommand());
 
 
 

@@ -25,43 +25,6 @@ public class PostLoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-//        String login = request.getParameter("login");
-//        String password  = request.getParameter("pass");
-
-//        User users = new User();
-//        ErrorObj eo = new ErrorObj();
-//        DBWorker worker = new DBWorker();
-//
-//        if (login != null) {
-//            if (login.isEmpty() || password.isEmpty()) {
-//                eo.setErrorAuthorization();
-//                users.setLogin(login);
-//                model.addAttribute("users", users);
-//                model.addAttribute("errorObj", eo);
-//            } else {
-//                if(worker.getConnection()!=null ) {
-//                    if (new FormChecker().check(login, password)) {
-//                        users.setLogin(login);
-//                        users.setName(login);
-//                        session.setAttribute("users", users);
-//                        eo.setAccess();
-//                        model.addAttribute("errorObj", eo);
-//                        return "../../index";
-//                    }
-//                    else {
-//                        count++;
-//                        session.setAttribute("count", count);
-//                    }
-//                }else {
-//                    return "connectionToDBError";
-//                }
-//                if( eo.isConSQLError()){
-//                    return "connectionToDBError";
-//                }
-//            }
-//        }
-//        return "formLogin";
-
 
         log.debug("Command starts");
         HttpSession session = request.getSession();
@@ -69,8 +32,7 @@ public class PostLoginCommand implements Command {
         log.trace("Request parameter: loging --> " + email);
         String password = request.getParameter("password");
 
-        // error handler
-        String errorMessage = null;
+        String errorMessage;
         String forward = Path.ERROR_PAGE;
 
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
@@ -93,7 +55,7 @@ public class PostLoginCommand implements Command {
             log.trace("userRole --> " + userRole);
             session.setAttribute("user", user);
             if (userRole == Role.ADMIN){
-                session.setAttribute("user", user);
+                session.setAttribute("userRole", user);
                 log.trace("Set the session attribute: user --> " + user);
                 forward = Path.ADMIN_CABINET;
             }
