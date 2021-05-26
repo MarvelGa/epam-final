@@ -11,6 +11,9 @@ import java.io.IOException;
 public class GetUserCabinet implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+
+
+
         return Path.USER_CABINET;
     }
 }

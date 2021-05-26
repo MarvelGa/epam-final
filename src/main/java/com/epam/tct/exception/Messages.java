@@ -52,4 +52,24 @@ public final class Messages {
         public static final String ERR_SERVICE_LAYER_CANNOT_DELETE_USER = "Cannot delete new user at service layer";
         public static final String ERR_SERVICE_LAYER_CANNOT_READ_ALL_USERS = "Cannot read all users at service layer";
         public static final String ERR_SERVICE_LAYER_CANNOT_READ_USERS_WITH_LIMITATION = "Cannot read users with limitation at service layer";
+
+        // distance entity exceptions
+        public static final String ERR_CANNOT_INSERT_DISTANCE = "Cannot insert new distance";
+        public static final String ERR_CANNOT_OBTAIN_DISTANCE_BY_ID = "Cannot obtain a distance by its id";
+        public static final String ERR_CANNOT_OBTAIN_DISTANCE_BY_NAME = "Cannot obtain a distance by its name";
+        public static final String ERR_CANNOT_OBTAIN_DISTANCE_BY_ITS_FIELDS = "Cannot obtain a distance by its fields(fromCityId, toCityId)";
+        public static final String ERR_CANNOT_UPDATE_DISTANCE = "Cannot update a distance";
+        public static final String ERR_CANNOT_DELETE_DISTANCE = "Cannot delete new distance";
+        public static final String ERR_CANNOT_READ_ALL_DISTANCES = "Cannot read all distances";
+        public static final String ERR_CANNOT_COUNT_ALL_DISTANCES = "Cannot count all distances";
+        public static final String ERR_CANNOT_READ_DISTANCES_WITH_LIMITATION = "Cannot read distances with limitation";
+
+        public static final String ERR_SERVICE_LAYER_CANNOT_OBTAIN_DISTANCE_BY_ID = "Cannot obtain a distance by its id at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_INSERT_DISTANCE = "Cannot insert new distance at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_UPDATE_DISTANCE = "Cannot update a distance at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_DELETE_DISTANCE = "Cannot delete new distance at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_READ_ALL_DISTANCES = "Cannot read all distances at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_READ_DISTANCES_WITH_LIMITATION = "Cannot read distances with limitation at service layer";
+        public static final String ERR_SERVICE_LAYER_CANNOT_OBTAIN_DISTANCE_BY_ITS_FIELDS = "Cannot obtain a distance by its fields(fromCityId, toCityId) at service layer";
+
 }

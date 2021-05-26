@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS fly_tct;
 
 USE fly_tct;
 
-DROP TABLE IF EXISTS cities, `roles`, users, items, `orders`, order_items;
+DROP TABLE IF EXISTS cities, `roles`, users, items, `orders`, order_items, distance;
 
 CREATE TABLE `cities`
 (
@@ -67,3 +67,17 @@ CREATE TABLE order_items
     CONSTRAINT `fk_product_id`
         FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE
 );
+
+CREATE TABLE distance
+(
+    `id`         INT PRIMARY KEY AUTO_INCREMENT,
+    `city_from`   INT NOT NULL,
+    `city_to` INT NOT NULL,
+    `distance` DOUBLE NOT NULL,
+
+    CONSTRAINT `fk_city_from`
+        FOREIGN KEY (`city_from`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_city_to`
+        FOREIGN KEY (`city_to`) REFERENCES `cities` (`id`) ON DELETE CASCADE
+);
+
