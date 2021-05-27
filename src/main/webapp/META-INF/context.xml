@@ -3,6 +3,6 @@
     <Resource name="jdbc/fly_tct" auth="Container" type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000" username="root" password="pass123"
               driverClassName="com.mysql.cj.jdbc.Driver" defaultAutoCommit="false"
-              defaultTransactionIsolation="READ_COMMITTED" url="jdbc:mysql://localhost:3306/fly_tct?serverTimezone=UTC&amp;useUnicode=true"
+              defaultTransactionIsolation="READ_COMMITTED" url="jdbc:mysql://localhost:3306/fly_tct1?serverTimezone=UTC&amp;useUnicode=true"
            />
 </Context>

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DistanceDAO {
     List<Distance> readAll() throws DaoException;
+    Distance readById(int id) throws DaoException;
 }

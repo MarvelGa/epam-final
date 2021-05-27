@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DistanceService {
     List<Distance> findAll() throws ServiceException;
+    Distance findById(int id) throws ServiceException;
 }

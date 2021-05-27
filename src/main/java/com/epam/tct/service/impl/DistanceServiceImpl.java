@@ -27,4 +27,15 @@ public class DistanceServiceImpl implements DistanceService {
             throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_READ_ALL_DISTANCES, e);
         }
     }
+
+    @Override
+    public Distance findById(int id) throws ServiceException {
+        Distance distance;
+        try {
+            return distance = distanceDAO.readById(id);
+        } catch (DaoException e) {
+            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_OBTAIN_DISTANCE_BY_ID, e);
+            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_OBTAIN_DISTANCE_BY_ID, e);
+        }
+    }
 }
