@@ -19,6 +19,7 @@ public class CommandContainer {
         commands.put("userCabinet", new GetUserCabinet());
         commands.put("create-delivery", new GetCreateDelivery());
         commands.put("postCreateDelivery", new PostCreateDelivery());
+        commands.put("userOrdersPage", new UserOrders());
 
     }
     public static Command getCommand(String commandName) {

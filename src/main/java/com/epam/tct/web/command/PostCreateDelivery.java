@@ -2,10 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
-import com.epam.tct.model.Distance;
-import com.epam.tct.model.Item;
-import com.epam.tct.model.Order;
-import com.epam.tct.model.User;
+import com.epam.tct.model.*;
 import com.epam.tct.service.DistanceService;
 import com.epam.tct.service.OrderItemsService;
 import com.epam.tct.service.impl.ServiceFactory;
@@ -17,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PostCreateDelivery implements Command{
+public class PostCreateDelivery implements Command {
     private static final Logger log = Logger.getLogger(PostCreateDelivery.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
@@ -32,18 +31,20 @@ public class PostCreateDelivery implements Command{
         Double height = Double.valueOf(request.getParameter("height"));
 
 
-
         HttpSession session = request.getSession();
-         User user = (User) session.getAttribute("user");
-         Distance data = distanceService.findById(id);
-         Double price = (weight*length*width*height*data.getDistance())/(double)4 ;
+        User user = (User) session.getAttribute("user");
+        Distance data = distanceService.findById(id);
+        Double volume = weight * length * width * height;
+        Double price = volume * data.getDistance()/ (double) 3;
 
-
-         int cityFromId = distanceService.getCityIdByName(data.getCityFrom());
-         int cityToId = distanceService.getCityIdByName(data.getCityTo());
+        int cityFromId = distanceService.getCityIdByName(data.getCityFrom());
+        int cityToId = distanceService.getCityIdByName(data.getCityTo());
         Order order = new Order();
         order.setUser_id(user.getId());
+        order.setCreatedAt(LocalDateTime.now());
         Item item = new Item();
+        item.setCityFrom(data.getCityFrom());
+        item.setCityTo(data.getCityTo());
         item.setCitySender(cityFromId);
         item.setCityRecipeint(cityToId);
         item.setMaxWeight(weight);
@@ -53,8 +54,18 @@ public class PostCreateDelivery implements Command{
         item.setPrice(price);
         item.setCreatedAt(LocalDateTime.now());
 
-        orderItemsService.createOrder(order, item, data.getDistance());
+        int orderItemId = orderItemsService.createOrder(order, item, data.getDistance());
 
-        return Path.PAGE__HOME;
+        OrderItem orderItem = new OrderItem();
+        orderItem.setId(orderItemId);
+        orderItem.setOrder(order);
+        orderItem.setItem(item);
+        orderItem.setDistance(data.getDistance());
+        orderItem.setVolume(volume);
+        List<OrderItem> list = new ArrayList<>();
+        list.add(orderItem);
+        request.setAttribute("orderItems", list);
+        session.setAttribute("orderItems", list);
+        return Path.COMMAND__USER_ORDER_VEIW;
     }
 }
