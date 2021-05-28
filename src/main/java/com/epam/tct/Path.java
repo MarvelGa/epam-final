@@ -17,5 +17,6 @@ public final class Path {
     // commands
     public static final String COMMAND__LIST_ORDERS = "controller?command=listMenu";
     public static final String COMMAND__LIST_MENU = "controller?command=getOrder";
-    public static final String COMMAND__USER_ORDER_VEIW = "controller?command=userOrdersPage";
+    public static final String COMMAND__USER_ORDER_VIEW = "controller?command=userOrdersPage";
+    public static final String COMMAND__USER_ALL_ORDER_VIEW = "controller?command=allUserDeliveries";
 }

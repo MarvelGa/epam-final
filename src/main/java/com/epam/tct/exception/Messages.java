@@ -74,7 +74,9 @@ public final class Messages {
 
         public static final String ERR_SERVICE_LAYER_CANNOT_CREATE_ORDER = "Cannot create the order at service layer";
         public static final String ERR_CANNOT_INSERT_ORDER = "Cannot insert new order";
+        public static final String ERR_CANNOT_GET_ALL_ORDERS_BY_USER_ID = "Cannot get all orders by userId";
         public static final String ERR_CANNOT_GET_CITY_ID = "Cannot get id of the city";
         public static final String ERR_SERVICE_LAYER_CANNOT_GET_CITY_ID = "Cannot get id of the city";
+        public static final String ERR_SERVICE_LAYER_CANNOT_GET_ALL_ORDERS_BY_USER_ID = "Cannot get all orders by userId";
 
 }

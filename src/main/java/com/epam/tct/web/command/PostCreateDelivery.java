@@ -34,8 +34,8 @@ public class PostCreateDelivery implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Distance data = distanceService.findById(id);
-        Double volume = weight * length * width * height;
-        Double price = volume * data.getDistance()/ (double) 3;
+        Double volume = getRoundOffTheNumber(length * width * height);
+        Double price = getRoundOffTheNumber(volume * data.getDistance()/ (double) 3);
 
         int cityFromId = distanceService.getCityIdByName(data.getCityFrom());
         int cityToId = distanceService.getCityIdByName(data.getCityTo());
@@ -66,6 +66,11 @@ public class PostCreateDelivery implements Command {
         list.add(orderItem);
         request.setAttribute("orderItems", list);
         session.setAttribute("orderItems", list);
-        return Path.COMMAND__USER_ORDER_VEIW;
+        return Path.COMMAND__USER_ORDER_VIEW;
+    }
+
+    static Double getRoundOffTheNumber(Double value){
+        double scale = Math.pow(10, 2);
+        return Math.ceil(value * scale) / scale;
     }
 }

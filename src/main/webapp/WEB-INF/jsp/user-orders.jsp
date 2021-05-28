@@ -11,17 +11,45 @@
 </head>
 
 <body>
-
-
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-    </br>
-    <form action="./controller" method="GET">
-        <input type="hidden" name="command" value="userCabinet">
-        <input type="submit" value="Create New Delivery Order">
-    </form>
-    </br>
+    <table>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+            <td>
+                </br>
+                <form action="./controller" method="GET">
+                    <input type="hidden" name="command" value="userCabinet">
+                    <input type="submit" value="Create New Delivery Order">
+                </form>
+                </br>
+            </td>
+            <td>
+                <form action="./controller" method="GET">
+                    <input type="hidden" name="command" value="allUserDeliveries">
+                    <input type="submit" value="Show All Your Deliveries">
+                </form>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+
+
+
+
+
+<%--    </br>--%>
+<%--    <form action="./controller" method="GET">--%>
+<%--        <input type="hidden" name="command" value="userCabinet">--%>
+<%--        <input type="submit" value="Create New Delivery Order">--%>
+<%--    </form>--%>
+<%--    </br>--%>
+
+
+
 
     <%
         int counter = 1;

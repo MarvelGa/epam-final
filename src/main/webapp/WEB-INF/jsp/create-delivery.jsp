@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
