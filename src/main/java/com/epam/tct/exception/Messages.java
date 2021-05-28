@@ -72,6 +72,9 @@ public final class Messages {
         public static final String ERR_SERVICE_LAYER_CANNOT_READ_DISTANCES_WITH_LIMITATION = "Cannot read distances with limitation at service layer";
         public static final String ERR_SERVICE_LAYER_CANNOT_OBTAIN_DISTANCE_BY_ITS_FIELDS = "Cannot obtain a distance by its fields(fromCityId, toCityId) at service layer";
 
+        public static final String ERR_SERVICE_LAYER_CANNOT_CREATE_ORDER = "Cannot create the order at service layer";
         public static final String ERR_CANNOT_INSERT_ORDER = "Cannot insert new order";
+        public static final String ERR_CANNOT_GET_CITY_ID = "Cannot get id of the city";
+        public static final String ERR_SERVICE_LAYER_CANNOT_GET_CITY_ID = "Cannot get id of the city";
 
 }

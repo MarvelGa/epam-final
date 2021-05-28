@@ -1,6 +1,6 @@
 package com.epam.tct.dao.impl;
 
-import com.epam.tct.dao.OrderDAO;
+import com.epam.tct.dao.OrderItemsDAO;
 import com.epam.tct.dao.dbmanager.DBManager;
 import com.epam.tct.exception.DaoException;
 import com.epam.tct.exception.Messages;
@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class OrderDAOImpl implements OrderDAO {
-    private static final Logger logger = Logger.getLogger(OrderDAOImpl.class);
-    private static final String CREATE_ITEM = "INSERT INTO items (city_sender_id, city_recipient_id, max_weight, max_length, max_width, max_height, price, created_at) VALUES ?,?,?,?,?,?,?,?";
-    private static final String CREATE_ORDER = "INSERT INTO orders (user_id, status, created_at) VALUES ?,?,?";
-    private static final String CREATE_ORDER_ITEM = "INSERT INTO order_items (order_id, item_id, distance) VALUES ?,?,?";
+public class OrderItemsDAOImpl implements OrderItemsDAO {
+    private static final Logger logger = Logger.getLogger(OrderItemsDAOImpl.class);
+    private static final String CREATE_ITEM = "INSERT INTO items (city_sender_id, city_recipient_id, max_weight, max_length, max_width, max_height, price, created_at) VALUES (?,?,?,?,?,?,?,?);";
+    private static final String CREATE_ORDER = "INSERT INTO orders (user_id, status, created_at) VALUES (?,?,?);";
+    private static final String CREATE_ORDER_ITEM = "INSERT INTO order_items (order_id, item_id, distance) VALUES (?,?,?);";
 
     @Override
     public int createOrder(Order order, Item item, double distance) throws DaoException {
@@ -29,9 +29,8 @@ public class OrderDAOImpl implements OrderDAO {
         Connection con = null;
         try {
             dbm = DBManager.getInstance();
-            con.setAutoCommit(false);
             con = dbm.getConnection();
-
+            con.setAutoCommit(false);
 
             pstmt = con.prepareStatement(CREATE_ITEM, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, item.getCitySender());

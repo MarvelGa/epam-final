@@ -1,6 +1,7 @@
 package com.epam.tct.service.impl;
 
 import com.epam.tct.service.DistanceService;
+import com.epam.tct.service.OrderItemsService;
 import com.epam.tct.service.UserService;
 
 public class ServiceFactory {
@@ -17,8 +18,14 @@ public class ServiceFactory {
     }
 
     private final DistanceService distanceService = new DistanceServiceImpl();
-    public DistanceService getDistanceService(){
+
+    public DistanceService getDistanceService() {
         return distanceService;
     }
 
+    private final OrderItemsService orderItemsService = new OrderItemsServiceImpl();
+
+    public OrderItemsService getOrderItemsService() {
+        return orderItemsService;
+    }
 }

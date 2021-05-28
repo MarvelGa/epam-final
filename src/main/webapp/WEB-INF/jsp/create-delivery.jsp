@@ -15,7 +15,8 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-    <form action="/create-delivery/add/${distance.id}" method="POST">
+<%--    <form action="/create-delivery/add/${distance.id}" method="POST">--%>
+    <form action="/null/controller?command=postCreateDelivery" method="POST">
         <table border="1">
             <tr>
                 <th>City From</th>

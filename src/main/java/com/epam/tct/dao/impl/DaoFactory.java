@@ -1,6 +1,7 @@
 package com.epam.tct.dao.impl;
 
 import com.epam.tct.dao.DistanceDAO;
+import com.epam.tct.dao.OrderItemsDAO;
 import com.epam.tct.dao.UserDAO;
 
 public class DaoFactory {
@@ -22,5 +23,10 @@ public class DaoFactory {
         return distanceDAO;
     }
 
+    private final OrderItemsDAO orderItemsDAO = new OrderItemsDAOImpl();
+
+    public OrderItemsDAO getOrderItemsDAO() {
+        return orderItemsDAO;
+    }
 
 }
