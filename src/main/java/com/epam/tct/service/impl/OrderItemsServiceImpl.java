@@ -37,4 +37,14 @@ public class OrderItemsServiceImpl implements OrderItemsService {
             throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_GET_ALL_ORDERS_BY_USER_ID, e);
         }
     }
+
+    @Override
+    public List<OrderItem> getAllUsersOrders() throws ServiceException {
+        try {
+            return orderItemsDAO.getAllUsersOrders();
+        } catch (DaoException e) {
+            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_GET_ALL_USERS_ORDER, e);
+            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_GET_ALL_USERS_ORDER, e);
+        }
+    }
 }

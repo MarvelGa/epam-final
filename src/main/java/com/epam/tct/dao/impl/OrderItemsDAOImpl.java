@@ -4,10 +4,7 @@ import com.epam.tct.dao.OrderItemsDAO;
 import com.epam.tct.dao.dbmanager.DBManager;
 import com.epam.tct.exception.DaoException;
 import com.epam.tct.exception.Messages;
-import com.epam.tct.model.Distance;
-import com.epam.tct.model.Item;
-import com.epam.tct.model.Order;
-import com.epam.tct.model.OrderItem;
+import com.epam.tct.model.*;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -27,6 +24,11 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id\n" +
             "ORDER BY o.id ASC;";
 
+    private static final String GET_ALL_USERS_ORDERS = "SELECT o.id, u.email, u.first_name, u.last_name, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.name\n" +
+            "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d, users u, roles r\n" +
+            "WHERE o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id\n" +
+            "ORDER BY o.id ASC;";
     @Override
     public int createOrder(Order order, Item item, double distance) throws DaoException {
         int itemId =-1;
@@ -106,9 +108,6 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM");
-              //  LocalDateTime result = LocalDateTime.parse(convertDate, format);
                 Item item = new Item();
                 Order order = new Order();
                 OrderItem orderItem = new OrderItem();
@@ -121,7 +120,6 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
                 item.setMaxLength(rs.getDouble(7));
                 item.setMaxWidth(rs.getDouble(8));
                 item.setMaxHeight(rs.getDouble(9));
-               // order.setCreatedAt(LocalDateTime.parse(rsgetString(10)));
                 order.setCreatedAt(Timestamp.valueOf(rs.getString(10)).toLocalDateTime());
                 order.setStatus(Order.OrderStatus.valueOf(rs.getString(11)));
                 orderItem.setOrder(order);
@@ -137,6 +135,55 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             DBManager.close(con, stmt, rs);
         }
         return listOfUserOrders;
+    }
 
+    @Override
+    public List<OrderItem> getAllUsersOrders() throws DaoException {
+        final String query = GET_ALL_USERS_ORDERS;
+        List<OrderItem> listOfUserOrders = new ArrayList<>();
+        DBManager dbm;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Item item = new Item();
+                Order order = new Order();
+                OrderItem orderItem = new OrderItem();
+
+                User user = new User();
+                order.setId(rs.getInt(1));
+                user.setEmail(rs.getString(2));
+                user.setFirstName(rs.getString(3));
+                user.setLastName(rs.getString(4));
+                item.setCityFrom(rs.getString(5));
+                item.setCityTo(rs.getString(6));
+                orderItem.setDistance(rs.getDouble(7));
+                item.setPrice(rs.getDouble(8));
+                item.setMaxWeight(rs.getDouble(9));
+                item.setMaxLength(rs.getDouble(10));
+                item.setMaxWidth(rs.getDouble(11));
+                item.setMaxHeight(rs.getDouble(12));
+                order.setCreatedAt(Timestamp.valueOf(rs.getString(13)).toLocalDateTime());
+                order.setStatus(Order.OrderStatus.valueOf(rs.getString(14)));
+                user.setRoleName((rs.getString(15)).toUpperCase());
+                orderItem.setOrder(order);
+                orderItem.setItem(item);
+                orderItem.setUser(user);
+                listOfUserOrders.add(orderItem);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_GET_ALL_USERS_ORDERS, ex);
+            throw new DaoException(Messages.ERR_CANNOT_GET_ALL_USERS_ORDERS, ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return listOfUserOrders;
     }
 }

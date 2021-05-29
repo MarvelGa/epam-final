@@ -10,6 +10,19 @@
     text-align: center;
     font-size: 12px;
 }
+
+.form-horizontal{
+    float: right;
+    font-size: 14px;
+    color: #fff;
+    background: #00b4ef;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+}
+
 #loginForm{
     /*position: center;*/
     /*align:  center;*/

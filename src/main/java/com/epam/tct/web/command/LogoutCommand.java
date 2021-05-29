@@ -22,6 +22,6 @@ public class LogoutCommand implements Command {
         }
 
         logger.debug("Command finished");
-        return Path.PAGE__HOME;
+        return Path.COMMAND__HOME_PAGE;
     }
 }

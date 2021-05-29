@@ -12,4 +12,5 @@ import java.util.List;
 public interface OrderItemsService {
    int createOrder(Order order, Item item, double distance)throws ServiceException;
    List<OrderItem> getAllDeliveriesOrdersByUserID(int id) throws ServiceException;
+   List<OrderItem> getAllUsersOrders() throws ServiceException;
 }

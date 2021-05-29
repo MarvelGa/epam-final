@@ -23,8 +23,7 @@
                     <c:when test="${sessionScope.user!=null}">
                         <h4 style="color:forestgreen">Hello, ${sessionScope.user.firstName}</h4></br>
                         <h4 style="color:forestgreen">You've entered
-                            as ${sessionScope.user.roleId.equals(1)?"ADMIN":"USER"}</h4></br>
-
+                            as ${sessionScope.userRole}</h4></br>
                         <c:choose>
                             <c:when test="${sessionScope.user.roleId==1}">
                                 </br>

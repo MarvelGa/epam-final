@@ -13,13 +13,13 @@
 
 <div id="content" style="position: center">
 
-    <c:if test="${not empty errorMessage and empty exception and empty code}">
-        <h3 style="color:tomato">${errorMessage}</h3>
-    </c:if>
+            <c:if test="${not empty errorMessage and empty exception and empty code}">
+            <h3 style="color:tomato">${errorMessage}</h3>
+            </c:if>
 
-    <c:choose>
-        <c:when test="${sessionScope.user==null }">
-            <form id="loginForm" action="/null/controller?command=authorization" method="post">
+            <c:choose>
+            <c:when test="${sessionScope.user==null }">
+            <form id="loginForm"  action="/null/controller?command=authorization" method="post">
                 <div class="field">
                     </br></br><label>${resources.Enter_your_email}:</label>
                     <div class="input"><input type="text" name="email" id="email"/></div>
@@ -36,10 +36,10 @@
                 <input type="hidden" name="command" value="authorization">
                 <c:remove var="email"/>
             </form>
-        </c:when>
-    </c:choose>
+            </c:when>
+            </c:choose>
 
-    <c:remove var="errorMessage"/>
+            <c:remove var="errorMessage"/>
 </div>
 
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>

@@ -55,13 +55,13 @@ public class PostLoginCommand implements Command {
             log.trace("userRole --> " + userRole);
             session.setAttribute("user", user);
             if (userRole == Role.ADMIN){
-//                session.setAttribute("userRole", user);
+                session.setAttribute("userRole", userRole);
                 log.trace("Set the session attribute: user --> " + user);
-                forward = Path.ADMIN_CABINET;
+                forward = Path.COMMAND__ADMIN_CABINET;
             }
 
             if (userRole == Role.USER){
-//                session.setAttribute("userRole", userRole);
+                session.setAttribute("userRole", userRole);
                 log.trace("Set the session attribute: userRole --> " + userRole);
                 forward = Path.COMMAND__USER_CABINET;
             }

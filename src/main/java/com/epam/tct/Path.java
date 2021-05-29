@@ -1,6 +1,10 @@
 package com.epam.tct;
 
 public final class Path {
+    //common pages
+
+
+    //user pages
     public static final String PAGE__HOME = "/WEB-INF/jsp/home.jsp";
     public static final String PAGE__LOGIN = "/WEB-INF/jsp/login.jsp";
     public static final String PAGE__REGISTRATION = "/WEB-INF/jsp/register.jsp";
@@ -9,6 +13,10 @@ public final class Path {
     public static final String CREATE_DELIVERY = "/WEB-INF/jsp/create-delivery.jsp";
     public static final String USER_ORDERS = "/WEB-INF/jsp/user-orders.jsp";
     public static final String USER_All_ORDERS = "/WEB-INF/jsp/all-deliveries.jsp";
+
+
+    //admin pages
+    public static final String ALL_USERS_ORDERS = "/WEB-INF/jsp/admin/users-orders.jsp";
 
 
 //    public static final String PAGE__LOGIN = "/login.jsp";
@@ -22,4 +30,6 @@ public final class Path {
     public static final String COMMAND__USER_ORDER_VIEW = "controller?command=userOrdersPage";
     public static final String COMMAND__USER_ALL_ORDER_VIEW = "controller?command=allUserDeliveries";
     public static final String COMMAND__USER_CABINET = "controller?command=userCabinet";
+    public static final String COMMAND__ADMIN_CABINET = "controller?command=adminCabinet";
+    public static final String COMMAND__HOME_PAGE = "controller?command=home";
 }

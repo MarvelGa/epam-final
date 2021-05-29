@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrderItemsDAO {
     int createOrder(Order order, Item item, double distance) throws DaoException;
     List<OrderItem> getAllDeliveriesOrdersByUserID(int id) throws DaoException;
+    List<OrderItem> getAllUsersOrders() throws DaoException;
 }

@@ -16,7 +16,7 @@
     <h3>We proceed carry out delivery on such routes!
         Price depends also from weight and volume of parcel.</h3>
 
-    <p>Have already registered?<a href="/null/controller?command=authorization"> Login to order the delivery!</a></p>
+    <p>Have already registered?<a href="/null/controller?command=loginPage"> Login to order the delivery!</a></p>
     <p>Not registered yet?<a href="/null/controller?command=registration"> Go to Registration Page</a></p>
     <%
         int counter = 1;

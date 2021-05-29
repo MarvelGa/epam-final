@@ -5,35 +5,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>All user's deliveries</title>
+    <title>All Users' Orders</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
-
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    </br>
-    <center><h2>All your order deliveries</h2></center>
-    </br>
+    <h3>View Of All Users Orders Delivery</h3>
 
-    <table>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td>
-                </br>
-                <form action="./controller" method="GET">
-                    <input type="hidden" name="command" value="userCabinet">
-                    <input type="submit" value="Create New Delivery Order">
-                </form>
-                </br>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-    </table>
+    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
+    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
 
     <%
         int counter = 1;
@@ -42,6 +25,9 @@
         <tr>
             <th>No.</th>
             <th>Order ID</th>
+            <th>User email</th>
+            <th>User First Name</th>
+            <th>User Last Name</th>
             <th>City FROM</th>
             <th>City TO</th>
             <th>Distance, km</th>
@@ -50,8 +36,10 @@
             <th>Created Date</th>
             <th>Price</th>
             <th>Status</th>
+            <th>Role</th>
+
         </tr>
-        <c:forEach var="record" items="${sessionScope.allUserOrders}">
+        <c:forEach var="record" items="${sessionScope.listUsersOrders}">
             <tr>
                 <td>
                     <%=counter++%>
@@ -59,6 +47,18 @@
 
                 <td>
                         ${record.order.id}
+                </td>
+
+                <td>
+                        ${record.user.email}
+                </td>
+
+                <td>
+                        ${record.user.firstName}
+                </td>
+
+                <td>
+                        ${record.user.lastName}
                 </td>
 
                 <td>
@@ -92,16 +92,17 @@
                 <td>
                         ${record.order.status}
                 </td>
+
+                <td>
+                        ${record.user.roleName}
+                </td>
             </tr>
         </c:forEach>
     </table>
-    </br>
+    <br>
 
-    </br></br>
-    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
