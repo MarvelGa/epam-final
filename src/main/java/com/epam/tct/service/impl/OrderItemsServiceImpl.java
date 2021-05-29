@@ -47,4 +47,24 @@ public class OrderItemsServiceImpl implements OrderItemsService {
             throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_GET_ALL_USERS_ORDER, e);
         }
     }
+
+    @Override
+    public boolean updateOrderStatusByOrderId(Order.OrderStatus status, int orderId) throws ServiceException {
+        try {
+            return orderItemsDAO.updateOrderStatusByOrderId(status,orderId);
+        } catch (DaoException e) {
+            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_UPDATE_ORDER_STATUS_BY_ORDER_ID, e);
+            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_UPDATE_ORDER_STATUS_BY_ORDER_ID, e);
+        }
+    }
+
+    @Override
+    public OrderItem getDeliveryOrderItemByOrderId(int orderId) throws ServiceException {
+        try {
+            return orderItemsDAO.getDeliveryOrderItemByOrderId(orderId);
+        } catch (DaoException e) {
+            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_GET_USER_ORDER_BY_ORDER_ID, e);
+            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_GET_USER_ORDER_BY_ORDER_ID, e);
+        }
+    }
 }

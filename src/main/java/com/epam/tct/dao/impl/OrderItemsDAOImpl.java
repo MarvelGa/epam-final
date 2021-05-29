@@ -29,6 +29,14 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             "WHERE o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
             "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id\n" +
             "ORDER BY o.id ASC;";
+
+    private static final String UPDATE_ORDER_STATUS_BY_ORDER_ID = "UPDATE orders o SET o.status = ?, o.created_at=? WHERE o.id = ?;";
+
+    private static final String GET_ORDER_BY_ORDER_ID = "SELECT o.id, u.email, u.first_name, u.last_name, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.name\n" +
+            "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d, users u, roles r\n" +
+            "WHERE o.id=? AND o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id;";
+
     @Override
     public int createOrder(Order order, Item item, double distance) throws DaoException {
         int itemId =-1;
@@ -185,5 +193,79 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             DBManager.close(con, stmt, rs);
         }
         return listOfUserOrders;
+    }
+
+    @Override
+    public boolean updateOrderStatusByOrderId(Order.OrderStatus status, int orderId) throws DaoException {
+            final String query = UPDATE_ORDER_STATUS_BY_ORDER_ID;
+            DBManager dbm;
+            Connection con = null;
+            PreparedStatement pstmt = null;
+            try {
+                dbm = DBManager.getInstance();
+                con = dbm.getConnection();
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, String.valueOf(status));
+                pstmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+                pstmt.setInt(3, orderId);
+                pstmt.executeUpdate();
+                con.commit();
+            } catch (SQLException ex) {
+                DBManager.rollback(con);
+                logger.error(Messages.ERR_CANNOT_UPDATE_ORDER_STATUS_BY_ORDER_ID);
+                throw new DaoException(Messages.ERR_CANNOT_UPDATE_ORDER_STATUS_BY_ORDER_ID, ex);
+            } finally {
+                DBManager.close(con, pstmt);
+            }
+            return true;
+        }
+
+    @Override
+    public OrderItem getDeliveryOrderItemByOrderId(int orderId) throws DaoException {
+        final String query = GET_ORDER_BY_ORDER_ID;
+        OrderItem orderItem = new OrderItem();
+        DBManager dbm;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, orderId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Item item = new Item();
+                Order order = new Order();
+                User user = new User();
+                order.setId(rs.getInt(1));
+                user.setEmail(rs.getString(2));
+                user.setFirstName(rs.getString(3));
+                user.setLastName(rs.getString(4));
+                item.setCityFrom(rs.getString(5));
+                item.setCityTo(rs.getString(6));
+                orderItem.setDistance(rs.getDouble(7));
+                item.setPrice(rs.getDouble(8));
+                item.setMaxWeight(rs.getDouble(9));
+                item.setMaxLength(rs.getDouble(10));
+                item.setMaxWidth(rs.getDouble(11));
+                item.setMaxHeight(rs.getDouble(12));
+                order.setCreatedAt(Timestamp.valueOf(rs.getString(13)).toLocalDateTime());
+                order.setStatus(Order.OrderStatus.valueOf(rs.getString(14)));
+                user.setRoleName((rs.getString(15)).toUpperCase());
+                orderItem.setOrder(order);
+                orderItem.setItem(item);
+                orderItem.setUser(user);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_GET_USER_ORDER_BY_ORDER_ID, ex);
+            throw new DaoException(Messages.ERR_CANNOT_GET_USER_ORDER_BY_ORDER_ID, ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return orderItem;
     }
 }

@@ -13,4 +13,7 @@ public interface OrderItemsService {
    int createOrder(Order order, Item item, double distance)throws ServiceException;
    List<OrderItem> getAllDeliveriesOrdersByUserID(int id) throws ServiceException;
    List<OrderItem> getAllUsersOrders() throws ServiceException;
+   boolean updateOrderStatusByOrderId(Order.OrderStatus status, int orderId) throws ServiceException;
+
+   OrderItem getDeliveryOrderItemByOrderId(int orderId) throws ServiceException;
 }

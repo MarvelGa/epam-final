@@ -33,10 +33,11 @@
             <th>Distance, km</th>
             <th>Weight of Parcel, tonne</th>
             <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-            <th>Created Date</th>
+            <th>Last Status Update Data</th>
             <th>Price</th>
             <th>Status</th>
             <th>Role</th>
+            <th colspan="1">Operations</th>
 
         </tr>
         <c:forEach var="record" items="${sessionScope.listUsersOrders}">
@@ -96,6 +97,16 @@
                 <td>
                         ${record.user.roleName}
                 </td>
+
+                <td>
+
+                    <form action="./controller" method="GET">
+                        <input type="hidden" name="command" value="changeStatusDelivery">
+                        <input type="hidden" name="id" value="${record.order.id}">
+                        <input type="submit" value="Change Status Delivery">
+                    </form>
+                </td>
+
             </tr>
         </c:forEach>
     </table>
