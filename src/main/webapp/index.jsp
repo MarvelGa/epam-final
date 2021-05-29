@@ -1,22 +1,5 @@
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-<%@ page isELIgnored="false" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Home page</title>
-    <meta charset="UTF-8"/>
-</head>
+<c:redirect url="controller?command=home"/>
 
-<body>
-
-<center>
-    <%@include file="/WEB-INF/jsp/top.jsp" %>
-</center>
-<input type="hidden" name="referer" value="${pageContext.request.requestURI}" />
-<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-<%@include file="/WEB-INF/jsp/footer.jsp" %>
-</body>
-</html>

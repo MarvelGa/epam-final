@@ -85,6 +85,7 @@
     </center>
 </div>
 
+<input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
