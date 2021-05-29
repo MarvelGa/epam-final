@@ -14,6 +14,33 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
+    <h2>User Personal Cabinet!</h2>
+
+    </br> </br>
+    <table>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+            <td>
+<%--                </br>--%>
+<%--                <form action="./controller" method="GET">--%>
+<%--                    <input type="hidden" name="command" value="userCabinet">--%>
+<%--                    <input type="submit" value="Create New Delivery Order">--%>
+<%--                </form>--%>
+<%--                </br>--%>
+            </td>
+            <td>
+                <form action="./controller" method="GET">
+                    <input type="hidden" name="command" value="allUserDeliveries">
+                    <input type="submit" value="Show All Your Deliveries">
+                </form>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+
+
     <br>
     <%
         int counter = 1;
@@ -62,7 +89,7 @@
 
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-<center><h1>USERCabinet!</h1></center>
+<h1>USERCabinet!</h1>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>

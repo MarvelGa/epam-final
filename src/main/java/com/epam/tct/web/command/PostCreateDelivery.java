@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class PostCreateDelivery implements Command {
     private static final Logger log = Logger.getLogger(PostCreateDelivery.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
-
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int id = Integer.valueOf(request.getParameter("id"));
@@ -41,6 +43,7 @@ public class PostCreateDelivery implements Command {
         int cityToId = distanceService.getCityIdByName(data.getCityTo());
         Order order = new Order();
         order.setUser_id(user.getId());
+        //order.setCreatedAt(String.valueOf(LocalDateTime.now()));
         order.setCreatedAt(LocalDateTime.now());
         Item item = new Item();
         item.setCityFrom(data.getCityFrom());

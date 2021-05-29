@@ -14,15 +14,25 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     </br>
-    <center><h4>All your order deliveries</h4></center>
+    <center><h2>All your order deliveries</h2></center>
     </br>
 
-
-
-
-
-
-
+    <table>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+            <td>
+                </br>
+                <form action="./controller" method="GET">
+                    <input type="hidden" name="command" value="userCabinet">
+                    <input type="submit" value="Create New Delivery Order">
+                </form>
+                </br>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
 
     <%
         int counter = 1;
@@ -31,28 +41,55 @@
         <tr>
             <th>No.</th>
             <th>Order ID</th>
-            <th>Products total Price</th>
-            <th>Product Name</th>
-            <th>Products Quantity</th>
-            <th>Order Created Date</th>
+            <th>City FROM</th>
+            <th>City TO</th>
+            <th>Distance, km</th>
+            <th>Weight of Parcel, tonne</th>
+            <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
+            <th>Created Date</th>
+            <th>Price</th>
+            <th>Status</th>
         </tr>
-        <c:forEach var="record" items="${orderItems}">
+        <c:forEach var="record" items="${sessionScope.allUserOrders}">
             <tr>
-                <td><%=counter++%>
-                </td>
-                <td>${record.order_id}
-                </td>
                 <td>
-                    <c:out value="${record.product_price * record.quantity}"/>
+                    <%=counter++%>
                 </td>
+
                 <td>
-                        ${record.product_name}
+                        ${record.order.id}
                 </td>
+
                 <td>
-                        ${record.quantity}
+                        ${record.item.cityFrom}
                 </td>
+
                 <td>
-                        ${record.time}
+                        ${record.item.cityTo}
+                </td>
+
+                <td>
+                        ${record.distance}
+                </td>
+
+                <td>
+                        ${record.item.maxWeight}
+                </td>
+
+                <td>
+                    <c:out value="${record.item.maxLength * record.item.maxWidth * record.item.maxHeight}"/>
+                </td>
+
+                <td>
+                        ${record.order.createdAt}
+                </td>
+
+                <td>
+                        ${record.item.price}
+                </td>
+
+                <td>
+                        ${record.order.status}
                 </td>
             </tr>
         </c:forEach>
@@ -60,11 +97,10 @@
     <br>
 
 
-
-
-
+    </br></br>
+    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>
 </center>
-<input type="hidden" name="referer" value="${pageContext.request.requestURI}" />
+<input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 <center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>

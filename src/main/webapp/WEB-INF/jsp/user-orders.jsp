@@ -38,17 +38,12 @@
     </table>
 
 
-
-
-
-<%--    </br>--%>
-<%--    <form action="./controller" method="GET">--%>
-<%--        <input type="hidden" name="command" value="userCabinet">--%>
-<%--        <input type="submit" value="Create New Delivery Order">--%>
-<%--    </form>--%>
-<%--    </br>--%>
-
-
+    <%--    </br>--%>
+    <%--    <form action="./controller" method="GET">--%>
+    <%--        <input type="hidden" name="command" value="userCabinet">--%>
+    <%--        <input type="submit" value="Create New Delivery Order">--%>
+    <%--    </form>--%>
+    <%--    </br>--%>
 
 
     <%
@@ -59,11 +54,12 @@
             <th>No.</th>
             <th>Order ID</th>
             <th>City FROM</th>
-            <th>CITY TO</th>
-            <th>Distance</th>
-            <th>Price</th>
-            <th>Volume of Parcel</th>
+            <th>City TO</th>
+            <th>Distance, km</th>
+            <th>Weight of Parcel, tonne</th>
+            <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
             <th>Created Date</th>
+            <th>Price</th>
             <th>Status</th>
         </tr>
         <c:forEach var="record" items="${sessionScope.orderItems}">
@@ -89,15 +85,19 @@
                 </td>
 
                 <td>
-                        ${record.item.price}
+                        ${record.item.maxWeight}
                 </td>
 
                 <td>
-                      ${record.volume}
+                        ${record.volume}
                 </td>
 
                 <td>
                         ${record.order.createdAt}
+                </td>
+
+                <td>
+                        ${record.item.price}
                 </td>
 
                 <td>

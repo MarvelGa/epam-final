@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +106,9 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM");
+              //  LocalDateTime result = LocalDateTime.parse(convertDate, format);
                 Item item = new Item();
                 Order order = new Order();
                 OrderItem orderItem = new OrderItem();
@@ -117,7 +121,8 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
                 item.setMaxLength(rs.getDouble(7));
                 item.setMaxWidth(rs.getDouble(8));
                 item.setMaxHeight(rs.getDouble(9));
-                order.setCreatedAt(LocalDateTime.parse(rs.getString(10)));
+               // order.setCreatedAt(LocalDateTime.parse(rsgetString(10)));
+                order.setCreatedAt(Timestamp.valueOf(rs.getString(10)).toLocalDateTime());
                 order.setStatus(Order.OrderStatus.valueOf(rs.getString(11)));
                 orderItem.setOrder(order);
                 orderItem.setItem(item);

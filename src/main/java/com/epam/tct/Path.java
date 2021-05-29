@@ -8,6 +8,8 @@ public final class Path {
     public static final String ADMIN_CABINET = "/WEB-INF/jsp/adminCabinet.jsp";
     public static final String CREATE_DELIVERY = "/WEB-INF/jsp/create-delivery.jsp";
     public static final String USER_ORDERS = "/WEB-INF/jsp/user-orders.jsp";
+    public static final String USER_All_ORDERS = "/WEB-INF/jsp/all-deliveries.jsp";
+
 
 //    public static final String PAGE__LOGIN = "/login.jsp";
     public static final String PAGE__LIST_ORDERS = "/WEB-INF/jsp/admin/list_items.jsp";
@@ -19,4 +21,5 @@ public final class Path {
     public static final String COMMAND__LIST_MENU = "controller?command=getOrder";
     public static final String COMMAND__USER_ORDER_VIEW = "controller?command=userOrdersPage";
     public static final String COMMAND__USER_ALL_ORDER_VIEW = "controller?command=allUserDeliveries";
+    public static final String COMMAND__USER_CABINET = "controller?command=userCabinet";
 }

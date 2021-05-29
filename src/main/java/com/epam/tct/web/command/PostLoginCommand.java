@@ -63,7 +63,7 @@ public class PostLoginCommand implements Command {
             if (userRole == Role.USER){
 //                session.setAttribute("userRole", userRole);
                 log.trace("Set the session attribute: userRole --> " + userRole);
-                forward = Path.USER_CABINET;
+                forward = Path.COMMAND__USER_CABINET;
             }
 
             log.info("User " + user + " logged as " + userRole.toString().toLowerCase());

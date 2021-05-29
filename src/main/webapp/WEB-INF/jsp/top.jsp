@@ -27,14 +27,20 @@
 
                         <c:choose>
                             <c:when test="${sessionScope.user.roleId==1}">
+                                </br>
                                 <a href="/null/controller?command=adminCabinet">${resources.Personal_cabinet}</a>
+                                </br>
                             </c:when>
                             <c:otherwise>
+                                </br>
                                 <a href="/null/controller?command=userCabinet">${resources.Personal_cabinet}</a>
+                                </br></br>
+                                <a href="/null/controller?command=allUserDeliveries">${resources.All_your_delivery}</a>
+                                </br>
                             </c:otherwise>
                         </c:choose>
 
-
+                        </br>
                         <form action='' method="get">
                             <input type='submit' value='${resources.Log_out}'/>
                             <input type="hidden" name="command" value="logout">
