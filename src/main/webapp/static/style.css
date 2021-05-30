@@ -11,6 +11,14 @@
     font-size: 12px;
 }
 
+#table {
+    margin: 0px;
+    padding: 40px 0px 0px 0px;
+    text-align: center;
+    font-size: 12px;
+    background: #00b4ef;
+}
+
 .form-horizontal{
     float: right;
     font-size: 14px;

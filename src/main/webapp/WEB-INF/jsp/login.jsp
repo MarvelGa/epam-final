@@ -8,39 +8,48 @@
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
+<center>
+    <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-<%@include file="/WEB-INF/jsp/top.jsp" %>
+    <h2>Login Page</h2> <br>
+    <br>
+    <p>Not registered yet?<a href="/null/controller?command=registration"> Go to Registration Page</a></p>
+    </br>
+    <c:if test="${not empty errorMessage and empty exception and empty code}">
+        <h3 style="color:tomato">${errorMessage}</h3>
+    </c:if>
 
-<div id="content" style="position: center">
+    <c:choose>
+    <c:when test="${sessionScope.user==null }">
 
-            <c:if test="${not empty errorMessage and empty exception and empty code}">
-            <h3 style="color:tomato">${errorMessage}</h3>
-            </c:if>
+    <table class="table" style="background-color: #ECF0F1"  padding: 5px; border: 1px solid #fff;>
+        <td padding: 5px; border: 1px solid #fff;>
+            <form id="loginForm" action="/null/controller?command=authorization" method="post">
 
-            <c:choose>
-            <c:when test="${sessionScope.user==null }">
-            <form id="loginForm"  action="/null/controller?command=authorization" method="post">
                 <div class="field">
-                    </br></br><label>${resources.Enter_your_email}:</label>
-                    <div class="input"><input type="text" name="email" id="email"/></div>
+                    <br><br><label>Enter your email:</label>
+                    <div class="input"><input type="text" name="email" id="email"></div>
                 </div>
 
                 <div class="field">
-                    <label>${resources.Enter_your_password}:</label>
-                    <div class="input"><input type="password" name="password" id="pass"/></div>
+                    <label>Enter your password:</label>
+                    <div class="input"><input type="password" name="password" id="pass"></div>
                 </div>
 
                 <div class="submit">
-                    <button type="submit">${resources.Enter}</button>
+                    <button type="submit">Enter</button>
                 </div>
-                <input type="hidden" name="command" value="authorization">
-                <c:remove var="email"/>
-            </form>
-            </c:when>
-            </c:choose>
 
-            <c:remove var="errorMessage"/>
-</div>
+                <input type="hidden" name="command" value="authorization">
+            </form>
+        </td>
+    </table>
+</center>
+</c:when>
+</c:choose>
+
+<c:remove var="email"/>
+<c:remove var="errorMessage"/>
 
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>

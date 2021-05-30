@@ -26,7 +26,6 @@
         </c:when>
         <c:otherwise>
             <table>
-                <tr>
                     <td>
                         <form action="./controller" method="GET">
                             <input type="hidden" name="command" value="userCabinet">
@@ -34,6 +33,7 @@
                         </form>
                     </td>
             </table>
+            </br>
         </c:otherwise>
     </c:choose>
 
