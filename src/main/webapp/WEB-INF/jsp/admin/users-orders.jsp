@@ -12,7 +12,7 @@
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>View Of All Users Orders Delivery</h3>
+    <h3>Change Status Of Order Delivery</h3>
 
     <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 

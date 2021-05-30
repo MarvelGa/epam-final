@@ -26,6 +26,7 @@ public class CommandContainer {
         commands.put("confirmationChangeStatus", new PostChangeStatusDelivery());
         commands.put("displayAllUsers", new DisplayAllUsers());
         commands.put("getOrders", new DisplayOrders());
+        commands.put("createOrderByAdmin", new CreateDeliveryByAdmin());
 
     }
     public static Command getCommand(String commandName) {

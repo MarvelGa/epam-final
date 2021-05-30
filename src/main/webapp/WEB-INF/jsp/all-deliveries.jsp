@@ -17,23 +17,31 @@
     <center><h2>All your order deliveries</h2></center>
     </br>
 
-    <table>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td>
-                </br>
-                <form action="./controller" method="GET">
-                    <input type="hidden" name="command" value="userCabinet">
-                    <input type="submit" value="Create New Delivery Order">
-                </form>
-                </br>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-    </table>
 
+    <c:choose>
+        <c:when test="${sessionScope.user.roleId==1}">
+            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+            </br> </br>
+        </c:when>
+        <c:otherwise>
+            <table>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        </br>
+                        <form action="./controller" method="GET">
+                            <input type="hidden" name="command" value="userCabinet">
+                            <input type="submit" value="Create New Delivery Order">
+                        </form>
+                        </br>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+            </table>
+        </c:otherwise>
+    </c:choose>
 
     <%
         int counter = 1;
@@ -98,7 +106,9 @@
     </br>
 
     </br></br>
-    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>
+<%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
+    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
+
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 <center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>

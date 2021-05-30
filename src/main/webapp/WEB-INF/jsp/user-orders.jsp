@@ -14,28 +14,37 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-    <table>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td>
-                </br>
-                <form action="./controller" method="GET">
-                    <input type="hidden" name="command" value="userCabinet">
-                    <input type="submit" value="Create New Delivery Order">
-                </form>
-                </br>
-            </td>
-            <td>
-                <form action="./controller" method="GET">
-                    <input type="hidden" name="command" value="allUserDeliveries">
-                    <input type="submit" value="Show All Your Deliveries">
-                </form>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-    </table>
+
+    <c:choose>
+        <c:when test="${sessionScope.user.roleId==1}">
+            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+            </br> </br>
+        </c:when>
+        <c:otherwise>
+            <table>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        </br>
+                        <form action="./controller" method="GET">
+                            <input type="hidden" name="command" value="userCabinet">
+                            <input type="submit" value="Create New Delivery Order">
+                        </form>
+                        </br>
+                    </td>
+                    <td>
+                        <form action="./controller" method="GET">
+                            <input type="hidden" name="command" value="allUserDeliveries">
+                            <input type="submit" value="Show All Your Deliveries">
+                        </form>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+            </table>
+        </c:otherwise>
+    </c:choose>
 
 
     <%--    </br>--%>
@@ -107,7 +116,10 @@
         </c:forEach>
     </table>
     </br></br>
-    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>
+
+
+    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
+
 </center>
 <%--<input type="hidden" name="command" value="user_orders">--%>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
