@@ -19,7 +19,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String CREAT_USER = "INSERT INTO users (email, first_name, last_name, password, role_id) VALUES (?, ?, ?, ?, ?);";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users where id = ?;";
    // private static final String GET_ALL_USERS = "SELECT * FROM users;";
-    private static final String GET_ALL_USERS = "SELECT u.email, u.first_name, u.last_name, r.name FROM users u, roles r WHERE r.id=u.role_id;";
+    private static final String GET_ALL_USERS = "SELECT u.id, u.email, u.first_name, u.last_name, r.name FROM users u, roles r WHERE r.id=u.role_id;";
     private static final String GET_COUNT_OF_USERS = "select count(*) from users;";
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String UPDATE_USER_BY_ID = "UPDATE users SET email = ?, first _name = ?, last_name = ?, password=?, role_id = ?,  WHERE id = ?;";
@@ -131,10 +131,11 @@ public class UserDAOImpl implements UserDAO {
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 User user = new User();
-                user.setEmail(rs.getString(1));
-                user.setFirstName(rs.getString(2));
-                user.setLastName(rs.getString(3));
-                user.setRoleName(rs.getString(4).toUpperCase());
+                user.setId(rs.getInt(1));
+                user.setEmail(rs.getString(2));
+                user.setFirstName(rs.getString(3));
+                user.setLastName(rs.getString(4));
+                user.setRoleName(rs.getString(5).toUpperCase());
                 userList.add(user);
             }
             con.commit();

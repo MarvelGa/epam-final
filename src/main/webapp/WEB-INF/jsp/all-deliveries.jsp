@@ -16,36 +16,27 @@
     </br>
     <center><h2>All your order deliveries</h2></center>
     </br>
-
-
+    <%
+        int counter = 1;
+    %>
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
             <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
-            </br> </br>
+            </br>
         </c:when>
         <c:otherwise>
             <table>
-                <tr></tr>
-                <tr></tr>
                 <tr>
                     <td>
-                        </br>
                         <form action="./controller" method="GET">
                             <input type="hidden" name="command" value="userCabinet">
                             <input type="submit" value="Create New Delivery Order">
                         </form>
-                        </br>
                     </td>
-                </tr>
-                <tr></tr>
-                <tr></tr>
             </table>
         </c:otherwise>
     </c:choose>
 
-    <%
-        int counter = 1;
-    %>
     <table border="1">
         <tr>
             <th>No.</th>
@@ -58,6 +49,7 @@
             <th>Created Date</th>
             <th>Price</th>
             <th>Status</th>
+            <th>Role</th>
         </tr>
         <c:forEach var="record" items="${sessionScope.allUserOrders}">
             <tr>
@@ -100,12 +92,15 @@
                 <td>
                         ${record.order.status}
                 </td>
+
+                <td>
+                        ${record.user.roleName}
+                </td>
             </tr>
         </c:forEach>
     </table>
     </br>
 
-    </br></br>
 <%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
     <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
 

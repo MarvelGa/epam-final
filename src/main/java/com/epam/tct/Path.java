@@ -22,7 +22,7 @@ public final class Path {
     public static final String ORDERS_VIEW = "/WEB-INF/jsp/admin/all-orders.jsp";
     public static final String COMMAND__ALL_USERS_ORDERS = "controller?command=getAllUsersOrders";
     public static final String CREATE_DELIVERY_BY_ADMIN = "/WEB-INF/jsp/admin/create-delivery.jsp";
-
+    public static final String GET_LIST_OF_USER_ORDERS = "/WEB-INF/jsp/admin/list-orders-of-user.jsp";
 //    public static final String PAGE__LOGIN = "/login.jsp";
     public static final String PAGE__LIST_ORDERS = "/WEB-INF/jsp/admin/list_items.jsp";
     public static final String MAIN_PAGE = "/WEB-INF/jsp/admin/list_items.jsp";

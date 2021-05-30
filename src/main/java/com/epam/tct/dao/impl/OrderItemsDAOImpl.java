@@ -18,10 +18,11 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
     private static final String CREATE_ITEM = "INSERT INTO items (city_sender_id, city_recipient_id, max_weight, max_length, max_width, max_height, price, created_at) VALUES (?,?,?,?,?,?,?,?);";
     private static final String CREATE_ORDER = "INSERT INTO orders (user_id, status, created_at) VALUES (?,?,?);";
     private static final String CREATE_ORDER_ITEM = "INSERT INTO order_items (order_id, item_id, distance) VALUES (?,?,?);";
-    private static final String GET_ALL_ORDERS_BY_USER_ID = "SELECT o.id, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`\n" +
-            "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d\n" +
+    
+    private static final String GET_ALL_ORDERS_BY_USER_ID ="SELECT o.id, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.`name`\n" +
+            "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d, roles r, users u\n" +
             "WHERE o.user_id=? AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
-            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id\n" +
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND r.id=u.role_id AND u.id=o.user_id\n" +
             "ORDER BY o.id ASC;";
 
     private static final String GET_ALL_USERS_ORDERS = "SELECT o.id, u.email, u.first_name, u.last_name, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.name\n" +
@@ -125,6 +126,7 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
                 Item item = new Item();
                 Order order = new Order();
                 OrderItem orderItem = new OrderItem();
+                User user = new User();
                 order.setId(rs.getInt(1));
                 item.setCityFrom(rs.getString(2));
                 item.setCityTo(rs.getString(3));
@@ -136,8 +138,10 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
                 item.setMaxHeight(rs.getDouble(9));
                 order.setCreatedAt(Timestamp.valueOf(rs.getString(10)).toLocalDateTime());
                 order.setStatus(Order.OrderStatus.valueOf(rs.getString(11)));
+                user.setRoleName((rs.getString(12)).toUpperCase());
                 orderItem.setOrder(order);
                 orderItem.setItem(item);
+                orderItem.setUser(user);
                 listOfUserOrders.add(orderItem);
             }
             con.commit();

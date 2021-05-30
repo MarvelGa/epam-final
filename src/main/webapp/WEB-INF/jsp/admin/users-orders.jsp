@@ -17,7 +17,7 @@
     <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
     <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
-
+    </br>
     <%
         int counter = 1;
     %>

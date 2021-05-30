@@ -27,6 +27,7 @@ public class CommandContainer {
         commands.put("displayAllUsers", new DisplayAllUsers());
         commands.put("getOrders", new DisplayOrders());
         commands.put("createOrderByAdmin", new CreateDeliveryByAdmin());
+        commands.put("listDeliveries", new ListDeliveries());
 
     }
     public static Command getCommand(String commandName) {

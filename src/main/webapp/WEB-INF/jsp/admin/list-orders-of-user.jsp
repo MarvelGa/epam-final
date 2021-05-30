@@ -5,19 +5,44 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Display All Orders</title>
+    <title>List the Orders Delivery Of Particular User</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
+
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>View Of Orders Delivery</h3>
+    </br>
+    <center><h2>List the Orders Delivery Of Particular User</h2></center>
+    </br>
 
-    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
-    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
-     </br>
+    <c:choose>
+        <c:when test="${sessionScope.user.roleId==1}">
+            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+            </br> </br>
+        </c:when>
+        <c:otherwise>
+            <table>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        </br>
+                        <form action="./controller" method="GET">
+                            <input type="hidden" name="command" value="userCabinet">
+                            <input type="submit" value="Create New Delivery Order">
+                        </form>
+                        </br>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+            </table>
+        </c:otherwise>
+    </c:choose>
+
     <%
         int counter = 1;
     %>
@@ -30,11 +55,12 @@
             <th>Distance, km</th>
             <th>Weight of Parcel, tonne</th>
             <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-            <th>Last Status Update Data</th>
+            <th>Created Date</th>
             <th>Price</th>
             <th>Status</th>
+            <th>Role</th>
         </tr>
-        <c:forEach var="record" items="${requestScope.orderItemList}">
+        <c:forEach var="record" items="${requestScope.listOfUsersOrders}">
             <tr>
                 <td>
                     <%=counter++%>
@@ -76,14 +102,22 @@
                         ${record.order.status}
                 </td>
 
+                <td>
+                        ${record.user.roleName}
+                </td>
             </tr>
         </c:forEach>
     </table>
-    <br>
+    </br>
+
+    </br></br>
+    <%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
+    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
 
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-</br></br></br></br></br></br></br></br></br>
+<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

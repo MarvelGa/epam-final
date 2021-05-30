@@ -17,7 +17,7 @@
     <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
     <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
-
+    </br>
     <%
         int counter = 1;
     %>
@@ -28,6 +28,7 @@
             <th>User First Name</th>
             <th>User Last Name</th>
             <th>Role</th>
+            <th colspan="1" style="background-color: #b0c4de">Operations</th>
         </tr>
         <c:forEach var="record" items="${requestScope.listUsers}">
             <tr>
@@ -51,6 +52,13 @@
                         ${record.roleName}
                 </td>
 
+                <td>
+                    <form action="./controller" method="GET">
+                        <input type="hidden" name="command" value="listDeliveries">
+                        <input type="hidden" name="userId" value= ${record.id}>
+                        <input type="submit" value="Show Deliveries of the User">
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
