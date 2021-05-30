@@ -78,10 +78,12 @@ public final class Messages {
         public static final String ERR_CANNOT_GET_USER_ORDER_BY_ORDER_ID = "Cannot get user order by order id";
         public static final String ERR_CANNOT_GET_ALL_ORDERS_BY_USER_ID = "Cannot get all orders by userId";
         public static final String ERR_CANNOT_GET_ALL_USERS_ORDERS = "Cannot get all users' orders";
+        public static final String ERR_CANNOT_GET_ORDERS = "Cannot get orders";
         public static final String ERR_CANNOT_GET_CITY_ID = "Cannot get id of the city";
         public static final String ERR_SERVICE_LAYER_CANNOT_GET_CITY_ID = "Cannot get id of the city";
         public static final String ERR_SERVICE_LAYER_CANNOT_GET_ALL_ORDERS_BY_USER_ID = "Cannot get all orders by userId";
         public static final String ERR_SERVICE_LAYER_CANNOT_GET_ALL_USERS_ORDER = "Cannot get all users' orders";
+        public static final String ERR_SERVICE_LAYER_CANNOT_GET_ORDERS = "Cannot get orders";
         public static final String ERR_SERVICE_LAYER_CANNOT_UPDATE_ORDER_STATUS_BY_ORDER_ID = "Cannot update order status by order id";
         public static final String ERR_SERVICE_LAYER_CANNOT_GET_USER_ORDER_BY_ORDER_ID = "Cannot get user order by order id";
 

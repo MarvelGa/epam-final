@@ -17,4 +17,5 @@ public interface UserService {
     List<User> findAll() throws ServiceException;
     int countAllUsers() throws ServiceException;
 
+
 }

@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>All Users' Orders</title>
+    <title>Display All Orders</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>View Of All Users Orders Delivery</h3>
+    <h3>View Of Orders Delivery</h3>
 
     <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
@@ -25,9 +25,6 @@
         <tr>
             <th>No.</th>
             <th>Order ID</th>
-            <th>User email</th>
-            <th>User First Name</th>
-            <th>User Last Name</th>
             <th>City FROM</th>
             <th>City TO</th>
             <th>Distance, km</th>
@@ -36,11 +33,8 @@
             <th>Last Status Update Data</th>
             <th>Price</th>
             <th>Status</th>
-            <th>Role</th>
-            <th colspan="1" style="background-color: #b0c4de">Operations</th>
-
         </tr>
-        <c:forEach var="record" items="${sessionScope.listUsersOrders}">
+        <c:forEach var="record" items="${requestScope.orderItemList}">
             <tr>
                 <td>
                     <%=counter++%>
@@ -48,18 +42,6 @@
 
                 <td>
                         ${record.order.id}
-                </td>
-
-                <td>
-                        ${record.user.email}
-                </td>
-
-                <td>
-                        ${record.user.firstName}
-                </td>
-
-                <td>
-                        ${record.user.lastName}
                 </td>
 
                 <td>
@@ -92,19 +74,6 @@
 
                 <td>
                         ${record.order.status}
-                </td>
-
-                <td>
-                        ${record.user.roleName}
-                </td>
-
-                <td style="background-color: #b0c4de">
-
-                    <form action="./controller" method="GET">
-                        <input type="hidden" name="command" value="changeStatusDelivery">
-                        <input type="hidden" name="id" value="${record.order.id}">
-                        <input type="submit" value="Change Status Delivery">
-                    </form>
                 </td>
 
             </tr>

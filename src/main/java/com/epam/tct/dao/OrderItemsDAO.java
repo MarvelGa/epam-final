@@ -14,4 +14,5 @@ public interface OrderItemsDAO {
     List<OrderItem> getAllUsersOrders() throws DaoException;
     boolean updateOrderStatusByOrderId(Order.OrderStatus status, int orderId) throws DaoException;
     OrderItem getDeliveryOrderItemByOrderId(int orderId) throws DaoException;
+    List<OrderItem> getOrders() throws DaoException;
 }

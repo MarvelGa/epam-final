@@ -37,6 +37,12 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             "WHERE o.id=? AND o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
             "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id;";
 
+    private static final String GET_ORDERS = "SELECT o.id, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`\n" +
+            "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d\n" +
+            "WHERE  c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id \n" +
+            "ORDER BY o.id ASC;";
+
     @Override
     public int createOrder(Order order, Item item, double distance) throws DaoException {
         int itemId =-1;
@@ -267,5 +273,48 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
             DBManager.close(con, stmt, rs);
         }
         return orderItem;
+    }
+
+    @Override
+    public List<OrderItem> getOrders() throws DaoException {
+        final String query = GET_ORDERS;
+        List<OrderItem> listOfUserOrders = new ArrayList<>();
+        DBManager dbm;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            dbm = DBManager.getInstance();
+            con = dbm.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Item item = new Item();
+                Order order = new Order();
+                OrderItem orderItem = new OrderItem();
+                order.setId(rs.getInt(1));
+                item.setCityFrom(rs.getString(2));
+                item.setCityTo(rs.getString(3));
+                orderItem.setDistance(rs.getDouble(4));
+                item.setPrice(rs.getDouble(5));
+                item.setMaxWeight(rs.getDouble(6));
+                item.setMaxLength(rs.getDouble(7));
+                item.setMaxWidth(rs.getDouble(8));
+                item.setMaxHeight(rs.getDouble(9));
+                order.setCreatedAt(Timestamp.valueOf(rs.getString(10)).toLocalDateTime());
+                order.setStatus(Order.OrderStatus.valueOf(rs.getString(11)));
+                orderItem.setOrder(order);
+                orderItem.setItem(item);
+                listOfUserOrders.add(orderItem);
+            }
+            con.commit();
+        } catch (SQLException ex) {
+            DBManager.rollback(con);
+            logger.error(Messages.ERR_CANNOT_GET_ORDERS, ex);
+            throw new DaoException(Messages.ERR_CANNOT_GET_ORDERS, ex);
+        } finally {
+            DBManager.close(con, stmt, rs);
+        }
+        return listOfUserOrders;
     }
 }

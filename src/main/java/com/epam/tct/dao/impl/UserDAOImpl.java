@@ -4,6 +4,7 @@ import com.epam.tct.dao.UserDAO;
 import com.epam.tct.dao.dbmanager.DBManager;
 import com.epam.tct.exception.DaoException;
 import com.epam.tct.exception.Messages;
+import com.epam.tct.model.Role;
 import com.epam.tct.model.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,7 +18,8 @@ public class UserDAOImpl implements UserDAO {
     private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
     private static final String CREAT_USER = "INSERT INTO users (email, first_name, last_name, password, role_id) VALUES (?, ?, ?, ?, ?);";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users where id = ?;";
-    private static final String GET_ALL_USERS = "SELECT * FROM users;";
+   // private static final String GET_ALL_USERS = "SELECT * FROM users;";
+    private static final String GET_ALL_USERS = "SELECT u.email, u.first_name, u.last_name, r.name FROM users u, roles r WHERE r.id=u.role_id;";
     private static final String GET_COUNT_OF_USERS = "select count(*) from users;";
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String UPDATE_USER_BY_ID = "UPDATE users SET email = ?, first _name = ?, last_name = ?, password=?, role_id = ?,  WHERE id = ?;";
@@ -128,7 +130,12 @@ public class UserDAOImpl implements UserDAO {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while (rs.next()) {
-                userList.add(extractUserFromResultSet(rs));
+                User user = new User();
+                user.setEmail(rs.getString(1));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setRoleName(rs.getString(4).toUpperCase());
+                userList.add(user);
             }
             con.commit();
         } catch (SQLException ex) {

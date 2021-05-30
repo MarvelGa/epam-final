@@ -17,7 +17,9 @@ public final class Path {
 
     //admin pages
     public static final String ALL_USERS_ORDERS = "/WEB-INF/jsp/admin/users-orders.jsp";
+    public static final String DISPLAY_ALL_USERS = "/WEB-INF/jsp/admin/all-users.jsp";
     public static final String USER_ORDER_VIEW = "/WEB-INF/jsp/admin/order-view.jsp";
+    public static final String ORDERS_VIEW = "/WEB-INF/jsp/admin/all-orders.jsp";
     public static final String COMMAND__ALL_USERS_ORDERS = "controller?command=getAllUsersOrders";
 
 //    public static final String PAGE__LOGIN = "/login.jsp";
