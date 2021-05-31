@@ -7,9 +7,9 @@
 <head>
     <title>Home page</title>
     <meta charset="UTF-8"/>
-    <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
+
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     <h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1>

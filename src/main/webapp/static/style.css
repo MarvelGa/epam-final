@@ -12,14 +12,19 @@
 }
 
 body {
-    background: #eee;
+    /*background: #eee;*/
+    background: #D8BFD8;
+    /*    color: #ff6347;*/
+    /*background: url(../images/air.jpg) repeat-y left top;*/
+    /*background: url(../images/air.jpg) no-repeat center 115px;*/
+    /*background: url(/images/air.jpg) repeat-y left top;*/
 }
 
-#content {
-    float: right;
-    width: 530px;
-    color: #ff6347
-}
+/*#content {*/
+/*    float: right;*/
+/*    width: 530px;*/
+/*    color: #ff6347*/
+/*}*/
 
 
 

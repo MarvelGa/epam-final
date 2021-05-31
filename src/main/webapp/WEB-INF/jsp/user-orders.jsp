@@ -17,7 +17,8 @@
 
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
-            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+            <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
+<%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
             </br> </br>
         </c:when>
         <c:otherwise>
@@ -116,9 +117,6 @@
         </c:forEach>
     </table>
     </br></br>
-
-
-    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
 
 </center>
 <%--<input type="hidden" name="command" value="user_orders">--%>

@@ -8,17 +8,16 @@
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
-
+<center>
 <%@include file="/WEB-INF/jsp/top.jsp" %>
-
+<h2>REGISTRATION FORM</h2> <br>
 <div id="content">
-    <center>
+
         <table>
             <tr>
                 <td>
                     <c:choose>
                         <c:when test="${sessionScope.user==null}">
-                            <h2>REGISTRATION FORM</h2> <br>
 
                             <c:if test="${not empty errorMessage and empty exception and empty code}">
                                 <h4 style="color:tomato">${errorMessage}</h4>
@@ -85,7 +84,7 @@
 </div>
 
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-</br></br></br></br></br></br></br></br></br></br></br></br>
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
