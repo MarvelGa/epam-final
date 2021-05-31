@@ -18,12 +18,11 @@
                 <td>
                     <c:choose>
                         <c:when test="${sessionScope.user==null}">
-                            <h2>REGISTER</h2> <br>
+                            <h2>REGISTRATION FORM</h2> <br>
 
                             <c:if test="${not empty errorMessage and empty exception and empty code}">
-                                <h3 style="color:tomato">${errorMessage}</h3>
+                                <h4 style="color:tomato">${errorMessage}</h4>
                             </c:if>
-
                             <form id="formRegistration" action="/null/controller?command=register" method="post">
 
                                 <div class="field">
@@ -86,7 +85,7 @@
 </div>
 
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+</br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

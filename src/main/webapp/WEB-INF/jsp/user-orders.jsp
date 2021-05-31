@@ -123,7 +123,6 @@
 </center>
 <%--<input type="hidden" name="command" value="user_orders">--%>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>

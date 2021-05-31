@@ -113,7 +113,7 @@
                                 <td>
                                     <form action="./controller" method="GET">
                                         <input type="hidden" name="command" value="userCabinet">
-                                        <input type="submit" value="Create New Delivery Order">
+                                        <input type="submit" value="Create Delivery Order">
                                     </form>
                                 </td>
                         </table>
