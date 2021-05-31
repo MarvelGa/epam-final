@@ -11,53 +11,93 @@
     font-size: 12px;
 }
 
-#table {
-    margin: 0px;
-    padding: 40px 0px 0px 0px;
-    text-align: center;
-    font-size: 12px;
-    background: #00b4ef;
+body {
+    background: #eee;
 }
-
-.form-horizontal{
-    float: right;
-    font-size: 14px;
-    color: #fff;
-    background: #00b4ef;
-    border-radius: 30px;
-    padding: 10px 25px;
-    border: none;
-    text-transform: capitalize;
-    transition: all 0.5s ease 0s;
-}
-
-#loginForm{
-    /*position: center;*/
-    /*align:  center;*/
-    /*float: right;*/
-    /*color: #ff6347*/
-}
-
-/*.field{*/
-/*    text-align: left;*/
-/*}*/
-
-/*body {*/
-/*    background: url(../WEB-INF/images/air.jpg.jpg) no-repeat center 115px;*/
-/*}*/
-
-/*body {*/
-/*    color: #ff6347;*/
-/*    !*background: url(../images/air.jpg) repeat-y left top;*!*/
-/*    background: url(../WEB-INF/images/air.jpg) no-repeat center 115px;*/
-/*}*/
 
 #content {
-    /*float: right;*/
+    float: right;
     width: 530px;
-    /*color: #ff6347*/
+    color: #ff6347
 }
 
-#bg1 {
-    background: url(../images/air.jpg) repeat-y left top;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#footer {*/
+/*    overflow: hidden;*/
+/*    width: 940px;*/
+/*    height: 100px;*/
+/*    margin: 0px auto;*/
+/*}*/
+/*#footer p {*/
+/*    margin: 0px;*/
+/*    padding: 40px 0px 0px 0px;*/
+/*    text-align: center;*/
+/*    font-size: 12px;*/
+/*}*/
+
+/*#table {*/
+/*    margin: 0px;*/
+/*    padding: 40px 0px 0px 0px;*/
+/*    text-align: center;*/
+/*    font-size: 12px;*/
+/*    background: #00b4ef;*/
+/*}*/
+
+/*.form-horizontal{*/
+/*    float: right;*/
+/*    font-size: 14px;*/
+/*    color: #fff;*/
+/*    background: #00b4ef;*/
+/*    border-radius: 30px;*/
+/*    padding: 10px 25px;*/
+/*    border: none;*/
+/*    text-transform: capitalize;*/
+/*    transition: all 0.5s ease 0s;*/
+/*}*/
+
+/*#loginForm{*/
+/*    !*position: center;*!*/
+/*    !*align:  center;*!*/
+/*    !*float: right;*!*/
+/*    !*color: #ff6347*!*/
+/*}*/
+
+/*!*.field{*!*/
+/*!*    text-align: left;*!*/
+/*!*}*!*/
+
+/*!*body {*!*/
+/*!*    background: url(../WEB-INF/images/air.jpg.jpg) no-repeat center 115px;*!*/
+/*!*}*!*/
+
+/*!*body {*!*/
+/*!*    color: #ff6347;*!*/
+/*!*    !*background: url(../images/air.jpg) repeat-y left top;*!*!*/
+/*!*    background: url(../WEB-INF/images/air.jpg) no-repeat center 115px;*!*/
+/*!*}*!*/
+
+/*#content {*/
+/*    !*float: right;*!*/
+/*    width: 530px;*/
+/*    !*color: #ff6347*!*/
+/*}*/
+
+/*#bg1 {*/
+/*    background: url(../images/air.jpg) repeat-y left top;*/
+/*}*/
