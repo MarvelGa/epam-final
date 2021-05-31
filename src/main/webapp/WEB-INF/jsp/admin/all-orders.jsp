@@ -15,8 +15,9 @@
     <h3>View Of Orders Delivery</h3>
 
     <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
-
-    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+    <c:choose>
+    <c:when test="${requestScope.orderItemList.size()!=0}">
+<%--    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
      </br>
     <%
         int counter = 1;
@@ -79,6 +80,11 @@
             </tr>
         </c:forEach>
     </table>
+    </c:when>
+        <c:otherwise>
+            <center><h2>You have no order delivery yet!</h2></center>
+        </c:otherwise>
+    </c:choose>
     <br>
 
 </center>

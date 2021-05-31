@@ -13,14 +13,11 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     <h3>View Data Of Delivery</h3>
-
-    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
-
-    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
-
     <%
         int counter = 1;
     %>
+    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <a href="/null/controller?command=getAllUsersOrders"> Back to Previously Page!</a>
     <table border="1">
         <tr>
             <th>No.</th>
@@ -37,7 +34,6 @@
             <th>Price</th>
             <th>Status</th>
             <th>Role</th>
-
         </tr>
             <tr>
                 <td>
@@ -98,13 +94,14 @@
 
             </tr>
 
-        </br> </br> </br>
-
+        </br>
 
         <form action="./controller" method="POST">
             <input type="hidden" name="command" value="confirmationChangeStatus">
             <input type="hidden" name="orderId" value=${orderItem.order.id}>
+            </br>
         <table>
+            </br>
             <tr>
                 <td>
                     <label for="status">Change Status</label>
@@ -128,17 +125,16 @@
             </tr>
 
         </table>
-
         <tr>
+            </br>
             <td colspan="2">
                 <input type="submit" value="Confirm changing status"/>
             </td>
         </tr>
-
         </form>
 
     </table>
-    <br>
+    </br>
 
 <%--    <form action="./controller" method="GET">--%>
 <%--        <input type="hidden" name="command" value="changeStatusDelivery">--%>

@@ -15,99 +15,119 @@
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     </br>
     <center><h2>All your order deliveries</h2></center>
-    </br>
+
     <%
         int counter = 1;
     %>
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
-            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
+            <%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
+            <%--            <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>--%>
+            <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
+
             </br>
         </c:when>
         <c:otherwise>
-            <table>
-                    <td>
-                        <form action="./controller" method="GET">
-                            <input type="hidden" name="command" value="userCabinet">
-                            <input type="submit" value="Create New Delivery Order">
-                        </form>
-                    </td>
-            </table>
+          <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
+            <%--            <table>--%>
+            <%--                    <td>--%>
+            <%--                        <form action="./controller" method="GET">--%>
+            <%--                            <input type="hidden" name="command" value="userCabinet">--%>
+            <%--                            <input type="submit" value="Create New Delivery Order">--%>
+            <%--                        </form>--%>
+            <%--                    </td>--%>
+            <%--            </table>--%>
             </br>
         </c:otherwise>
     </c:choose>
 
-    <table border="1">
-        <tr>
-            <th>No.</th>
-            <th>Order ID</th>
-            <th>City FROM</th>
-            <th>City TO</th>
-            <th>Distance, km</th>
-            <th>Weight of Parcel, tonne</th>
-            <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-            <th>Created Date</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Role</th>
-        </tr>
-        <c:forEach var="record" items="${sessionScope.allUserOrders}">
-            <tr>
-                <td>
-                    <%=counter++%>
-                </td>
+    <c:choose>
+        <c:when test="${sessionScope.allUserOrders.size()!=0}">
+            <table border="1">
+                <tr>
+                    <th>No.</th>
+                    <th>Order ID</th>
+                    <th>City FROM</th>
+                    <th>City TO</th>
+                    <th>Distance, km</th>
+                    <th>Weight of Parcel, tonne</th>
+                    <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
+                    <th>Created Date</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                </tr>
+                <c:forEach var="record" items="${sessionScope.allUserOrders}">
+                    <tr>
+                        <td>
+                            <%=counter++%>
+                        </td>
 
-                <td>
-                        ${record.order.id}
-                </td>
+                        <td>
+                                ${record.order.id}
+                        </td>
 
-                <td>
-                        ${record.item.cityFrom}
-                </td>
+                        <td>
+                                ${record.item.cityFrom}
+                        </td>
 
-                <td>
-                        ${record.item.cityTo}
-                </td>
+                        <td>
+                                ${record.item.cityTo}
+                        </td>
 
-                <td>
-                        ${record.distance}
-                </td>
+                        <td>
+                                ${record.distance}
+                        </td>
 
-                <td>
-                        ${record.item.maxWeight}
-                </td>
+                        <td>
+                                ${record.item.maxWeight}
+                        </td>
 
-                <td>
-                    <c:out value="${record.item.maxLength * record.item.maxWidth * record.item.maxHeight}"/>
-                </td>
+                        <td>
+                            <c:out value="${record.item.maxLength * record.item.maxWidth * record.item.maxHeight}"/>
+                        </td>
 
-                <td>
-                        ${record.order.createdAt}
-                </td>
+                        <td>
+                                ${record.order.createdAt}
+                        </td>
 
-                <td>
-                        ${record.item.price}
-                </td>
+                        <td>
+                                ${record.item.price}
+                        </td>
 
-                <td>
-                        ${record.order.status}
-                </td>
+                        <td>
+                                ${record.order.status}
+                        </td>
 
-                <td>
-                        ${record.user.roleName}
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+                        <td>
+                                ${record.user.roleName}
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:when>
+        <c:otherwise>
+            <center><font color='#228b22'><h2>You have no order delivery yet!</h2></font></center>
+            </br>
+                        <table>
+                                <td>
+                                    <form action="./controller" method="GET">
+                                        <input type="hidden" name="command" value="userCabinet">
+                                        <input type="submit" value="Create New Delivery Order">
+                                    </form>
+                                </td>
+                        </table>
+        </c:otherwise>
+    </c:choose>
     </br>
 
-<%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
-    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
+    <%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
+    <%--    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>--%>
 
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+<%--<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>--%>
+</br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
