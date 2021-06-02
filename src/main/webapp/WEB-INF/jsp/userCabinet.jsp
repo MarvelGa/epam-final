@@ -10,7 +10,6 @@
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 
-<body style="background-color: #D8BFD8;">
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
@@ -21,12 +20,6 @@
         <tr></tr>
         <tr>
             <td>
-<%--                </br>--%>
-<%--                <form action="./controller" method="GET">--%>
-<%--                    <input type="hidden" name="command" value="userCabinet">--%>
-<%--                    <input type="submit" value="Create New Delivery Order">--%>
-<%--                </form>--%>
-<%--                </br>--%>
             </td>
             <td>
                 <form action="./controller" method="GET">
@@ -40,49 +33,6 @@
     </table>
 
     <%@include file="/WEB-INF/jsp/common/delivery.jsp" %>
-<%--    <br>--%>
-<%--    <%--%>
-<%--        int counter = 1;--%>
-<%--    %>--%>
-
-<%--    <table border="1">--%>
-<%--        <tr>--%>
-<%--            <th>No.</th>--%>
-<%--            <th>ID</th>--%>
-<%--            <th>City FROM</th>--%>
-<%--            <th>City TO</th>--%>
-<%--            <th>Destination</th>--%>
-<%--            <th colspan="1">Operation</th>--%>
-<%--        </tr>--%>
-<%--        <c:forEach var="record" items="${cityAndDistance}">--%>
-<%--            <tr>--%>
-<%--                <td><%=counter++%>--%>
-<%--                </td>--%>
-<%--                <td>--%>
-<%--                        ${record.id}--%>
-<%--                </td>--%>
-<%--                <td>--%>
-<%--                        ${record.cityFrom}--%>
-<%--                </td>--%>
-<%--                <td>--%>
-<%--                        ${record.cityTo}--%>
-<%--                </td>--%>
-<%--                <td>--%>
-<%--                        ${record.distance}--%>
-<%--                </td>--%>
-
-<%--                <td>--%>
-<%--                    <form action="./controller" method="GET">--%>
-<%--                        <input type="hidden" name="command" value="create-delivery">--%>
-<%--                        <input type="hidden" name="id" value="${record.id}">--%>
-<%--                        <input type="submit" value="Create delivery">--%>
-<%--                    </form>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
-
-
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 </br></br></br></br></br></br>

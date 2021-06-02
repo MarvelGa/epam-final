@@ -36,4 +36,8 @@ public final class Path {
     public static final String COMMAND__USER_CABINET = "controller?command=userCabinet";
     public static final String COMMAND__ADMIN_CABINET = "controller?command=adminCabinet";
     public static final String COMMAND__HOME_PAGE = "controller?command=home";
+
+
+    public static final String PAGE_ERROR_PAGE = "/WEB-INF/errorPage.jsp";
+    public static final String PAGE_404 = "/WEB-INF/404.jsp";
 }

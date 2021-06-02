@@ -15,7 +15,6 @@
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     <h3>Create new Delivery</h3>
     <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
-<%--    <form action="/create-delivery/add/${distance.id}" method="POST">--%>
     <form action="/null/controller?command=postCreateDelivery" method="POST">
         <table border="1">
             <tr>
@@ -100,9 +99,6 @@
 
 
 </center>
-
-
-<%--<input type="hidden" name="referer" value="${pageContext.request.requestURI}" />--%>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 </br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>

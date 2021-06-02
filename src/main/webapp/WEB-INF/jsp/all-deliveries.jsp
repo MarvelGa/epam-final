@@ -15,28 +15,17 @@
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     </br>
     <center><h2>All your order deliveries</h2></center>
-
     <%
         int counter = 1;
     %>
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
-            <%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
-            <%--            <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>--%>
             <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
 
             </br>
         </c:when>
         <c:otherwise>
-          <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
-            <%--            <table>--%>
-            <%--                    <td>--%>
-            <%--                        <form action="./controller" method="GET">--%>
-            <%--                            <input type="hidden" name="command" value="userCabinet">--%>
-            <%--                            <input type="submit" value="Create New Delivery Order">--%>
-            <%--                        </form>--%>
-            <%--                    </td>--%>
-            <%--            </table>--%>
+            <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
             </br>
         </c:otherwise>
     </c:choose>
@@ -109,24 +98,20 @@
         <c:otherwise>
             <center><font color='#228b22'><h2>You have no order delivery yet!</h2></font></center>
             </br>
-                        <table>
-                                <td>
-                                    <form action="./controller" method="GET">
-                                        <input type="hidden" name="command" value="userCabinet">
-                                        <input type="submit" value="Create Delivery Order">
-                                    </form>
-                                </td>
-                        </table>
+            <table>
+                <td>
+                    <form action="./controller" method="GET">
+                        <input type="hidden" name="command" value="userCabinet">
+                        <input type="submit" value="Create Delivery Order">
+                    </form>
+                </td>
+            </table>
         </c:otherwise>
     </c:choose>
     </br>
 
-    <%--    <a href="/null/controller?command=userCabinet">Go to Delivery List Page</a>--%>
-    <%--    <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>--%>
-
 </center>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-<%--<center><h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1></center>--%>
 </br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>

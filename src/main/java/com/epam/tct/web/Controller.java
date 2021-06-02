@@ -1,5 +1,6 @@
 package com.epam.tct.web;
 
+import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
 import com.epam.tct.web.command.Command;
 import com.epam.tct.web.command.CommandContainer;
@@ -15,35 +16,32 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            process (req, resp);
+            process(req, resp);
         } catch (AppException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            process (req, resp);
+            process(req, resp);
         } catch (AppException e) {
             e.printStackTrace();
         }
 
     }
 
-    private void process (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, AppException {
-        String address = "error.jsp";
-        String commandName =req.getParameter("command");
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, AppException {
+        String address = Path.PAGE_ERROR_PAGE;
+        String commandName = req.getParameter("command");
         Command command = CommandContainer.getCommand(commandName);
-        try{
-            address =command.execute(req, resp);
-
-        }catch (AppException ex){
+        try {
+            address = command.execute(req, resp);
+        } catch (AppException ex) {
             req.setAttribute("errorMessage", ex.getMessage());
         }
-     //   req.getRequestDispatcher(address).forward(req,resp);
 
         if (address.contains("controller?command")) {
             resp.sendRedirect(address);
@@ -51,11 +49,5 @@ public class Controller extends HttpServlet {
             req.getRequestDispatcher(address).forward(req, resp);
         }
 
-//        if(address.contains("redirect:")){
-//          //  resp.sendRedirect(commandName.replace("redirect:", "/controller"));
-//            resp.sendRedirect(address);
-//        }else {
-//            req.getRequestDispatcher(address).forward(req, resp);
-//        }
     }
 }

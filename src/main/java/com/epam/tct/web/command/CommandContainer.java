@@ -1,9 +1,12 @@
 package com.epam.tct.web.command;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandContainer {
+    private static final Logger LOG = Logger.getLogger(CommandContainer.class);
     private static final Map<String, Command> commands;
 
     static {
@@ -28,16 +31,14 @@ public class CommandContainer {
         commands.put("getOrders", new DisplayOrders());
         commands.put("createOrderByAdmin", new CreateDeliveryByAdmin());
         commands.put("listDeliveries", new ListDeliveries());
+        commands.put("commandNotFound", new NoCommand());
 
     }
     public static Command getCommand(String commandName) {
-      Command command;
-      try{
-          command = commands.get(commandName);
-      }catch (IllegalThreadStateException | NullPointerException e){
-          command = commands.get("commandNotFound");
-      }
-
-        return  command;
+        if (commandName == null || !commands.containsKey(commandName)) {
+            LOG.trace("Command not found, name --> " + commandName);
+            return commands.get("commandNotFound");
+        }
+        return commands.get(commandName);
     }
 }

@@ -18,7 +18,7 @@
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
             <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
-<%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
+            <%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
             </br> </br>
         </c:when>
         <c:otherwise>
@@ -46,15 +46,6 @@
             </table>
         </c:otherwise>
     </c:choose>
-
-
-    <%--    </br>--%>
-    <%--    <form action="./controller" method="GET">--%>
-    <%--        <input type="hidden" name="command" value="userCabinet">--%>
-    <%--        <input type="submit" value="Create New Delivery Order">--%>
-    <%--    </form>--%>
-    <%--    </br>--%>
-
 
     <%
         int counter = 1;
@@ -119,7 +110,6 @@
     </br></br>
 
 </center>
-<%--<input type="hidden" name="command" value="user_orders">--%>
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
