@@ -2,7 +2,7 @@ package com.epam.tct;
 
 public final class Path {
     //common pages
-
+    public static final String ABOUT_US_PAGE = "/WEB-INF/jsp/aboutUs.jsp";
 
     //user pages
     public static final String PAGE__HOME = "/WEB-INF/jsp/home.jsp";

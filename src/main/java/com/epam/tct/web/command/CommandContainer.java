@@ -32,6 +32,7 @@ public class CommandContainer {
         commands.put("createOrderByAdmin", new CreateDeliveryByAdmin());
         commands.put("listDeliveries", new ListDeliveries());
         commands.put("commandNotFound", new NoCommand());
+        commands.put("aboutUs", new AboutUs());
 
     }
     public static Command getCommand(String commandName) {

@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>${resources.Login_form}</title>
-    <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
@@ -38,7 +37,7 @@
 </center>
 </c:when>
 </c:choose>
-
+</div>
 <c:remove var="email"/>
 <c:remove var="errorMessage"/>
 

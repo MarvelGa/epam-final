@@ -5,8 +5,8 @@
             <th><h3><a href="controller?command=home">${resources.Home_page}</a> |</h3></th>
             <th><h3><a href="controller?command=loginPage">${resources.Login}</a> |</h3></th>
             <th><h3><a href="controller?command=registration">Registration Page</a> |</h3></th>
-            <th><h3><a href="controller?command=registration">Our Routes/Rate</a> |</h3></th>
-            <th><h3><a href="controller?command=registration">About us</a> |</h3></th>
+<%--            <th><h3><a href="controller?command=rates">Our Routes/Rate</a> |</h3></th>--%>
+            <th><h3><a href="controller?command=aboutUs">About us</a> |</h3></th>
             <th><h3>
                 <a href='changeLocale' class='langstyle'>${resources.EN}</a>
                 <strong style='width:2px'>|</strong>

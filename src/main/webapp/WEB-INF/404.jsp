@@ -1,21 +1,21 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 <%@ page isELIgnored="false" %>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Error page</title>
+    <title>404 error</title>
     <meta charset="UTF-8"/>
 </head>
-<body>
+<body style="background-color:whitesmoke;">
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h2 style="color: tomato">${lang.SORRY}</h2>
-    <h3 style="color: tomato">${lang.The_Page_Youre_Looking_for_Was_Not_Found}</h3>
+    </br></br></br></br></br></br></br>
+    <h2><span style="color: tomato">${resources.SORRY}</span></h2>
+    <h1 style="color: tomato">${resources.The_Page_Youre_Looking_for_Was_Not_Found}</h1>
+    <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    <%@include file="/WEB-INF/jsp/footer.jsp" %>
 </center>
-<input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>
-</br></br></br></br></br></br>
-<%@include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
