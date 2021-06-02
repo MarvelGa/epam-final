@@ -25,7 +25,6 @@ public class CreateDeliveryByAdmin implements Command {
         if (session != null) {
             session.setAttribute("cityAndDistance", data);
         }
-
         return Path.CREATE_DELIVERY_BY_ADMIN;
 
     }

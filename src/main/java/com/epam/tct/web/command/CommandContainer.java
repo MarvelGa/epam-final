@@ -16,7 +16,6 @@ public class CommandContainer {
         commands.put("authorization", new PostLoginCommand());
         commands.put("register", new PostRegistrationCommand());
         commands.put("registration", new GetRegistrationCommand());
-        commands.put("commandNotFound", new CommandNotFound());
         commands.put("logout", new LogoutCommand());
         commands.put("adminCabinet", new GetAdminCabinet());
         commands.put("userCabinet", new GetUserCabinet());
@@ -31,7 +30,7 @@ public class CommandContainer {
         commands.put("getOrders", new DisplayOrders());
         commands.put("createOrderByAdmin", new CreateDeliveryByAdmin());
         commands.put("listDeliveries", new ListDeliveries());
-        commands.put("commandNotFound", new NoCommand());
+        commands.put("commandNotFound", new CommandNotFound());
         commands.put("aboutUs", new AboutUs());
 
     }

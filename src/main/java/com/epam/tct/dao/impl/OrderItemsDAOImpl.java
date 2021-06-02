@@ -281,6 +281,8 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
 
     @Override
     public List<OrderItem> getOrders() throws DaoException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
         final String query = GET_ORDERS;
         List<OrderItem> listOfUserOrders = new ArrayList<>();
         DBManager dbm;

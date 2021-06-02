@@ -94,7 +94,8 @@
                 </td>
 
                 <td>
-                        ${record.order.createdAt}
+                    <custom:formatDate value="${record.order.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
+<%--                        ${record.order.createdAt}--%>
                 </td>
 
                 <td>

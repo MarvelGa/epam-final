@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ taglib uri="/WEB-INF/tld/custom.tld" prefix="custom" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -77,7 +78,8 @@
                 </td>
 
                 <td>
-                        ${orderItem.order.createdAt}
+                    <custom:formatDate value="${orderItem.order.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
+<%--                        ${orderItem.order.createdAt}--%>
                 </td>
 
                 <td>
