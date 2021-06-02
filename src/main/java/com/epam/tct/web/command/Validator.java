@@ -7,9 +7,6 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-
-
-
     public static boolean isValidEmail(final String email) {
         if (email == null || email.isEmpty()) {
             return false;

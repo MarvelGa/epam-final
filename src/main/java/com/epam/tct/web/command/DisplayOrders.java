@@ -20,9 +20,6 @@ public class DisplayOrders implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
      List<OrderItem> orderItemList = orderItemsService.getOrders();
-     for (OrderItem elem: orderItemList){
-         elem.getOrder().getCreatedAt().toString().replace("T"," ");
-     }
      request.setAttribute("orderItemList", orderItemList);
      return Path.ORDERS_VIEW;
     }
