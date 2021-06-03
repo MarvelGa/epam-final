@@ -39,6 +39,44 @@
     <url-pattern>/changeLocale</url-pattern>
   </filter-mapping>
 
+
+  <filter>
+    <filter-name>CommandAccessFilter</filter-name>
+    <filter-class>com.epam.tct.filter.CommandAccessFilter</filter-class>
+
+    <init-param>
+      <param-name>restrictedAdmin</param-name>
+      <param-value>
+        adminCabinet displayAllUsers getAllUsersOrders changeStatusDelivery confirmationChangeStatus displayAllUsers getOrders createOrderByAdmin listDeliveries
+      </param-value>
+    </init-param>
+    <init-param>
+      <param-name>restrictedUser</param-name>
+      <param-value>
+        userCabinet
+      </param-value>
+    </init-param>
+    <init-param>
+      <param-name>common</param-name>
+      <param-value> create-delivery postCreateDelivery userOrdersPage allUserDeliveries
+      </param-value>
+    </init-param>
+    <init-param>
+      <param-name>out-of-control</param-name>
+      <param-value>home loginPage registration aboutUs authorization register logout commandNotFound
+      </param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CommandAccessFilter</filter-name>
+    <servlet-name>Controller</servlet-name>
+  </filter-mapping>
+
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+
   <listener>
     <listener-class>com.epam.tct.listener.LanguageListener</listener-class>
   </listener>
@@ -49,7 +87,6 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
-
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/WEB-INF/errorPage.jsp</location>
@@ -58,6 +95,4 @@
     <error-code>404</error-code>
     <location>/WEB-INF/404.jsp</location>
   </error-page>
-
-
 </web-app>
