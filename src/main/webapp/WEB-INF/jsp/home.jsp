@@ -12,12 +12,12 @@
 
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h1>Welcome to FIRST AIR TRANSPORT COMPANY!</h1>
-    <h3>We proceed carry out delivery on such routes!
-        Price depends also from weight and volume of parcel.</h3>
+    <h1>${resources.Welcome_to_company}!</h1>
+    <h3>${resources.Our_routes}!
+        ${resources.About_price}.</h3>
 
-    <p>Have already registered?<a href="/null/controller?command=loginPage"> Login to order the delivery!</a></p>
-    <p>Not registered yet?<a href="/null/controller?command=registration"> Go to Registration Page</a></p>
+    <p>${resources.Have_already_registered}?<a href="/null/controller?command=loginPage"> ${resources.Login_to_delivery}!</a></p>
+    <p>${resources.Not_registered_yet}?<a href="/null/controller?command=registration"> ${resources.Go_to_registration_page}!</a></p>
     <%
         int counter = 1;
     %>

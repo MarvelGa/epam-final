@@ -1,7 +1,5 @@
 package com.epam.tct.model;
 
-import java.util.Arrays;
-
 public enum Role {
     ADMIN, USER, GUEST;
 

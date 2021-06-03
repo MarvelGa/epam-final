@@ -3,7 +3,6 @@ package com.epam.tct.web.command;
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
 import com.epam.tct.model.Distance;
-import com.epam.tct.model.OrderItem;
 import com.epam.tct.service.DistanceService;
 import com.epam.tct.service.impl.ServiceFactory;
 import org.apache.log4j.Logger;

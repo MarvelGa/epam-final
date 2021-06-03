@@ -4,9 +4,9 @@
         <tr>
             <th><h3><a href="controller?command=home">${resources.Home_page}</a> |</h3></th>
             <th><h3><a href="controller?command=loginPage">${resources.Login}</a> |</h3></th>
-            <th><h3><a href="controller?command=registration">Registration Page</a> |</h3></th>
+            <th><h3><a href="controller?command=registration">${resources.Registration_page}</a> |</h3></th>
 <%--            <th><h3><a href="controller?command=rates">Our Routes/Rate</a> |</h3></th>--%>
-            <th><h3><a href="controller?command=aboutUs">About us</a> |</h3></th>
+            <th><h3><a href="controller?command=aboutUs">${resources.About_us}</a> |</h3></th>
             <th><h3>
                 <a href='changeLocale' class='langstyle'>${resources.EN}</a>
                 <strong style='width:2px'>|</strong>
@@ -22,8 +22,8 @@
                 <th>
                     <c:choose>
                     <c:when test="${sessionScope.user!=null}">
-                    <h2><span style="color:forestgreen">Hello, ${sessionScope.user.firstName}! </span></h2>
-                    <h4><span style="color:forestgreen">You've entered as ${sessionScope.userRole} </span></h4>
+                    <h2><span style="color:forestgreen">${resources.Hello}, ${sessionScope.user.firstName}! </span></h2>
+                    <h4><span style="color:forestgreen">${resources.You_ve_entered_as} ${sessionScope.userRole} </span></h4>
                     <c:choose>
                     <c:when test="${sessionScope.user.roleId==1}">
                         <h2><a href="/null/controller?command=adminCabinet">${resources.Personal_cabinet}</a></h2>

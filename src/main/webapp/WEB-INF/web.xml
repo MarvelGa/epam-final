@@ -62,7 +62,7 @@
       </param-value>
     </init-param>
     <init-param>
-      <param-name>out-of-control</param-name>
+      <param-name>not-controlling</param-name>
       <param-value>home loginPage registration aboutUs authorization register logout commandNotFound
       </param-value>
     </init-param>

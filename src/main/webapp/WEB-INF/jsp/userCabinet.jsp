@@ -5,15 +5,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Home page</title>
+    <title> ${resources.User_personal_cabinet} </title>
     <meta charset="UTF-8"/>
-    <link href="/static/style.css" rel="stylesheet"/>
 </head>
 
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-    <h2>User Personal Cabinet!</h2>
+    <h2>${resources.User_personal_cabinet}!</h2>
 
     <table>
         <tr></tr>
@@ -24,7 +23,7 @@
             <td>
                 <form action="./controller" method="GET">
                     <input type="hidden" name="command" value="allUserDeliveries">
-                    <input type="submit" value="Show All Your Deliveries">
+                    <input type="submit" value="${resources.Show_all_your_deliveries}">
                 </form>
             </td>
         </tr>

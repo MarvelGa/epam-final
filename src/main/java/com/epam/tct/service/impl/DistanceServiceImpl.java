@@ -1,7 +1,6 @@
 package com.epam.tct.service.impl;
 
 import com.epam.tct.dao.DistanceDAO;
-import com.epam.tct.dao.UserDAO;
 import com.epam.tct.dao.impl.DaoFactory;
 import com.epam.tct.exception.DaoException;
 import com.epam.tct.exception.Messages;

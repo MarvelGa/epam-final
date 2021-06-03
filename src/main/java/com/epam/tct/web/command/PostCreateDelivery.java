@@ -23,7 +23,7 @@ public class PostCreateDelivery implements Command {
     private static final Logger log = Logger.getLogger(PostCreateDelivery.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int id = Integer.valueOf(request.getParameter("id"));
@@ -37,13 +37,11 @@ public class PostCreateDelivery implements Command {
         User user = (User) session.getAttribute("user");
         Distance data = distanceService.findById(id);
         Double volume = getRoundOffTheNumber(length * width * height);
-        Double price = getRoundOffTheNumber(volume * data.getDistance()/ (double) 3);
-
+        Double price = getRoundOffTheNumber(volume * data.getDistance() / (double) 3);
         int cityFromId = distanceService.getCityIdByName(data.getCityFrom());
         int cityToId = distanceService.getCityIdByName(data.getCityTo());
         Order order = new Order();
         order.setUser_id(user.getId());
-        //order.setCreatedAt(String.valueOf(LocalDateTime.now()));
         order.setCreatedAt(LocalDateTime.now());
         Item item = new Item();
         item.setCityFrom(data.getCityFrom());
@@ -56,9 +54,7 @@ public class PostCreateDelivery implements Command {
         item.setMaxHeight(height);
         item.setPrice(price);
         item.setCreatedAt(LocalDateTime.now());
-
         int orderItemId = orderItemsService.createOrder(order, item, data.getDistance());
-
         OrderItem orderItem = new OrderItem();
         orderItem.setId(orderItemId);
         orderItem.setOrder(order);
@@ -72,7 +68,7 @@ public class PostCreateDelivery implements Command {
         return Path.COMMAND__USER_ORDER_VIEW;
     }
 
-    static Double getRoundOffTheNumber(Double value){
+    static Double getRoundOffTheNumber(Double value) {
         double scale = Math.pow(10, 2);
         return Math.ceil(value * scale) / scale;
     }

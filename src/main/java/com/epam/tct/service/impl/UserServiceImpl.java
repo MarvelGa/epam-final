@@ -10,7 +10,6 @@ import com.epam.tct.service.UserService;
 import org.apache.log4j.Logger;
 
 import java.util.List;
-import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
     private DaoFactory daoFactory = DaoFactory.getInstance();

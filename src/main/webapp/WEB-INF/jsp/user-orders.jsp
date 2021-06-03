@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Orders of User in Personal Cabinet</title>
+    <title>${resources.Make_an_order_page}</title>
     <meta charset="UTF-8"/>
-    <link href="/static/style.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -30,14 +29,14 @@
                         </br>
                         <form action="./controller" method="GET">
                             <input type="hidden" name="command" value="userCabinet">
-                            <input type="submit" value="Create New Delivery Order">
+                            <input type="submit" value="${resources.Create_new_delivery_order}">
                         </form>
                         </br>
                     </td>
                     <td>
                         <form action="./controller" method="GET">
                             <input type="hidden" name="command" value="allUserDeliveries">
-                            <input type="submit" value="Show All Your Deliveries">
+                            <input type="submit" value="${resources.Show_all_your_deliveries}">
                         </form>
                     </td>
                 </tr>
@@ -52,16 +51,16 @@
     %>
     <table border="1">
         <tr>
-            <th>No.</th>
-            <th>Order ID</th>
-            <th>City FROM</th>
-            <th>City TO</th>
-            <th>Distance, km</th>
-            <th>Weight of Parcel, tonne</th>
-            <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-            <th>Created Date</th>
-            <th>Price</th>
-            <th>Status</th>
+            <th>№</th>
+            <th>${resources.Order_id}</th>
+            <th>${resources.City_from}</th>
+            <th>${resources.City_to}</th>
+            <th>${resources.Distance}</th>
+            <th>${resources.Weight}</th>
+            <th>${resources.Volume_of_parcel}, <i>m<sup><small>3</small></sup></i></th>
+            <th>${resources.Created_date}</th>
+            <th>${resources.Price}</th>
+            <th>${resources.Status}</th>
         </tr>
         <c:forEach var="record" items="${sessionScope.orderItems}">
             <tr>

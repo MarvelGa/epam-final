@@ -1,12 +1,16 @@
 package com.epam.tct.filter;
 
 import com.epam.tct.Path;
+import com.epam.tct.exception.AppException;
 import com.epam.tct.model.Role;
 import com.epam.tct.model.User;
+import com.epam.tct.web.command.Command;
+import com.epam.tct.web.command.CommandContainer;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
@@ -19,7 +23,7 @@ public class CommandAccessFilter implements Filter {
 
     private List<String> commons = new ArrayList<String>();
 
-    private List<String> outOfControl = new ArrayList<String>();
+    private List<String> notControlling = new ArrayList<String>();
 
     @Override
     public final void destroy() {
@@ -32,11 +36,14 @@ public class CommandAccessFilter implements Filter {
     public final void doFilter(final ServletRequest request,
                                final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
+
         logger.debug("Filter starts");
+
         if (accessAllowed(request)) {
             logger.debug("Filter finished");
             chain.doFilter(request, response);
         } else {
+
             String errorMessasge = "You do not have permission "
                     + "to access the requested resource";
 
@@ -61,7 +68,7 @@ public class CommandAccessFilter implements Filter {
             return false;
         }
 
-        if (outOfControl.contains(commandName)) {
+        if (notControlling.contains(commandName)) {
             return true;
         }
 
@@ -85,18 +92,15 @@ public class CommandAccessFilter implements Filter {
             throws ServletException {
         logger.debug("Filter initialization starts");
 
-        // roles
         accessMap.put(Role.ADMIN, asList(fConfig.getInitParameter("restrictedAdmin")));
         accessMap.put(Role.USER, asList(fConfig.getInitParameter("restrictedUser")));
         logger.trace("Access map  --> " + accessMap);
 
-        // commons
         commons = asList(fConfig.getInitParameter("common"));
         logger.trace("Common commands --> " + commons);
 
-        // out of control
-        outOfControl = asList(fConfig.getInitParameter("out-of-control"));
-        logger.trace("Out of control commands --> " + outOfControl);
+        notControlling = asList(fConfig.getInitParameter("not-controlling"));
+        logger.trace("Out of control commands --> " + notControlling);
 
         logger.debug("Filter initialization finished");
     }
