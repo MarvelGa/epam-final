@@ -28,7 +28,7 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
     private static final String GET_ALL_USERS_ORDERS = "SELECT o.id, u.email, u.first_name, u.last_name, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.name\n" +
             "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d, users u, roles r\n" +
             "WHERE o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
-            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id\n" +
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND r.id=u.role_id\n" +
             "ORDER BY o.id ASC;";
 
     private static final String UPDATE_ORDER_STATUS_BY_ORDER_ID = "UPDATE orders o SET o.status = ?, o.created_at=? WHERE o.id = ?;";
@@ -36,7 +36,7 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
     private static final String GET_ORDER_BY_ORDER_ID = "SELECT o.id, u.email, u.first_name, u.last_name, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`, r.name\n" +
             "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d, users u, roles r\n" +
             "WHERE o.id=? AND o.user_id=u.id AND c1.id = d.city_from_id AND c2.id = d.city_to_id AND o.id=oi.order_id AND i.id=oi.item_id\n" +
-            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND u.id=r.id;";
+            "\tAND i.city_sender_id= c1.id AND i.city_recipient_id=c2.id AND r.id=u.role_id;";
 
     private static final String GET_ORDERS = "SELECT o.id, c1.`name`, c2.`name`, d.distance, i.price, i.max_weight, i.max_length, i.max_width, i.max_height, o.created_at, o.`status`\n" +
             "FROM order_items oi, cities c1, cities c2, orders o, items i, distance d\n" +

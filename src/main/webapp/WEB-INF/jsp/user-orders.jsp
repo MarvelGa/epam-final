@@ -51,7 +51,7 @@
     %>
     <table border="1">
         <tr>
-            <th>№</th>
+            <th>No.</th>
             <th>${resources.Order_id}</th>
             <th>${resources.City_from}</th>
             <th>${resources.City_to}</th>

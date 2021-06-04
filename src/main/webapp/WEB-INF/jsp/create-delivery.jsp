@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create new Delivery</title>
+    <title>${resources.Create_new_Delivery}</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
@@ -13,18 +13,18 @@
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>Create new Delivery</h3>
-    <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
+    <h3>${resources.Create_new_Delivery}</h3>
+    <p><a href="/null/controller?command=userCabinet"> ${resources.Back_to_previously_page}!</a></p>
     <form action="/null/controller?command=postCreateDelivery" method="POST">
         <table border="1">
             <tr>
-                <th>City From</th>
-                <th>City To</th>
-                <th>Distance</th>
-                <th>Choose weight</th>
-                <th>Choose length</th>
-                <th>Choose width</th>
-                <th>Choose height</th>
+                <th>${resources.City_from}</th>
+                <th>${resources.City_to}</th>
+                <th>${resources.Distance}</th>
+                <th>${resources.Choose_weight}</th>
+                <th>${resources.Choose_length}</th>
+                <th>${resources.Choose_width}</th>
+                <th>${resources.Choose_height}</th>
             </tr>
 
             <tr>
@@ -91,7 +91,7 @@
         </br>
 
         <th style="'background-color: #228b22'">
-            <input type="submit" value="Create order"/>
+            <input type="submit" value="${resources.Create_order}"/>
         </th>
         <input type="hidden" name="command" value="postCreateDelivery">
         <input type="hidden" name="id" value="${distance.id}">

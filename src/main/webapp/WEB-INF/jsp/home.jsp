@@ -12,7 +12,7 @@
 
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h1>${resources.Welcome_to_company}!</h1>
+    <h2>${resources.Welcome_to_company}!</h2>
     <h3>${resources.Our_routes}!
         ${resources.About_price}.</h3>
 
@@ -24,10 +24,10 @@
     <table border="1">
         <tr>
             <th>No.</th>
-            <th>City FROM</th>
-            <th>City TO</th>
-            <th>Distance, km</th>
-            <th>Minimum Price</th>
+            <th>${resources.City_from}</th>
+            <th>${resources.City_to}</th>
+            <th>${resources.City_to}</th>
+            <th>${resources.Minimum_price}</th>
         </tr>
         <c:forEach var="record" items="${requestScope.data}">
             <tr>
@@ -36,7 +36,7 @@
                 </td>
 
                 <td>
-                        ${record.cityFrom}
+                  ${record.cityFrom}
                 </td>
 
                 <td>
@@ -55,7 +55,7 @@
                         double result = Math.ceil(value * scale) / scale;
                         pageContext.getRequest().setAttribute("RESULT", result);
                     %>
-                    from ${RESULT}
+                        ${resources.From} ${RESULT}
                 </td>
             </tr>
         </c:forEach>
