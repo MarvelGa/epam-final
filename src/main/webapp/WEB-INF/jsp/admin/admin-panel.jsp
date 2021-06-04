@@ -1,4 +1,4 @@
-
+<center>
 <table>
     <tr>
         <td colspan="2">
@@ -24,7 +24,7 @@
         </td>
     </tr>
 
-
+    <table>
     <tr>
         <td colspan="3" align="right" >
             <form action="./controller" method="GET">
@@ -40,4 +40,6 @@
             </form>
         </td>
     </tr>
+        </table>
 </table>
+    </center>

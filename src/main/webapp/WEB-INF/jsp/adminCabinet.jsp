@@ -7,7 +7,6 @@
 <head>
     <title>Admin Personal Cabinet</title>
     <meta charset="UTF-8"/>
-    <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
