@@ -18,6 +18,13 @@ public class OrderItemsServiceImpl implements OrderItemsService {
     private OrderItemsDAO orderItemsDAO = daoFactory.getOrderItemsDAO();
     private static final Logger logger = Logger.getLogger(OrderItemsServiceImpl.class);
 
+    public OrderItemsServiceImpl() {
+    }
+
+    public OrderItemsServiceImpl(OrderItemsDAO orderItemsDAO) {
+        this.orderItemsDAO = orderItemsDAO;
+    }
+
     @Override
     public int createOrder(Order order, Item item, double distance) throws ServiceException {
         try {
