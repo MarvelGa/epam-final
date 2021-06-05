@@ -20,6 +20,13 @@ public class AllUserDeliveries implements Command {
     private static final Logger log = Logger.getLogger(AllUserDeliveries.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public AllUserDeliveries() {
+    }
+
+    public AllUserDeliveries(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         HttpSession session = request.getSession();

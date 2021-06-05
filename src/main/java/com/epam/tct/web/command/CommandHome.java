@@ -17,6 +17,13 @@ public class CommandHome implements Command{
     private static final Logger log = Logger.getLogger(CommandHome.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
+    public CommandHome() {
+    }
+
+    public CommandHome(DistanceService distanceService) {
+        this.distanceService = distanceService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
       List<Distance> data = distanceService.findAll();
