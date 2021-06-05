@@ -1,6 +1,7 @@
-package com.epam.tct.unit.services;
+package com.epam.tct.unittest.services;
 
 import com.epam.tct.dao.UserDAO;
+import com.epam.tct.exception.DaoException;
 import com.epam.tct.model.User;
 import com.epam.tct.service.UserService;
 import com.epam.tct.service.impl.UserServiceImpl;
@@ -12,10 +13,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class UserServiceImplTest {
 
@@ -24,6 +23,7 @@ public class UserServiceImplTest {
     UserService service;
     private User user;
     private List<User> listUser;
+    private String email = "ivanov@gmail.com";
 
     @BeforeEach
     void setUp() {
@@ -53,8 +53,18 @@ public class UserServiceImplTest {
     }
 
     @Test
+    void whenTryAddUserThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(userDAO).createUser(user);
+            service.addUser(user);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     void shouldGetUserEmail() {
-        String email = "ivanov@gmail.com";
         try {
             when(userDAO.getUserByEmail(email)).thenReturn(user);
             User expected = user;
@@ -62,6 +72,17 @@ public class UserServiceImplTest {
             assertEquals(expected, actual);
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    void whenTryGetUserEmailThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(userDAO).getUserByEmail(email);
+            service.getUserByEmail(email);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 
@@ -74,6 +95,17 @@ public class UserServiceImplTest {
             assertEquals(expected, actual);
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    void whenTryGetAllUsersFromDBThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(userDAO).readAllUsers();
+            service.findAll();
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 }

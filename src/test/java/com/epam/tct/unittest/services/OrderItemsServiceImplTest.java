@@ -1,6 +1,7 @@
-package com.epam.tct.unit.services;
+package com.epam.tct.unittest.services;
 
 import com.epam.tct.dao.OrderItemsDAO;
+import com.epam.tct.exception.DaoException;
 import com.epam.tct.model.*;
 import com.epam.tct.service.OrderItemsService;
 import com.epam.tct.service.impl.OrderItemsServiceImpl;
@@ -13,10 +14,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class OrderItemsServiceImplTest {
     @Mock
@@ -88,6 +87,17 @@ public class OrderItemsServiceImplTest {
     }
 
     @Test
+    void whenTryCreateOrderThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).createOrder(order, item, distance);
+            service.createOrder(order, item, distance);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     void shouldGetAllDeliveriesOrdersByUserID() {
         try {
             when(orderItemsDAO.getAllDeliveriesOrdersByUserID(1)).thenReturn(listOrderItem);
@@ -96,6 +106,17 @@ public class OrderItemsServiceImplTest {
             assertEquals(expected, actual);
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    void whenGetAllDeliveriesOrdersByUserIDThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).getAllDeliveriesOrdersByUserID(1);
+            service.getAllDeliveriesOrdersByUserID(1);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 
@@ -112,6 +133,17 @@ public class OrderItemsServiceImplTest {
     }
 
     @Test
+    void whenGetAllUsersOrdersThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).getAllUsersOrders();
+            service.getAllUsersOrders();
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     void shouldUpdateOrderStatusByOrderId() {
         try {
             when(orderItemsDAO.updateOrderStatusByOrderId(Order.OrderStatus.NEW, 1)).thenReturn(true);
@@ -120,6 +152,17 @@ public class OrderItemsServiceImplTest {
             assertEquals(expected, actual);
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    void whenUpdateOrderStatusByOrderIdThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).updateOrderStatusByOrderId(Order.OrderStatus.NEW, 1);
+            service.updateOrderStatusByOrderId(Order.OrderStatus.NEW, 1);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 
@@ -136,6 +179,17 @@ public class OrderItemsServiceImplTest {
     }
 
     @Test
+    void whenGetDeliveryOrderItemByOrderIdThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).getDeliveryOrderItemByOrderId(1);
+            service.getDeliveryOrderItemByOrderId(1);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     void shouldGetOrders() {
         try {
             when(orderItemsDAO.getOrders()).thenReturn(listOrderItem);
@@ -144,6 +198,17 @@ public class OrderItemsServiceImplTest {
             assertEquals(expected, actual);
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    void whenShouldGetOrdersThanThrowsDaoException() {
+        try {
+            doThrow(DaoException.class).when(orderItemsDAO).getOrders();
+            service.getOrders();
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 }
