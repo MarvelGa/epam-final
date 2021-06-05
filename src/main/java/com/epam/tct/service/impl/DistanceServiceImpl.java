@@ -16,6 +16,13 @@ public class DistanceServiceImpl implements DistanceService {
     private DistanceDAO distanceDAO = daoFactory.getDistanceDAO();
     private static final Logger logger = Logger.getLogger(DistanceServiceImpl.class);
 
+    public DistanceServiceImpl() {
+    }
+
+    public DistanceServiceImpl(DistanceDAO distanceDAO) {
+        this.distanceDAO = distanceDAO;
+    }
+
     @Override
     public List<Distance> findAll() throws ServiceException {
         List<Distance> distanceList;

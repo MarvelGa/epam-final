@@ -1,11 +1,8 @@
 package com.epam.tct.unit.services;
 
 import com.epam.tct.dao.UserDAO;
-import com.epam.tct.dao.impl.DaoFactory;
-import com.epam.tct.dao.impl.UserDAOImpl;
 import com.epam.tct.model.User;
 import com.epam.tct.service.UserService;
-import com.epam.tct.service.impl.ServiceFactory;
 import com.epam.tct.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +39,6 @@ public class UserServiceImplTest {
         user.setRoleId(2);
         listUser.add(user);
     }
-
 
     @Test
     void shouldAddUser() {
