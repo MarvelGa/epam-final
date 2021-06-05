@@ -17,6 +17,13 @@ public class DisplayOrders implements Command{
     private static final Logger log = Logger.getLogger(DisplayOrders.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public DisplayOrders() {
+    }
+
+    public DisplayOrders(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
      List<OrderItem> orderItemList = orderItemsService.getOrders();

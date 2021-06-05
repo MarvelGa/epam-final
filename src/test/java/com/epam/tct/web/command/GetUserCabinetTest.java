@@ -2,7 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
-import com.epam.tct.model.*;
+import com.epam.tct.model.Distance;
 import com.epam.tct.service.DistanceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +24,25 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.never;
 
-public class CommandHomeTest {
+public class GetUserCabinetTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
     final HttpServletResponse response = mock(HttpServletResponse.class);
 
     @Mock
     private DistanceService distanceService;
 
+    @Mock
+    private HttpSession session;
+
     @InjectMocks
-    CommandHome command;
+    GetUserCabinet command;
     private Distance dataDistance;
     private List<Distance> listDistance;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        command = new CommandHome(distanceService);
+        command = new GetUserCabinet(distanceService);
         listDistance = new ArrayList<>();
         dataDistance = new Distance();
         dataDistance.setId(1);
@@ -50,11 +53,11 @@ public class CommandHomeTest {
     }
 
     @Test
-    void whenCallHomeCommandThanReturnHomePage() throws ServletException, IOException, AppException {
+    void whenCallGetUserCabinetCommandThanReturnUserCabinetPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
+        when(request.getSession(false)).thenReturn(session);
         when(distanceService.findAll()).thenReturn(listDistance);
         String forward = command.execute(request, response);
-        assertEquals(Path.PAGE__HOME, forward);
-        verify(request, never()).setAttribute(anyString(), any(Distance.class));
+        assertEquals(Path.USER_CABINET, forward);
     }
 }

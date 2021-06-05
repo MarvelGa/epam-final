@@ -17,6 +17,14 @@ import java.util.List;
 public class CreateDeliveryByAdmin implements Command {
     private static final Logger log = Logger.getLogger(CreateDeliveryByAdmin.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
+
+    public CreateDeliveryByAdmin() {
+    }
+
+    public CreateDeliveryByAdmin(DistanceService distanceService) {
+        this.distanceService = distanceService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         List<Distance> data = distanceService.findAll();

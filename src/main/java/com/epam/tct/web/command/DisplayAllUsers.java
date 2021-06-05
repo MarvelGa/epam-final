@@ -17,6 +17,13 @@ public class DisplayAllUsers implements Command {
     private static final Logger log = Logger.getLogger(DisplayAllUsers.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();
 
+    public DisplayAllUsers() {
+    }
+
+    public DisplayAllUsers(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         List<User> users =   userService.findAll();

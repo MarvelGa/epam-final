@@ -17,6 +17,13 @@ public class GetChangeStatusDelivery implements Command {
     private static final Logger log = Logger.getLogger(GetChangeStatusDelivery.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public GetChangeStatusDelivery() {
+    }
+
+    public GetChangeStatusDelivery(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int orderId = Integer.valueOf(request.getParameter("id"));

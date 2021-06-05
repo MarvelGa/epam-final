@@ -16,45 +16,37 @@ import org.mockito.MockitoAnnotations;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class AllUserDeliveriesTest {
+public class GetChangeStatusDeliveryTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
+
     final HttpServletResponse response = mock(HttpServletResponse.class);
 
-    @Mock
-    private HttpSession session;
     @Mock
     private OrderItemsService orderItemsService;
 
     @InjectMocks
-    AllUserDeliveries command;
+    GetChangeStatusDelivery command;
 
     private Order order;
     private Item item;
     private User user;
     private OrderItem orderItem;
-    private List<OrderItem> listOrderItem;
-    private List<Order> listOrder;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        command = new AllUserDeliveries(orderItemsService);
+        command = new GetChangeStatusDelivery(orderItemsService);
 
         order = new Order();
         item = new Item();
         user = new User();
         orderItem = new OrderItem();
-        listOrder = new ArrayList<>();
-        listOrderItem = new ArrayList<>();
 
         order.setUser_id(2);
         order.setStatus(Order.OrderStatus.NEW);
@@ -85,19 +77,15 @@ public class AllUserDeliveriesTest {
         orderItem.setVolume(555.55);
         orderItem.setUser(user);
 
-        listOrder.add(order);
-        listOrderItem.add(orderItem);
-
     }
 
     @Test
-    void whenCallAllUserDeliveriesCommandThanReturnAllDeliveriesPage() throws ServletException, IOException, AppException {
+    void whenCallGetChangeStatusDeliveryCommandThanReturnUserOrderViewPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(any(String.class))).thenReturn(user);
-        when(orderItemsService.getAllDeliveriesOrdersByUserID(anyInt())).thenReturn(listOrderItem);
+        when(request.getParameter("id")).thenReturn("1");
+        when(orderItemsService.getDeliveryOrderItemByOrderId(1)).thenReturn(orderItem);
         String forward = command.execute(request, response);
-        assertEquals(Path.USER_All_ORDERS, forward);
-        verify(session, never()).setAttribute(anyString(), any(OrderItem.class));
+        assertEquals(Path.USER_ORDER_VIEW, forward);
+        verify(request, times(1)).setAttribute("orderItem", orderItem);
     }
 }

@@ -16,6 +16,13 @@ public class GetCreateDelivery implements Command{
     private static final Logger log = Logger.getLogger(GetCreateDelivery.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
+    public GetCreateDelivery() {
+    }
+
+    public GetCreateDelivery(DistanceService distanceService) {
+        this.distanceService = distanceService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int id = Integer.valueOf(request.getParameter("id"));

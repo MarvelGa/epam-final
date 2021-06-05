@@ -18,17 +18,21 @@ public class GetUserCabinet implements Command {
     private static final Logger log = Logger.getLogger(GetUserCabinet.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
+    public GetUserCabinet() {
+    }
+
+    public GetUserCabinet(DistanceService distanceService) {
+        this.distanceService = distanceService;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         List<Distance> dis = distanceService.findAll();
-
         HttpSession session = request.getSession(false);
         session.setAttribute("cityAndDistance", dis);
         if (session != null) {
            session.setAttribute("cityAndDistance", dis);
         }
-
         return Path.USER_CABINET;
     }
 

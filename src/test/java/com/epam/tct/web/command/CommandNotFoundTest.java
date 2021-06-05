@@ -1,10 +1,10 @@
 package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
-import com.epam.tct.exception.AppException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.servlet.ServletException;
@@ -13,29 +13,27 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class AboutUsTest {
+public class CommandNotFoundTest {
+    @Mock
+    private HttpServletRequest request;
 
-    final HttpServletRequest request = mock(HttpServletRequest.class);
-    final HttpServletResponse response = mock(HttpServletResponse.class);
+    @Mock
+    private HttpServletResponse response;
 
     @InjectMocks
-    AboutUs command;
+    private CommandNotFound command;
+
 
     @BeforeEach
-    void setUp()  {
+    void setUp() throws ServletException, IOException {
         MockitoAnnotations.openMocks(this);
-        command = new AboutUs();
+        command = new CommandNotFound();
     }
 
     @Test
-    void whenCallAboutUsCommandThanReturnAboutUsPage() throws ServletException, IOException, AppException {
-        when(request.getMethod()).thenReturn("GET");
+    void whenCommandNotFoundThanReturnErrorPage() {
         String forward = command.execute(request, response);
-        assertEquals(Path.ABOUT_US_PAGE, forward);
+        assertEquals(Path.PAGE_ERROR_PAGE, forward);
     }
-
 }
-

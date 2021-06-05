@@ -23,19 +23,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
 
-public class AllUserDeliveriesTest {
+public class DisplayOrdersTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
+
     final HttpServletResponse response = mock(HttpServletResponse.class);
 
-    @Mock
-    private HttpSession session;
     @Mock
     private OrderItemsService orderItemsService;
 
     @InjectMocks
-    AllUserDeliveries command;
+    DisplayOrders command;
 
     private Order order;
     private Item item;
@@ -47,7 +49,7 @@ public class AllUserDeliveriesTest {
     @BeforeEach
     void setUp()  {
         MockitoAnnotations.openMocks(this);
-        command = new AllUserDeliveries(orderItemsService);
+        command = new DisplayOrders(orderItemsService);
 
         order = new Order();
         item = new Item();
@@ -91,13 +93,11 @@ public class AllUserDeliveriesTest {
     }
 
     @Test
-    void whenCallAllUserDeliveriesCommandThanReturnAllDeliveriesPage() throws ServletException, IOException, AppException {
+    void whenCallDisplayOrdersCommandThanReturnOrderViewPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(any(String.class))).thenReturn(user);
-        when(orderItemsService.getAllDeliveriesOrdersByUserID(anyInt())).thenReturn(listOrderItem);
+        when(orderItemsService.getOrders()).thenReturn(listOrderItem);
         String forward = command.execute(request, response);
-        assertEquals(Path.USER_All_ORDERS, forward);
-        verify(session, never()).setAttribute(anyString(), any(OrderItem.class));
+        assertEquals(Path.ORDERS_VIEW, forward);
+        verify(request, never()).setAttribute(anyString(), any(OrderItem.class));
     }
 }

@@ -23,19 +23,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
 
-public class AllUserDeliveriesTest {
+public class GetAllUsersOrdersTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
-    final HttpServletResponse response = mock(HttpServletResponse.class);
 
+    final HttpServletResponse response = mock(HttpServletResponse.class);
     @Mock
     private HttpSession session;
     @Mock
     private OrderItemsService orderItemsService;
 
     @InjectMocks
-    AllUserDeliveries command;
+    GetAllUsersOrders command;
 
     private Order order;
     private Item item;
@@ -45,9 +48,9 @@ public class AllUserDeliveriesTest {
     private List<Order> listOrder;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        command = new AllUserDeliveries(orderItemsService);
+        command = new GetAllUsersOrders(orderItemsService);
 
         order = new Order();
         item = new Item();
@@ -87,17 +90,15 @@ public class AllUserDeliveriesTest {
 
         listOrder.add(order);
         listOrderItem.add(orderItem);
-
     }
 
     @Test
-    void whenCallAllUserDeliveriesCommandThanReturnAllDeliveriesPage() throws ServletException, IOException, AppException {
-        when(request.getMethod()).thenReturn("GET");
+    void whenCallGetAllUsersOrdersCommandThanReturnAllUsersOrdersPage() throws ServletException, IOException, AppException {
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute(any(String.class))).thenReturn(user);
-        when(orderItemsService.getAllDeliveriesOrdersByUserID(anyInt())).thenReturn(listOrderItem);
+        when(request.getMethod()).thenReturn("GET");
+        when(orderItemsService.getOrders()).thenReturn(listOrderItem);
         String forward = command.execute(request, response);
-        assertEquals(Path.USER_All_ORDERS, forward);
-        verify(session, never()).setAttribute(anyString(), any(OrderItem.class));
+        assertEquals(Path.ALL_USERS_ORDERS, forward);
+        verify(request, never()).setAttribute(anyString(), any(OrderItem.class));
     }
 }

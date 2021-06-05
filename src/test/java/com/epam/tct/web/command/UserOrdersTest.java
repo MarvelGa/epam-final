@@ -16,26 +16,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AboutUsTest {
-
+public class UserOrdersTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
     final HttpServletResponse response = mock(HttpServletResponse.class);
 
     @InjectMocks
-    AboutUs command;
+    UserOrders command;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        command = new AboutUs();
+        command = new UserOrders();
     }
 
     @Test
-    void whenCallAboutUsCommandThanReturnAboutUsPage() throws ServletException, IOException, AppException {
+    void whenCallUserOrdersCommandThanReturnUserOrdersPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
         String forward = command.execute(request, response);
-        assertEquals(Path.ABOUT_US_PAGE, forward);
+        assertEquals(Path.USER_ORDERS, forward);
     }
-
 }
-

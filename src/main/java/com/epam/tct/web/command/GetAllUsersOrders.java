@@ -18,6 +18,13 @@ public class GetAllUsersOrders implements Command {
     private static final Logger log = Logger.getLogger(GetAllUsersOrders.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public GetAllUsersOrders() {
+    }
+
+    public GetAllUsersOrders(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         HttpSession session = request.getSession();
