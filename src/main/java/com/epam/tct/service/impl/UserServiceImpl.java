@@ -16,6 +16,13 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO = daoFactory.getUserDao();
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 
+    public UserServiceImpl() {
+    }
+
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
     @Override
     public User getUserByEmail(String email) throws ServiceException {
         User user;

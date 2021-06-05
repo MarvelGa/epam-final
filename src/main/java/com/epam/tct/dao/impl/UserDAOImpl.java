@@ -55,9 +55,9 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int createUser(User user) throws DaoException {
         int id = -1;
-        if (user.getId() != 0 && user.getId() > 0) {
-            return 0;
-        }
+//        if (user.getId() != 0 && user.getId() > 0) {
+//            return 0;
+//        }
         final String query = CREAT_USER;
         DBManager dbm;
         PreparedStatement pstmt = null;
