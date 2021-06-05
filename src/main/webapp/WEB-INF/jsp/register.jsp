@@ -22,7 +22,7 @@
                             <c:if test="${not empty errorMessage and empty exception and empty code}">
                                 <h4 style="color:tomato">${errorMessage}</h4>
                             </c:if>
-                            <form id="formRegistration" action="/null/controller?command=register" method="post">
+                            <form id="formRegistration" action="/tct/controller?command=register" method="post">
 
                                 <div class="field">
                                     <label>Enter your email:</label>

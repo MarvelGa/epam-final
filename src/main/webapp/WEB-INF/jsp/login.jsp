@@ -12,13 +12,13 @@
     <h2>${resources.Login_form}</h2>
     <c:choose>
     <c:when test="${sessionScope.user==null }">
-    <p>Not registered yet?<a href="/null/controller?command=registration"> Go to Registration Page</a></p>
+    <p>Not registered yet?<a href="/tct/controller?command=registration"> Go to Registration Page</a></p>
     <c:if test="${not empty errorMessage and empty exception and empty code}">
         <h3 style="color:tomato">${errorMessage}</h3>
     </c:if>
     <table class="table">
         <td padding: 5px; border: 1px solid #fff;>
-            <form id="loginForm" action="/null/controller?command=authorization" method="post">
+            <form id="loginForm" action="/tct/controller?command=authorization" method="post">
                 <div class="field">
                     <br><br><label>Enter your email:</label>
                     <div class="input"><input type="text" name="email" id="email"></div>

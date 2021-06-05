@@ -14,7 +14,7 @@
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     <h3>View Of All Users In DataBase</h3>
 
-    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <p><a href="/tct/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
 <%--    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
     </br>

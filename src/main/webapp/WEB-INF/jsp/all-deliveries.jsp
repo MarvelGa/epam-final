@@ -26,7 +26,7 @@
             </br>
         </c:when>
         <c:otherwise>
-            <p><a href="/null/controller?command=userCabinet"> Back to the previously Page!</a></p>
+            <p><a href="/tct/controller?command=userCabinet"> Back to the previously Page!</a></p>
             </br>
         </c:otherwise>
     </c:choose>

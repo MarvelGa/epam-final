@@ -13,7 +13,7 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <p><a href="/tct/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
 
     <%@include file="/WEB-INF/jsp/common/delivery.jsp" %>
 

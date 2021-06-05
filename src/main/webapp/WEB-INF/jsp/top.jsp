@@ -26,12 +26,12 @@
                     <h4><span style="color:forestgreen">${resources.You_ve_entered_as} ${sessionScope.userRole} </span></h4>
                     <c:choose>
                     <c:when test="${sessionScope.user.roleId==1}">
-                        <h2><a href="/null/controller?command=adminCabinet">${resources.Personal_cabinet}</a></h2>
+                        <h2><a href="/tct/controller?command=adminCabinet">${resources.Personal_cabinet}</a></h2>
                     </c:when>
                     <c:otherwise>
-                    <h2><a href="/null/controller?command=userCabinet">${resources.Personal_cabinet}</a>
+                    <h2><a href="/tct/controller?command=userCabinet">${resources.Personal_cabinet}</a>
                         <h3>
-                            <h3><a href="/null/controller?command=allUserDeliveries">${resources.All_your_delivery}</a>
+                            <h3><a href="/tct/controller?command=allUserDeliveries">${resources.All_your_delivery}</a>
                                 <h3>
                                     </c:otherwise>
                                     </c:choose>

@@ -17,8 +17,8 @@
     <%
         int counter = 1;
     %>
-    <p><a href="/null/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
-    <a href="/null/controller?command=getAllUsersOrders"> Back to Previously Page!</a>
+    <p><a href="/tct/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <a href="/tct/controller?command=getAllUsersOrders"> Back to Previously Page!</a>
     <table border="1">
         <tr>
             <th>No.</th>

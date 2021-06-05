@@ -16,8 +16,8 @@
     <h3>${resources.Our_routes}!
         ${resources.About_price}.</h3>
 
-    <p>${resources.Have_already_registered}?<a href="/null/controller?command=loginPage"> ${resources.Login_to_delivery}!</a></p>
-    <p>${resources.Not_registered_yet}?<a href="/null/controller?command=registration"> ${resources.Go_to_registration_page}!</a></p>
+    <p>${resources.Have_already_registered}?<a href="/tct/controller?command=loginPage"> ${resources.Login_to_delivery}!</a></p>
+    <p>${resources.Not_registered_yet}?<a href="/tct/controller?command=registration"> ${resources.Go_to_registration_page}!</a></p>
     <%
         int counter = 1;
     %>

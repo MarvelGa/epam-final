@@ -14,8 +14,17 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     <h3>${resources.Create_new_Delivery}</h3>
-    <p><a href="/null/controller?command=userCabinet"> ${resources.Back_to_previously_page}!</a></p>
-    <form action="/null/controller?command=postCreateDelivery" method="POST">
+
+    <c:choose>
+        <c:when test="${sessionScope.user.roleId==1}">
+            <p><a href="/tct/controller?command=adminCabinet"> ${resources.Back_to_previously_page}!</a></p>
+        </c:when>
+        <c:otherwise>
+            <a href="/tct/controller?command=userCabinet">${resources.Back_to_previously_page}!</a>
+        </c:otherwise>
+    </c:choose>
+
+    <form action="/tct/controller?command=postCreateDelivery" method="POST">
         <table border="1">
             <tr>
                 <th>${resources.City_from}</th>
