@@ -17,6 +17,13 @@ public class ListDeliveries implements Command {
     private static final Logger log = Logger.getLogger(AllUserDeliveries.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public ListDeliveries() {
+    }
+
+    public ListDeliveries(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int userID = Integer.parseInt(request.getParameter("userId"));

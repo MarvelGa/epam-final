@@ -24,6 +24,14 @@ public class PostCreateDelivery implements Command {
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public PostCreateDelivery() {
+    }
+
+    public PostCreateDelivery(DistanceService distanceService, OrderItemsService orderItemsService) {
+        this.distanceService = distanceService;
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         int id = Integer.valueOf(request.getParameter("id"));

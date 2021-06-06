@@ -2,6 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
+import com.epam.tct.exception.ServiceException;
 import com.epam.tct.model.Item;
 import com.epam.tct.model.Order;
 import com.epam.tct.model.OrderItem;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -100,5 +101,17 @@ public class GetAllUsersOrdersTest {
         String forward = command.execute(request, response);
         assertEquals(Path.ALL_USERS_ORDERS, forward);
         verify(request, never()).setAttribute(anyString(), any(OrderItem.class));
+    }
+
+    @Test
+    void whenCallTheCommandAndThrowServiceException() {
+        try {
+            when(orderItemsService.getOrders()).thenThrow(ServiceException.class);
+            when(request.getMethod()).thenReturn("GET");
+            command.execute(request, response);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 }

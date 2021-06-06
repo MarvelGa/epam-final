@@ -2,6 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
+import com.epam.tct.exception.ServiceException;
 import com.epam.tct.model.Item;
 import com.epam.tct.model.Order;
 import com.epam.tct.model.OrderItem;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class GetChangeStatusDeliveryTest {
@@ -87,5 +88,17 @@ public class GetChangeStatusDeliveryTest {
         String forward = command.execute(request, response);
         assertEquals(Path.USER_ORDER_VIEW, forward);
         verify(request, times(1)).setAttribute("orderItem", orderItem);
+    }
+
+    @Test
+    void whenCallTheCommandAndThrowServiceException() {
+        try {
+            when(orderItemsService.getDeliveryOrderItemByOrderId(1)).thenThrow(ServiceException.class);
+            when(request.getMethod()).thenReturn("GET");
+            command.execute(request, response);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 }

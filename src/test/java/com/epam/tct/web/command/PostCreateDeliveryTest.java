@@ -2,11 +2,8 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
-import com.epam.tct.exception.ServiceException;
-import com.epam.tct.model.Item;
-import com.epam.tct.model.Order;
-import com.epam.tct.model.OrderItem;
-import com.epam.tct.model.User;
+import com.epam.tct.model.*;
+import com.epam.tct.service.DistanceService;
 import com.epam.tct.service.OrderItemsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,23 +20,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.never;
 
-public class DisplayOrdersTest {
+public class PostCreateDeliveryTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
 
     final HttpServletResponse response = mock(HttpServletResponse.class);
-
+    @Mock
+    private HttpSession session;
     @Mock
     private OrderItemsService orderItemsService;
+    @Mock
+    private DistanceService distanceService;
 
     @InjectMocks
-    DisplayOrders command;
+    PostCreateDelivery command;
 
+    private Distance dataDistance;
+    private List<Distance> listDistance;
     private Order order;
     private Item item;
     private User user;
@@ -48,9 +48,9 @@ public class DisplayOrdersTest {
     private List<Order> listOrder;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        command = new DisplayOrders(orderItemsService);
+        command = new PostCreateDelivery(distanceService, orderItemsService);
 
         order = new Order();
         item = new Item();
@@ -88,29 +88,37 @@ public class DisplayOrdersTest {
         orderItem.setVolume(555.55);
         orderItem.setUser(user);
 
+        listDistance = new ArrayList<>();
+        dataDistance = new Distance();
+        dataDistance.setId(1);
+        dataDistance.setCityFrom("Kyiv");
+        dataDistance.setCityFrom("Lviv");
+        dataDistance.setDistance(480);
+        listDistance.add(dataDistance);
+
         listOrder.add(order);
         listOrderItem.add(orderItem);
-
     }
 
     @Test
-    void whenCallDisplayOrdersCommandThanReturnOrderViewPage() throws ServletException, IOException, AppException {
-        when(request.getMethod()).thenReturn("GET");
+    void whenCallGPostCreateDeliveryCommandThanReturnUserOrderViewPage() throws ServletException, IOException, AppException {
+
+        when(request.getMethod()).thenReturn("POST");
+        when(request.getParameter("id")).thenReturn("1");
+        when(request.getParameter("weight")).thenReturn("10.2");
+        when(request.getParameter("length")).thenReturn("20.5");
+        when(request.getParameter("width")).thenReturn("15.2");
+        when(request.getParameter("height")).thenReturn("10");
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute(any(String.class))).thenReturn(user);
         when(orderItemsService.getOrders()).thenReturn(listOrderItem);
+        when(distanceService.findById(1)).thenReturn(dataDistance);
+        when(distanceService.getCityIdByName(dataDistance.getCityFrom())).thenReturn(1);
+        when(distanceService.getCityIdByName(dataDistance.getCityTo())).thenReturn(2);
+        when(orderItemsService.createOrder(order, item, dataDistance.getDistance())).thenReturn(1);
         String forward = command.execute(request, response);
-        assertEquals(Path.ORDERS_VIEW, forward);
-        verify(request, never()).setAttribute(anyString(), any(OrderItem.class));
+        assertEquals(Path.COMMAND__USER_ORDER_VIEW, forward);
     }
 
-    @Test
-    void whenCallTheCommandAndThrowServiceException() {
-        try {
-            when(orderItemsService.getOrders()).thenThrow(ServiceException.class);
-            when(request.getMethod()).thenReturn("GET");
-            command.execute(request, response);
-            fail();
-        } catch (Exception e) {
-            assertTrue(true);
-        }
-    }
 }
+

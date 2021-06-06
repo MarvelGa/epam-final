@@ -2,6 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
+import com.epam.tct.exception.ServiceException;
 import com.epam.tct.model.Distance;
 import com.epam.tct.service.DistanceService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
@@ -51,5 +52,17 @@ public class GetCreateDeliveryTest {
         String forward = command.execute(request, response);
         assertEquals(Path.CREATE_DELIVERY, forward);
         verify(request, times(1)).setAttribute("distance", dataDistance);
+    }
+
+    @Test
+    void whenCallTheCommandAndThrowServiceException() {
+        try {
+            when(distanceService.findById(1)).thenThrow(ServiceException.class);
+            when(request.getMethod()).thenReturn("GET");
+            command.execute(request, response);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 }

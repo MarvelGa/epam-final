@@ -16,6 +16,13 @@ public class PostChangeStatusDelivery implements Command{
     private static final Logger log = Logger.getLogger(PostChangeStatusDelivery.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
+    public PostChangeStatusDelivery() {
+    }
+
+    public PostChangeStatusDelivery(OrderItemsService orderItemsService) {
+        this.orderItemsService = orderItemsService;
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         Order.OrderStatus status = Order.OrderStatus.valueOf(request.getParameter("status"));

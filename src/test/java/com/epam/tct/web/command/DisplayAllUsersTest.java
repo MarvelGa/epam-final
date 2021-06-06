@@ -2,6 +2,7 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
+import com.epam.tct.exception.ServiceException;
 import com.epam.tct.model.User;
 import com.epam.tct.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class DisplayAllUsersTest {
@@ -54,10 +55,22 @@ public class DisplayAllUsersTest {
     }
 
     @Test
-    void whenCallDisplayAllUsersThanReturnDisplayAllUsersPage() throws ServletException, IOException, AppException {
+    void whenCallDisplayAllUsersCommandThanReturnDisplayAllUsersPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
         when(userService.findAll()).thenReturn(listUser);
         String forward = command.execute(request, response);
         assertEquals(Path.DISPLAY_ALL_USERS, forward);
+    }
+
+    @Test
+    void whenCallTheCommandAndThrowServiceException() {
+        try {
+            when(userService.findAll()).thenThrow(ServiceException.class);
+            when(request.getMethod()).thenReturn("GET");
+            command.execute(request, response);
+            fail();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 }

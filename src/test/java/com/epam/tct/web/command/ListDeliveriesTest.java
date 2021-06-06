@@ -17,28 +17,24 @@ import org.mockito.MockitoAnnotations;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.never;
 
-public class DisplayOrdersTest {
+public class ListDeliveriesTest {
     final HttpServletRequest request = mock(HttpServletRequest.class);
-
     final HttpServletResponse response = mock(HttpServletResponse.class);
 
     @Mock
     private OrderItemsService orderItemsService;
 
     @InjectMocks
-    DisplayOrders command;
+    ListDeliveries command;
 
     private Order order;
     private Item item;
@@ -50,7 +46,7 @@ public class DisplayOrdersTest {
     @BeforeEach
     void setUp()  {
         MockitoAnnotations.openMocks(this);
-        command = new DisplayOrders(orderItemsService);
+        command = new ListDeliveries(orderItemsService);
 
         order = new Order();
         item = new Item();
@@ -94,18 +90,19 @@ public class DisplayOrdersTest {
     }
 
     @Test
-    void whenCallDisplayOrdersCommandThanReturnOrderViewPage() throws ServletException, IOException, AppException {
+    void whenCallListDeliveriesCommandThanReturnListOfUserOrdersPage() throws ServletException, IOException, AppException {
         when(request.getMethod()).thenReturn("GET");
-        when(orderItemsService.getOrders()).thenReturn(listOrderItem);
+        when(request.getParameter("userId")).thenReturn("1");
+        when(orderItemsService.getAllDeliveriesOrdersByUserID(anyInt())).thenReturn(listOrderItem);
         String forward = command.execute(request, response);
-        assertEquals(Path.ORDERS_VIEW, forward);
-        verify(request, never()).setAttribute(anyString(), any(OrderItem.class));
+        assertEquals(Path.GET_LIST_OF_USER_ORDERS, forward);
+        verify(request, times(1)).setAttribute("listOfUsersOrders", listOrderItem);
     }
 
     @Test
     void whenCallTheCommandAndThrowServiceException() {
         try {
-            when(orderItemsService.getOrders()).thenThrow(ServiceException.class);
+            when(orderItemsService.getAllDeliveriesOrdersByUserID(anyInt())).thenThrow(ServiceException.class);
             when(request.getMethod()).thenReturn("GET");
             command.execute(request, response);
             fail();
@@ -113,4 +110,5 @@ public class DisplayOrdersTest {
             assertTrue(true);
         }
     }
+
 }
