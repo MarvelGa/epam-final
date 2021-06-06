@@ -14,11 +14,6 @@ public class DBManager {
     private static DBManager instance;
     private DataSource ds;
 
-    /**
-     * Get instance.
-     *
-     * @return DBManagerMysql
-     */
     public static synchronized DBManager getInstance() {
         if (instance == null) {
             instance = new DBManager();
@@ -37,11 +32,6 @@ public class DBManager {
         }
     }
 
-    /**
-     * Returns a DB connection from the Pool Connections. *
-     *
-     * @return DB connection.
-     */
     public Connection getConnection() {
         Connection con = null;
         try {
@@ -52,35 +42,17 @@ public class DBManager {
         return con;
     }
 
-    /**
-     * Closes resources.
-     *
-     * @param con  connection
-     * @param stmt statement
-     * @param rs   result set
-     */
     public static void close(final Connection con, final Statement stmt, final ResultSet rs) {
         close(rs);
         close(stmt);
         close(con);
     }
 
-    /**
-     * Close resource
-     *
-     * @param con  connection
-     * @param psmt Prepared statement
-     */
     public static void close(final Connection con, final PreparedStatement psmt) {
         close(psmt);
         close(con);
     }
 
-    /**
-     * Closes a connection.
-     *
-     * @param con Connection to be closed.
-     */
     public static void close(final Connection con) {
         if (con != null) {
             try {
@@ -91,11 +63,6 @@ public class DBManager {
         }
     }
 
-    /**
-     * Rollbacks a connection.
-     *
-     * @param con Connection to be rollbacked.
-     */
     public static void rollback(final Connection con) {
         if (con != null) {
             try {

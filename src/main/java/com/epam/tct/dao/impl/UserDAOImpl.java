@@ -18,7 +18,6 @@ public class UserDAOImpl implements UserDAO {
     private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
     private static final String CREAT_USER = "INSERT INTO users (email, first_name, last_name, password, role_id) VALUES (?, ?, ?, ?, ?);";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users where id = ?;";
-   // private static final String GET_ALL_USERS = "SELECT * FROM users;";
     private static final String GET_ALL_USERS = "SELECT u.id, u.email, u.first_name, u.last_name, r.name FROM users u, roles r WHERE r.id=u.role_id;";
     private static final String GET_COUNT_OF_USERS = "select count(*) from users;";
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
@@ -55,9 +54,6 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int createUser(User user) throws DaoException {
         int id = -1;
-//        if (user.getId() != 0 && user.getId() > 0) {
-//            return 0;
-//        }
         final String query = CREAT_USER;
         DBManager dbm;
         PreparedStatement pstmt = null;
@@ -67,12 +63,11 @@ public class UserDAOImpl implements UserDAO {
             dbm = DBManager.getInstance();
             con = dbm.getConnection();
             pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            int k = 1;
-            pstmt.setString(k++, user.getEmail());
-            pstmt.setString(k++, user.getFirstName());
-            pstmt.setString(k++, user.getLastName());
-            pstmt.setString(k++, user.getPassword());
-            pstmt.setInt(k, 2);
+            pstmt.setString(1, user.getEmail());
+            pstmt.setString(2, user.getFirstName());
+            pstmt.setString(3, user.getLastName());
+            pstmt.setString(4, user.getPassword());
+            pstmt.setInt(5, 2);
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
@@ -240,8 +235,5 @@ public class UserDAOImpl implements UserDAO {
         user.setPassword(rs.getString(5));
         user.setRoleId(rs.getInt(6));
         return user;
-
     }
-
-
 }

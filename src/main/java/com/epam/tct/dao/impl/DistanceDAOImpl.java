@@ -18,7 +18,6 @@ public class DistanceDAOImpl implements DistanceDAO {
     private static final String GET_CITIES_AND_DISTANCE = " SELECT d.id, c1.`name`, c2.`name`, d.distance FROM distance d, cities c1,  cities c2 WHERE c1.id = d.city_from_id AND c2.id = d.city_to_id;";
     private static final String GET_DATA_FROM_DISTANCE_TABLE_BY_ID = "SELECT d.id, c1.`name`, c2.`name`, d.distance FROM distance d, cities c1,  cities c2 WHERE d.id = ? AND c1.id = d.city_from_id AND c2.id = d.city_to_id ;";
     private static final String GET_CITY_ID_BY_NAME = "SELECT c.id FROM cities c WHERE c.name=?";
-//    private static final String GET_DATA_FROM_DISTANCE_TABLE_BY_ID = "SELECT * FROM distance WHERE id = ?;";
 
     @Override
     public List<Distance> readAll() throws DaoException {

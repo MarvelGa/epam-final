@@ -26,14 +26,12 @@ public class LanguageFilter implements Filter {
         LOG.trace("Request locale --> " + locale);
         LOG.trace("Change language to: " + locale);
         ResourceBundle rb = ResourceBundle.getBundle(PROPERTIES_FILE, Locales.getLocale(locale));
-        LOG.trace("Set attribute: lang ");
-        // Set wanted language to the session
+        LOG.trace("Set attribute: resources ");
         req.getSession().setAttribute("resources", rb);
         LOG.trace("Set attribute: locale ");
         req.getSession().setAttribute("locale", locale);
         LOG.debug("Filter finished");
 
-        // redirect to the previous page
         ((HttpServletResponse) response).sendRedirect(req.getHeader("referer"));
     }
 

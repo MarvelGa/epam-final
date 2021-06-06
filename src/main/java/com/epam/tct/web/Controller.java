@@ -42,7 +42,6 @@ public class Controller extends HttpServlet {
         } catch (AppException ex) {
             req.setAttribute("errorMessage", ex.getMessage());
         }
-
         if (address.contains("controller?command")) {
             resp.sendRedirect(address);
         } else {
