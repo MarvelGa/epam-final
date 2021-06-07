@@ -2,7 +2,6 @@ package com.epam.tct.web.command;
 
 import com.epam.tct.Path;
 import com.epam.tct.exception.AppException;
-import com.epam.tct.exception.ServiceException;
 import com.epam.tct.model.User;
 import com.epam.tct.service.UserService;
 import com.epam.tct.service.impl.ServiceFactory;
@@ -19,7 +18,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class PostRegistrationCommand implements Command {
     private static final Logger logger = Logger.getLogger(PostRegistrationCommand.class);
@@ -77,6 +75,7 @@ public class PostRegistrationCommand implements Command {
 
         if (!errorList.isEmpty()) {
             request.setAttribute("errorMessages", errorList);
+            logger.debug(String.format("forward --> %s", Path.PAGE__REGISTRATION));
             return Path.PAGE__REGISTRATION;
         } else {
             User newUser = new User();
@@ -87,10 +86,11 @@ public class PostRegistrationCommand implements Command {
             newUser.setRoleId(2);
             logger.trace("Saving new user: " + newUser);
             userService.addUser(newUser);
-            session.setAttribute("user", newUser);
+            User dataWithId = userService.getUserByEmail(email);
+            session.setAttribute("user", dataWithId);
+            logger.debug(String.format("redirect --> %s", Path.COMMAND__HOME_PAGE));
             return Path.COMMAND__HOME_PAGE;
         }
-
     }
 
     private String encryptPassword(final String password) {

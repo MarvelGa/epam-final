@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class GetUserCabinet implements Command {
-    private static final Logger log = Logger.getLogger(GetUserCabinet.class);
+    private static final Logger logger = Logger.getLogger(GetUserCabinet.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
     public GetUserCabinet() {
@@ -27,14 +27,15 @@ public class GetUserCabinet implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+        logger.debug("Command starts");
         List<Distance> dis = distanceService.findAll();
         HttpSession session = request.getSession(false);
         session.setAttribute("cityAndDistance", dis);
         if (session != null) {
-           session.setAttribute("cityAndDistance", dis);
+            session.setAttribute("cityAndDistance", dis);
         }
+        logger.debug(String.format("forward --> %s", Path.USER_CABINET));
+        logger.debug("Command finished");
         return Path.USER_CABINET;
     }
-
-
 }

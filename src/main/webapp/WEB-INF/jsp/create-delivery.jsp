@@ -21,8 +21,10 @@
         </c:when>
         <c:otherwise>
             <a href="/tct/controller?command=userCabinet">${resources.Back_to_previously_page}!</a>
+            </br></br> </br>
         </c:otherwise>
     </c:choose>
+
 
     <form action="/tct/controller?command=postCreateDelivery" method="POST">
         <table border="1">

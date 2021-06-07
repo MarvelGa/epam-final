@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CreateDeliveryByAdmin implements Command {
-    private static final Logger log = Logger.getLogger(CreateDeliveryByAdmin.class);
+    private static final Logger logger = Logger.getLogger(CreateDeliveryByAdmin.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
     public CreateDeliveryByAdmin() {
@@ -27,11 +27,14 @@ public class CreateDeliveryByAdmin implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+        logger.debug("Command starts");
         List<Distance> data = distanceService.findAll();
         HttpSession session = request.getSession();
         if (session != null) {
             session.setAttribute("cityAndDistance", data);
         }
+        logger.debug(String.format("forward --> %s", Path.CREATE_DELIVERY_BY_ADMIN));
+        logger.debug("Command finished");
         return Path.CREATE_DELIVERY_BY_ADMIN;
 
     }

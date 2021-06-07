@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class DisplayOrders implements Command{
-    private static final Logger log = Logger.getLogger(DisplayOrders.class);
+public class DisplayOrders implements Command {
+    private static final Logger logger = Logger.getLogger(DisplayOrders.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
     public DisplayOrders() {
@@ -26,8 +26,11 @@ public class DisplayOrders implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-     List<OrderItem> orderItemList = orderItemsService.getOrders();
-     request.setAttribute("orderItemList", orderItemList);
-     return Path.ORDERS_VIEW;
+        logger.debug("Command starts");
+        List<OrderItem> orderItemList = orderItemsService.getOrders();
+        request.setAttribute("orderItemList", orderItemList);
+        logger.debug(String.format("forward --> %s", Path.ORDERS_VIEW));
+        logger.debug("Command finished");
+        return Path.ORDERS_VIEW;
     }
 }

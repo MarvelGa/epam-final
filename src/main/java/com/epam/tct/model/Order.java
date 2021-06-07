@@ -9,7 +9,7 @@ public class Order {
     }
 
     private int id;
-    private int user_id;
+    private int userId;
     private OrderStatus status = OrderStatus.NEW;
     private LocalDateTime createdAt;
 
@@ -21,12 +21,12 @@ public class Order {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public OrderStatus getStatus() {
@@ -50,11 +50,11 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id && user_id == order.user_id && status == order.status && createdAt.equals(order.createdAt);
+        return id == order.id && userId == order.userId && status == order.status && createdAt.equals(order.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, status, createdAt);
+        return Objects.hash(id, userId, status, createdAt);
     }
 }

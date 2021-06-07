@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class DisplayAllUsers implements Command {
-    private static final Logger log = Logger.getLogger(DisplayAllUsers.class);
+    private static final Logger logger = Logger.getLogger(DisplayAllUsers.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();
 
     public DisplayAllUsers() {
@@ -26,8 +26,11 @@ public class DisplayAllUsers implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-        List<User> users =   userService.findAll();
+        logger.debug("Command starts");
+        List<User> users = userService.findAll();
         request.setAttribute("listUsers", users);
+        logger.debug(String.format("forward --> %s", Path.DISPLAY_ALL_USERS));
+        logger.debug("Command finished");
         return Path.DISPLAY_ALL_USERS;
     }
 }

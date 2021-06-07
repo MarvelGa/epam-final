@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class PostLoginCommand implements Command {
 
-    private static final Logger log = Logger.getLogger(PostLoginCommand.class);
+    private static final Logger logger = Logger.getLogger(PostLoginCommand.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();
 
     public PostLoginCommand() {
@@ -32,11 +32,10 @@ public class PostLoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-
-        log.debug("Command starts");
+        logger.debug("Command starts");
         HttpSession session = request.getSession();
         String email = request.getParameter("email");
-        log.trace("Request parameter: loging --> " + email);
+        logger.trace("Request parameter: loging --> " + email);
         String password = request.getParameter("password");
 
         String errorMessage;
@@ -45,39 +44,43 @@ public class PostLoginCommand implements Command {
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             errorMessage = "Login/password cannot be empty";
             request.setAttribute("errorMessage", errorMessage);
-            log.error("errorMessage --> " + errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            logger.debug(String.format("forward --> %s", Path.PAGE__LOGIN));
             return Path.PAGE__LOGIN;
         }
 
         User user = userService.getUserByEmail(email);
-        log.trace("Found in DB: user --> " + user);
+        logger.trace("Found in DB: user --> " + user);
 
         if (user == null || !user.getPassword().equals(encryptPassword(password))) {
             errorMessage = "Wrong login or password";
             request.setAttribute("errorMessage", errorMessage);
-            log.error("errorMessage --> " + errorMessage);
+            logger.error("errorMessage --> " + errorMessage);
+            logger.debug(String.format("forward --> %s", Path.PAGE__LOGIN));
             return Path.PAGE__LOGIN;
         } else {
             Role userRole = Role.getRole(user);
-            log.trace("userRole --> " + userRole);
+            logger.trace("userRole --> " + userRole);
             session.setAttribute("user", user);
-            if (userRole == Role.ADMIN){
+            if (userRole == Role.ADMIN) {
                 session.setAttribute("userRole", userRole);
-                log.trace("Set the session attribute: user --> " + user);
+                logger.trace("Set the session attribute: user --> " + user);
+                logger.debug(String.format("redirect --> %s", Path.COMMAND__ADMIN_CABINET));
                 forward = Path.COMMAND__ADMIN_CABINET;
             }
 
-            if (userRole == Role.USER){
+            if (userRole == Role.USER) {
                 session.setAttribute("userRole", userRole);
-                log.trace("Set the session attribute: userRole --> " + userRole);
+                logger.trace("Set the session attribute: userRole --> " + userRole);
+                logger.debug(String.format("redirect --> %s", Path.COMMAND__USER_CABINET));
                 forward = Path.COMMAND__USER_CABINET;
             }
 
-            log.info("User " + user + " logged as " + userRole.toString().toLowerCase());
+            logger.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 
         }
-
-        log.debug("Command finished");
+        logger.debug(String.format("forward --> %s", forward));
+        logger.debug("Command finished");
         return forward;
     }
 
@@ -92,7 +95,7 @@ public class PostLoginCommand implements Command {
             digest.update(password.getBytes(), 0, password.length());
             return new BigInteger(1, digest.digest()).toString(16);
         } catch (NoSuchAlgorithmException e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
             throw new AppException(e.getMessage(), e);
         }
     }

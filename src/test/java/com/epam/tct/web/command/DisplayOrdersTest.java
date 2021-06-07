@@ -17,7 +17,6 @@ import org.mockito.MockitoAnnotations;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class DisplayOrdersTest {
         listOrder = new ArrayList<>();
         listOrderItem = new ArrayList<>();
 
-        order.setUser_id(2);
+        order.setUserId(2);
         order.setStatus(Order.OrderStatus.NEW);
         order.setCreatedAt(LocalDateTime.now());
 

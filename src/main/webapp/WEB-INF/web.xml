@@ -78,6 +78,9 @@
   </session-config>
 
   <listener>
+    <listener-class>com.epam.tct.listener.ContextListener</listener-class>
+  </listener>
+  <listener>
     <listener-class>com.epam.tct.listener.LanguageListener</listener-class>
   </listener>
 

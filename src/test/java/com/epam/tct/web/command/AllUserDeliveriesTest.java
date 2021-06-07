@@ -57,7 +57,7 @@ public class AllUserDeliveriesTest {
         listOrder = new ArrayList<>();
         listOrderItem = new ArrayList<>();
 
-        order.setUser_id(2);
+        order.setUserId(2);
         order.setStatus(Order.OrderStatus.NEW);
         order.setCreatedAt(LocalDateTime.now());
 

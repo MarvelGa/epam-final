@@ -1,4 +1,5 @@
 package com.epam.tct.web.command;
+
 import com.epam.tct.Path;
 import org.apache.log4j.Logger;
 
@@ -18,7 +19,6 @@ public class CommandNotFound implements Command {
         request.setAttribute("errorMessage", errorMessage);
         logger.error("Set the request attribute: errorMessage --> "
                 + errorMessage);
-
         logger.debug("Command finished");
         return Path.PAGE_ERROR_PAGE;
     }

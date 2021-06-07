@@ -47,6 +47,5 @@ public class Controller extends HttpServlet {
         } else {
             req.getRequestDispatcher(address).forward(req, resp);
         }
-
     }
 }

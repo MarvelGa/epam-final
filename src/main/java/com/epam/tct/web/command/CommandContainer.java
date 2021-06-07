@@ -38,7 +38,6 @@ public class CommandContainer {
     }
 
 
-
     public static Command getCommand(String commandName) {
         if (commandName == null || !commands.containsKey(commandName)) {
             logger.trace("Command not found, name --> " + commandName);

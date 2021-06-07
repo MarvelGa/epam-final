@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GetCreateDelivery implements Command{
-    private static final Logger log = Logger.getLogger(GetCreateDelivery.class);
+public class GetCreateDelivery implements Command {
+    private static final Logger logger = Logger.getLogger(GetCreateDelivery.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
     public GetCreateDelivery() {
@@ -25,9 +25,12 @@ public class GetCreateDelivery implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+        logger.debug("Command starts");
         int id = Integer.valueOf(request.getParameter("id"));
-        Distance data =  distanceService.findById(id);
-        request.setAttribute("distance", data );
+        Distance data = distanceService.findById(id);
+        request.setAttribute("distance", data);
+        logger.debug(String.format("forward --> %s", Path.CREATE_DELIVERY));
+        logger.debug("Command finished");
         return Path.CREATE_DELIVERY;
     }
 }

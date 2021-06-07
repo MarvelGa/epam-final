@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
             return user;
         } catch (DaoException ex) {
             logger.error(ex);
-            throw new ServiceException(Messages.ERR_CANNOT_OBTAIN_USER_BY_EMAIL, ex);
+            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_OBTAIN_USER_BY_EMAIL, ex);
         }
     }
 
@@ -47,41 +47,6 @@ public class UserServiceImpl implements UserService {
         return inserted;
     }
 
-    @Override
-    public User getUser(int id) throws ServiceException {
-        User user;
-        try {
-            return user = userDAO.getUserByID(id);
-        } catch (DaoException e) {
-            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_OBTAIN_USER_BY_ID, e);
-            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_OBTAIN_USER_BY_ID, e);
-        }
-    }
-
-
-    @Override
-    public boolean saveUser(User user) throws ServiceException {
-        boolean result;
-        try {
-            result = userDAO.updateUser(user);
-        } catch (DaoException e) {
-            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_UPDATE_USER, e);
-            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_UPDATE_USER, e);
-        }
-        return result;
-    }
-
-    @Override
-    public boolean removeUserById(int id) throws ServiceException {
-        boolean result;
-        try {
-            result = userDAO.deleteUserById(id);
-        } catch (DaoException e) {
-            logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_DELETE_USER, e);
-            throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_DELETE_USER, e);
-        }
-        return result;
-    }
 
     @Override
     public List<User> findAll() throws ServiceException {
@@ -91,17 +56,6 @@ public class UserServiceImpl implements UserService {
         } catch (DaoException e) {
             logger.error(Messages.ERR_SERVICE_LAYER_CANNOT_READ_ALL_USERS, e);
             throw new ServiceException(Messages.ERR_SERVICE_LAYER_CANNOT_READ_ALL_USERS, e);
-        }
-    }
-
-    @Override
-    public int countAllUsers() throws ServiceException {
-        try {
-            return userDAO.countAllUsers();
-        } catch (DaoException e) {
-            logger.error(Messages.ERR_CANNOT_COUNT_ALL_USERS, e);
-            throw new ServiceException(Messages.ERR_CANNOT_COUNT_ALL_USERS, e);
-
         }
     }
 

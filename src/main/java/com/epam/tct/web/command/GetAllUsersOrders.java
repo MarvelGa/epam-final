@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetAllUsersOrders implements Command {
-    private static final Logger log = Logger.getLogger(GetAllUsersOrders.class);
+    private static final Logger logger = Logger.getLogger(GetAllUsersOrders.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
     public GetAllUsersOrders() {
@@ -27,9 +27,12 @@ public class GetAllUsersOrders implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+        logger.debug("Command starts");
         HttpSession session = request.getSession();
         List<OrderItem> listUsersOrders = orderItemsService.getAllUsersOrders();
         session.setAttribute("listUsersOrders", listUsersOrders);
+        logger.debug(String.format("forward --> %s", Path.ALL_USERS_ORDERS));
+        logger.debug("Command finished");
         return Path.ALL_USERS_ORDERS;
     }
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GetChangeStatusDelivery implements Command {
-    private static final Logger log = Logger.getLogger(GetChangeStatusDelivery.class);
+    private static final Logger logger = Logger.getLogger(GetChangeStatusDelivery.class);
     private OrderItemsService orderItemsService = ServiceFactory.getInstance().getOrderItemsService();
 
     public GetChangeStatusDelivery() {
@@ -26,9 +26,12 @@ public class GetChangeStatusDelivery implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+        logger.debug("Command starts");
         int orderId = Integer.valueOf(request.getParameter("id"));
         OrderItem orderItem = orderItemsService.getDeliveryOrderItemByOrderId(orderId);
-        request.setAttribute("orderItem", orderItem );
+        request.setAttribute("orderItem", orderItem);
+        logger.debug(String.format("forward --> %s", Path.USER_ORDER_VIEW));
+        logger.debug("Command finished");
         return Path.USER_ORDER_VIEW;
     }
 }

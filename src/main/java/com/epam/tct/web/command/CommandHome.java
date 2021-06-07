@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class CommandHome implements Command{
-    private static final Logger log = Logger.getLogger(CommandHome.class);
+public class CommandHome implements Command {
+    private static final Logger logger = Logger.getLogger(CommandHome.class);
     private DistanceService distanceService = ServiceFactory.getInstance().getDistanceService();
 
     public CommandHome() {
@@ -26,8 +26,11 @@ public class CommandHome implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
-      List<Distance> data = distanceService.findAll();
-      request.setAttribute("data", data);
+        logger.debug("Command starts");
+        List<Distance> data = distanceService.findAll();
+        request.setAttribute("data", data);
+        logger.debug(String.format("forward --> %s", Path.PAGE__HOME));
+        logger.debug("Command finished");
         return Path.PAGE__HOME;
     }
 }

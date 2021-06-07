@@ -49,7 +49,7 @@ public class GetChangeStatusDeliveryTest {
         user = new User();
         orderItem = new OrderItem();
 
-        order.setUser_id(2);
+        order.setUserId(2);
         order.setStatus(Order.OrderStatus.NEW);
         order.setCreatedAt(LocalDateTime.now());
 

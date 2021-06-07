@@ -77,7 +77,7 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
 
 
             pstmt = con.prepareStatement(CREATE_ORDER, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, order.getUser_id());
+            pstmt.setInt(1, order.getUserId());
             pstmt.setString(2, String.valueOf(order.getStatus()));
             pstmt.setString(3, String.valueOf(order.getCreatedAt()));
             pstmt.executeUpdate();
