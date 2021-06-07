@@ -1,6 +1,6 @@
 package com.epam.tct.exception;
 
-public class DaoException extends RuntimeException{
+public class DaoException extends RuntimeException {
     public DaoException() {
         super();
     }

@@ -11,14 +11,6 @@ public interface UserDAO {
 
     int createUser(User user) throws DaoException;
 
-    int countAllUsers() throws DaoException;
-
     List<User> readAllUsers() throws DaoException;
-
-    boolean deleteUserById(int id) throws DaoException;
-
-    User getUserByID(int id) throws DaoException;
-
-    boolean updateUser(User user) throws DaoException;
 
 }
