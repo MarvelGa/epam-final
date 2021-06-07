@@ -3,8 +3,8 @@ USE fly_tct1;
 INSERT INTO roles VALUES(1, 'admin');
 INSERT INTO roles VALUES(2, 'user');
 INSERT INTO roles VALUES(3, 'guest');
--- //login admin88@gmail.com password 123
-insert into users (email, first_name, last_name, password, role_id) values ('admin88@gmail.com', 'Ivan', 'Ivanov', '202cb962ac59075b964b07152d234b70', 1);
+-- //login admin88@gmail.com password TESTtest22
+insert into users (email, first_name, last_name, password, role_id) values ('admin88@gmail.com', 'Ivan', 'Ivanov', '1a1dd7bfa1a20b11df832f8712c60161', 1);
 
 INSERT INTO cities (name) VALUES ('Kyiv');
 INSERT INTO cities (name) VALUES ('Kharkiv');

@@ -1,16 +1,12 @@
 package com.epam.tct.filter;
 
 import com.epam.tct.Path;
-import com.epam.tct.exception.AppException;
 import com.epam.tct.model.Role;
 import com.epam.tct.model.User;
-import com.epam.tct.web.command.Command;
-import com.epam.tct.web.command.CommandContainer;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
