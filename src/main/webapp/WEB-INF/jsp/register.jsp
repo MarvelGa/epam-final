@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>${resources.Login_form}</title>
+    <title>${resources.Registration_form}</title>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
-<%@include file="/WEB-INF/jsp/top.jsp" %>
-<h2>REGISTRATION FORM</h2> <br>
-<div id="content">
+    <%@include file="/WEB-INF/jsp/top.jsp" %>
+    <h2>${resources.Registration_form}</h2> <br>
+    <div id="content">
 
         <table>
             <tr>
@@ -25,21 +25,21 @@
                             <form id="formRegistration" action="/tct/controller?command=register" method="post">
 
                                 <div class="field">
-                                    <label>Enter your email:</label>
+                                    <label>${resources.Enter_your_email}:</label>
                                     <div class="input"><input type="text" name="email"
                                                               value='${sessionScope.user.email}'
                                                               id="email"/></div>
                                 </div>
 
                                 <div class="field">
-                                    <label>Enter your name:</label>
+                                    <label>${resources.Enter_your_name}:</label>
                                     <div class="input"><input type="text" name="name"
                                                               value='${sessionScope.user.firstName}' id="name"/>
                                     </div>
                                 </div>
 
                                 <div class="field">
-                                    <label>Enter your lastName:</label>
+                                    <label>${resources.Enter_your_lastName}:</label>
                                     <div class="input"><input type="text" name="lastName"
                                                               value='${sessionScope.user.lastName}'
                                                               id="lastName"/>
@@ -47,14 +47,14 @@
                                 </div>
 
                                 <div class="field">
-                                    <label>Enter your password:</label>
+                                    <label>${resources.Enter_your_password}:</label>
                                     <div class="input"><input type="password" name="password"
                                                               value="${sessionScope.user.password}"
                                                               id="password"/></div>
                                 </div>
 
                                 <div class="submit">
-                                    <button type="submit">Register</button>
+                                    <button type="submit">${resources.Register}</button>
                                 </div>
 
                                 <c:remove var="errorMessage"/>
@@ -80,7 +80,8 @@
                 </td>
             </tr>
         </table>
-    </center>
+    </div>
+</center>
 </div>
 
 <input type="hidden" name="referer" value="${pageContext.request.requestURI}"/>

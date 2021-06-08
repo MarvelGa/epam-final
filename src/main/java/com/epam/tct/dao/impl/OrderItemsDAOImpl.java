@@ -216,7 +216,7 @@ public class OrderItemsDAOImpl implements OrderItemsDAO {
                 con = dbm.getConnection();
                 pstmt = con.prepareStatement(query);
                 pstmt.setString(1, String.valueOf(status));
-                pstmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+                pstmt.setString(2, String.valueOf(LocalDateTime.now()));
                 pstmt.setInt(3, orderId);
                 pstmt.executeUpdate();
                 con.commit();

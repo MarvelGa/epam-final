@@ -7,10 +7,10 @@
     <tr>
         <th>No.</th>
         <th>ID</th>
-        <th>City FROM</th>
-        <th>City TO</th>
-        <th>Destination</th>
-        <th colspan="1">Operation</th>
+        <th>${resources.City_from}</th>
+        <th>${resources.City_to}</th>
+        <th>${resources.Destination}</th>
+        <th colspan="1">${resources.Operation}</th>
     </tr>
     <c:forEach var="record" items="${cityAndDistance}">
         <tr>
@@ -20,10 +20,12 @@
                     ${record.id}
             </td>
             <td>
-                    ${record.cityFrom}
+                <c:set var="city" value="${record.cityFrom}"/>
+                    ${resources[city]}
             </td>
             <td>
-                    ${record.cityTo}
+                <c:set var="city" value="${record.cityTo}"/>
+                    ${resources[city]}
             </td>
             <td>
                     ${record.distance}
@@ -33,7 +35,7 @@
                 <form action="./controller" method="GET">
                     <input type="hidden" name="command" value="create-delivery">
                     <input type="hidden" name="id" value="${record.id}">
-                    <input type="submit" value="Create delivery">
+                    <input type="submit" value="${resources.Create_delivery}">
                 </form>
             </td>
         </tr>

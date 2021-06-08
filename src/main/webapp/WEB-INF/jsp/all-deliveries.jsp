@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>All user's deliveries</title>
+    <title>${resources.All_users_deliveries}</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
@@ -15,7 +15,7 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
     </br>
-    <center><h2>All your order deliveries</h2></center>
+    <center><h2>${resources.All_your_order_deliveries}</h2></center>
     <%
         int counter = 1;
     %>
@@ -26,7 +26,7 @@
             </br>
         </c:when>
         <c:otherwise>
-            <p><a href="/tct/controller?command=userCabinet"> Back to the previously Page!</a></p>
+            <p><a href="/tct/controller?command=userCabinet">${resources.Back_to_previously_page}!</a></p>
             </br>
         </c:otherwise>
     </c:choose>
@@ -36,16 +36,16 @@
             <table border="1">
                 <tr>
                     <th>No.</th>
-                    <th>Order ID</th>
-                    <th>City FROM</th>
-                    <th>City TO</th>
-                    <th>Distance, km</th>
-                    <th>Weight of Parcel, tonne</th>
-                    <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-                    <th>Created Date</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Role</th>
+                    <th>${resources.Order_id}</th>
+                    <th>${resources.City_from}</th>
+                    <th>${resources.City_to}</th>
+                    <th>${resources.Distance}, km</th>
+                    <th>${resources.Weight}, tonne</th>
+                    <th>${resources.Volume_of_parcel}, <i>m<sup><small>3</small></sup></i></th>
+                    <th>${resources.Created_date}</th>
+                    <th>${resources.Price}</th>
+                    <th>${resources.Status}</th>
+                    <th>${resources.Role}</th>
                 </tr>
                 <c:forEach var="record" items="${sessionScope.allUserOrders}">
                     <tr>
@@ -58,11 +58,13 @@
                         </td>
 
                         <td>
-                                ${record.item.cityFrom}
+                            <c:set var="city" value="${record.item.cityFrom}"/>
+                                ${resources[city]}
                         </td>
 
                         <td>
-                                ${record.item.cityTo}
+                            <c:set var="city" value="${record.item.cityTo}"/>
+                                ${resources[city]}
                         </td>
 
                         <td>
@@ -79,7 +81,6 @@
 
                         <td>
                             <custom:formatDate value="${record.order.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
-<%--                                ${record.order.createdAt}--%>
                         </td>
 
                         <td>
@@ -98,13 +99,13 @@
             </table>
         </c:when>
         <c:otherwise>
-            <center><font color='#228b22'><h2>You have no order delivery yet!</h2></font></center>
+            <center><font color='#228b22'><h2>${resources.You_have_no_order_delivery_yet}!</h2></font></center>
             </br>
             <table>
                 <td>
                     <form action="./controller" method="GET">
                         <input type="hidden" name="command" value="userCabinet">
-                        <input type="submit" value="Create Delivery Order">
+                        <input type="submit" value="${resources.Create_delivery_order}">
                     </form>
                 </td>
             </table>

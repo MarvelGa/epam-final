@@ -6,18 +6,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>All Users' Orders</title>
+    <title>${resources.Change_status_of_order_delivery}</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>Change Status Of Order Delivery</h3>
+    <h3>${resources.Change_status_of_order_delivery}</h3>
 
-    <p><a href="/tct/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <p><a href="/tct/controller?command=adminCabinet"> ${resources.Go_to_main_admin_page}!</a></p>
 
-<%--    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
     </br>
     <%
         int counter = 1;
@@ -25,20 +24,20 @@
     <table border="1">
         <tr>
             <th>No.</th>
-            <th>Order ID</th>
-            <th>User email</th>
-            <th>User First Name</th>
-            <th>User Last Name</th>
-            <th>City FROM</th>
-            <th>City TO</th>
-            <th>Distance, km</th>
-            <th>Weight of Parcel, tonne</th>
-            <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-            <th>Last Status Update Data</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Role</th>
-            <th colspan="1" style="background-color: #b0c4de">Operations</th>
+            <th>${resources.Order_id}</th>
+            <th>${resources.User_email}</th>
+            <th>${resources.User_first_name}</th>
+            <th>${resources.User_last_name}</th>
+            <th>${resources.City_from}</th>
+            <th>${resources.City_to}</th>
+            <th>${resources.Distance}, km</th>
+            <th>${resources.Weight}, tonne</th>
+            <th>${resources.Volume_of_parcel}, <i>m<sup><small>3</small></sup></i></th>
+            <th>${resources.Last_status_update_data}</th>
+            <th>${resources.Price}</th>
+            <th>${resources.Status}</th>
+            <th>${resources.Role}</th>
+            <th colspan="1" style="background-color: #b0c4de">${resources.Operation}</th>
 
         </tr>
         <c:forEach var="record" items="${sessionScope.listUsersOrders}">
@@ -64,11 +63,13 @@
                 </td>
 
                 <td>
-                        ${record.item.cityFrom}
+                    <c:set var="city" value="${record.item.cityFrom}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>
-                        ${record.item.cityTo}
+                    <c:set var="city" value="${record.item.cityTo}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>
@@ -84,7 +85,6 @@
                 </td>
 
                 <td>
-<%--                        ${record.order.createdAt}--%>
                             <custom:formatDate value="${record.order.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
                 </td>
 
@@ -105,7 +105,7 @@
                     <form action="./controller" method="GET">
                         <input type="hidden" name="command" value="changeStatusDelivery">
                         <input type="hidden" name="id" value="${record.order.id}">
-                        <input type="submit" value="Change Status Delivery">
+                        <input type="submit" value="${resources.Change_status_delivery}">
                     </form>
                 </td>
 

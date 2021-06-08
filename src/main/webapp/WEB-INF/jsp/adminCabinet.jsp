@@ -5,13 +5,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Admin Personal Cabinet</title>
+    <title>${resources.Admin_personal_cabinet}</title>
     <meta charset="UTF-8"/>
 </head>
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <center><h1>Admin Cabinet</h1></center>
+    <center><h1>${resources.Admin_cabinet}</h1></center>
     <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>
 
 </center>

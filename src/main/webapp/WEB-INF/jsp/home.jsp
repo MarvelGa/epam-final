@@ -15,9 +15,15 @@
     <h2>${resources.Welcome_to_company}!</h2>
     <h3>${resources.Our_routes}!
         ${resources.About_price}.</h3>
+    <c:choose>
+    <c:when test="${sessionScope.user==null }">
+    <p>${resources.Have_already_registered}?<a
+            href="/tct/controller?command=loginPage"> ${resources.Login_to_delivery}!</a></p>
+    <p>${resources.Not_registered_yet}?<a
+            href="/tct/controller?command=registration"> ${resources.Go_to_registration_page}!</a></p>
+    </c:when>
+    </c:choose>
 
-    <p>${resources.Have_already_registered}?<a href="/tct/controller?command=loginPage"> ${resources.Login_to_delivery}!</a></p>
-    <p>${resources.Not_registered_yet}?<a href="/tct/controller?command=registration"> ${resources.Go_to_registration_page}!</a></p>
     <%
         int counter = 1;
     %>
@@ -36,11 +42,13 @@
                 </td>
 
                 <td>
-                  ${record.cityFrom}
+                    <c:set var="city" value="${record.cityFrom}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>
-                        ${record.cityTo}
+                    <c:set var="city" value="${record.cityTo}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>

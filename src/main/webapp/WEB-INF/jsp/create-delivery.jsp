@@ -40,10 +40,12 @@
 
             <tr>
                 <td>
-                    ${distance.cityFrom}
+                    <c:set var="city" value="${distance.cityFrom}"/>
+                    ${resources[city]}
                 </td>
                 <td>
-                    ${distance.cityTo}
+                    <c:set var="city" value="${distance.cityTo}"/>
+                    ${resources[city]}
                 </td>
 
                 <td>

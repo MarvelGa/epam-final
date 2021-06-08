@@ -13,11 +13,9 @@
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
 
-
     <c:choose>
         <c:when test="${sessionScope.user.roleId==1}">
             <%@include file="/WEB-INF/jsp/common/bottom-panel.jsp" %>
-            <%--            <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
             </br> </br>
         </c:when>
         <c:otherwise>
@@ -73,11 +71,13 @@
                 </td>
 
                 <td>
-                        ${record.item.cityFrom}
+                    <c:set var="city" value="${record.item.cityFrom}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>
-                        ${record.item.cityTo}
+                    <c:set var="city" value="${record.item.cityTo}"/>
+                        ${resources[city]}
                 </td>
 
                 <td>
@@ -94,7 +94,6 @@
 
                 <td>
                     <custom:formatDate value="${record.order.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
-<%--                        ${record.order.createdAt}--%>
                 </td>
 
                 <td>

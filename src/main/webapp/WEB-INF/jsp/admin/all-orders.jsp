@@ -6,19 +6,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Display All Orders</title>
+    <title>${resources.View_of_orders_delivery}</title>
     <meta charset="UTF-8"/>
     <link href="/static/style.css" rel="stylesheet"/>
 </head>
 <body>
 <center>
     <%@include file="/WEB-INF/jsp/top.jsp" %>
-    <h3>View Of Orders Delivery</h3>
+    <h3>${resources.View_of_orders_delivery}</h3>
 
-    <p><a href="/tct/controller?command=adminCabinet"> Go to Main Admin Page!</a></p>
+    <p><a href="/tct/controller?command=adminCabinet"> ${resources.Go_to_main_admin_page}!</a></p>
     <c:choose>
         <c:when test="${requestScope.orderItemList.size()!=0}">
-            <%--    <%@include file="/WEB-INF/jsp/admin/admin-panel.jsp" %>--%>
             </br>
             <%
                 int counter = 1;
@@ -26,15 +25,15 @@
             <table border="1">
                 <tr>
                     <th>No.</th>
-                    <th>Order ID</th>
-                    <th>City FROM</th>
-                    <th>City TO</th>
-                    <th>Distance, km</th>
-                    <th>Weight of Parcel, tonne</th>
-                    <th>Volume of Parcel, <i>m<sup><small>3</small></sup></i></th>
-                    <th>Last Status Update Data</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>${resources.Order_id}</th>
+                    <th>${resources.City_from}</th>
+                    <th>${resources.City_to}</th>
+                    <th>${resources.Distance}</th>
+                    <th>${resources.Weight}</th>
+                    <th>${resources.Volume_of_parcel}, <i>m<sup><small>3</small></sup></i></th>
+                    <th>${resources.Last_status_update_data}</th>
+                    <th>${resources.Price}</th>
+                    <th>${resources.Status}</th>
                 </tr>
                 <c:forEach var="record" items="${requestScope.orderItemList}">
                     <tr>
@@ -47,11 +46,13 @@
                         </td>
 
                         <td>
-                                ${record.item.cityFrom}
+                            <c:set var="city" value="${record.item.cityFrom}"/>
+                                ${resources[city]}
                         </td>
 
                         <td>
-                                ${record.item.cityTo}
+                            <c:set var="city" value="${record.item.cityTo}"/>
+                                ${resources[city]}
                         </td>
 
                         <td>
@@ -85,7 +86,7 @@
             </table>
         </c:when>
         <c:otherwise>
-            <center><h2>You have no order delivery yet!</h2></center>
+            <center><h2>${resources.You_have_no_order_delivery_yet}!</h2></center>
         </c:otherwise>
     </c:choose>
     <br>
